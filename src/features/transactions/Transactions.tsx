@@ -6,34 +6,15 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import type { TransactionTableColumn } from "../../models/table";
+import { transactionTableColumn } from "../../constants/table";
 
 function Transactions() {
-  const tableColumn: TransactionTableColumn[] = [
-    {
-      id: "date",
-      label: "Date",
-    },
-    {
-      id: "note",
-      label: "Note",
-    },
-    {
-      id: "category",
-      label: "Category",
-    },
-    {
-      id: "amount",
-      label: "Amount",
-    },
-  ];
-
   return (
-    <Paper elevation={2}>
+    <Paper elevation={4}>
       <Table stickyHeader aria-label="Transaction table">
         <TableHead>
           <TableRow>
-            {tableColumn.map(({ id, label }) => {
+            {transactionTableColumn.map(({ id, label }) => {
               return <TableCell id={id}>{label}</TableCell>;
             })}
           </TableRow>
