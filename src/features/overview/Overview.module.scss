@@ -1,12 +1,18 @@
 .paper {
   height: 100px;
-  color: #fff !important;
+  align-content: center;
 }
 
-.expensesPaper {
+.expenses {
+  color: #fff !important;
   background: #e91e63 !important;
 }
 
-.incomePaper {
+.income {
+  color: #fff !important;
   background: #009688 !important;
+}
+
+.valueHolder {
+  font-size: 1.5rem;
 }
