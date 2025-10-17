@@ -12,6 +12,7 @@ import {
 import { transactionTableColumn } from "../../constants/table";
 
 import styles from "./Transactions.module.scss";
+import { Add } from "@mui/icons-material";
 
 function Transactions() {
   return (
@@ -23,8 +24,10 @@ function Transactions() {
         padding={2}
         alignItems="center"
       >
-        <span className={styles.title}>Recent transactions</span>
-        <Button variant="outlined">Add new transaction</Button>
+        <span className="section-title">Recent transactions</span>
+        <Button variant="outlined">
+          <Add /> Add new transaction
+        </Button>
       </Grid>
       <TableContainer>
         <Table stickyHeader aria-label="Transaction table">
