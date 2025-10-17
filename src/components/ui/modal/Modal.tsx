@@ -9,15 +9,15 @@ import type { ReactNode } from "react";
 interface Props {
   title: string;
   content: ReactNode;
-  actions: ReactNode;
+  actionButtons: ReactNode;
 }
 
-function AppModal({ title, content, actions }: Props) {
+function AppModal({ title, content, actionButtons }: Props) {
   return (
     <Dialog open>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{content}</DialogContent>
-      <DialogActions>{actions}</DialogActions>
+      <DialogActions>{actionButtons}</DialogActions>
     </Dialog>
   );
 }
