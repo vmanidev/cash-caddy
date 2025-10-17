@@ -30,6 +30,12 @@ function Form(props: Props) {
   return (
     <Grid container spacing={4} margin={2} size={12}>
       <Grid size={6}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker label="Date" />
+        </LocalizationProvider>
+      </Grid>
+
+      <Grid size={6}>
         <TextField
           fullWidth
           variant="outlined"
@@ -44,12 +50,6 @@ function Form(props: Props) {
             },
           }}
         />
-      </Grid>
-
-      <Grid size={6}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label="Date" />
-        </LocalizationProvider>
       </Grid>
 
       <Grid size={6}>
