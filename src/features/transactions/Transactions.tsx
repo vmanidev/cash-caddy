@@ -13,52 +13,64 @@ import { transactionTableColumn } from "../../constants/table";
 
 import styles from "./Transactions.module.scss";
 import { Add } from "@mui/icons-material";
+import AddTransaction from "../addTransaction/AddTransaction";
+import { useState } from "react";
 
 function Transactions() {
-  return (
-    <Paper elevation={4}>
-      <Grid
-        size={12}
-        display="flex"
-        justifyContent="space-between"
-        padding={2}
-        alignItems="center"
-      >
-        <span className="section-title">Recent transactions</span>
-        <Button variant="outlined">
-          <Add /> Add new transaction
-        </Button>
-      </Grid>
-      <TableContainer>
-        <Table stickyHeader aria-label="Transaction table">
-          <TableHead>
-            <TableRow>
-              {transactionTableColumn.map(({ id, label }) => {
-                return (
-                  <TableCell
-                    className={styles.tableHeaderCell}
-                    key={id}
-                    id={id}
-                  >
-                    {label}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
+  const [addTransactionForm, setAddTransactionForm] = useState(false);
 
-          <TableBody>
-            <TableRow hover>
-              {/* mock data */}
-              <TableCell>Oct 10, 2025</TableCell>
-              <TableCell>Paid to Chaat Shop</TableCell>
-              <TableCell>Food & Beverages</TableCell>
-              <TableCell>Rs. 200</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+  return (
+    <>
+      {addTransactionForm && (
+        <AddTransaction setAddTransactionForm={setAddTransactionForm} />
+      )}
+      <Paper elevation={4}>
+        <Grid
+          size={12}
+          display="flex"
+          justifyContent="space-between"
+          padding={2}
+          alignItems="center"
+        >
+          <span className="section-title">Recent transactions</span>
+          <Button
+            variant="outlined"
+            onClick={() => setAddTransactionForm(true)}
+          >
+            <Add /> Add new transaction
+          </Button>
+        </Grid>
+        <TableContainer>
+          <Table stickyHeader aria-label="Transaction table">
+            <TableHead>
+              <TableRow>
+                {transactionTableColumn.map(({ id, label }) => {
+                  return (
+                    <TableCell
+                      className={styles.tableHeaderCell}
+                      key={id}
+                      id={id}
+                    >
+                      {label}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <TableRow hover>
+                {/* mock data */}
+                <TableCell>Oct 10, 2025</TableCell>
+                <TableCell>Paid to Chaat Shop</TableCell>
+                <TableCell>Food & Beverages</TableCell>
+                <TableCell>Rs. 200</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 }
 
