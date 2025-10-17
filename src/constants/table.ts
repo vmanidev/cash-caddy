@@ -17,4 +17,8 @@ export const transactionTableColumn: TransactionTableColumn[] = [
         id: "amount",
         label: "Amount",
     },
+    {
+        id: "actions",
+        label: "Actions"
+    }
 ];

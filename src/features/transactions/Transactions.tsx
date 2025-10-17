@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonGroup,
   Grid,
   Paper,
   Table,
@@ -12,7 +13,7 @@ import {
 import { transactionTableColumn } from "../../constants/table";
 
 import styles from "./Transactions.module.scss";
-import { Add } from "@mui/icons-material";
+import { Add, Delete, Edit } from "@mui/icons-material";
 import AddTransaction from "../addTransaction/AddTransaction";
 import { useState } from "react";
 
@@ -65,6 +66,16 @@ function Transactions() {
                 <TableCell>Paid to Chaat Shop</TableCell>
                 <TableCell>Food & Beverages</TableCell>
                 <TableCell>Rs. 200</TableCell>
+                <TableCell>
+                  <ButtonGroup variant="text">
+                    <Button>
+                      <Edit />
+                    </Button>
+                    <Button>
+                      <Delete color="error" />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
