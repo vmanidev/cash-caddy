@@ -27,6 +27,13 @@ function Form(props: Props) {
     props.mode === "add" ? initialData : props?.inputFormData
   );
 
+  const handleFormChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormData((prev) => {
+      if (prev) return { ...prev, [name]: value };
+    });
+  };
+
   return (
     <Grid container spacing={4} margin={2} size={12}>
       <Grid size={6}>
@@ -40,6 +47,9 @@ function Form(props: Props) {
           fullWidth
           variant="outlined"
           label="Amount"
+          name="amount"
+          value={formData?.amount}
+          onChange={handleFormChange}
           slotProps={{
             input: {
               startAdornment: (
@@ -55,7 +65,12 @@ function Form(props: Props) {
       <Grid size={6}>
         <FormControl fullWidth>
           <InputLabel>Category</InputLabel>
-          <Select label="Category">
+          <Select
+            label="Category"
+            name="category"
+            value={formData?.category}
+            onChange={handleFormChange}
+          >
             <MenuItem>Test</MenuItem>
           </Select>
         </FormControl>
@@ -63,11 +78,27 @@ function Form(props: Props) {
 
       <Grid size={6} alignContent="center">
         <RadioGroup row>
-          <FormControlLabel value="income" label="Income" control={<Radio />} />
           <FormControlLabel
-            value="expenses"
+            label="Income"
+            control={
+              <Radio
+                name="type"
+                value="income"
+                checked={formData?.type === "income"}
+                onChange={handleFormChange}
+              />
+            }
+          />
+          <FormControlLabel
             label="Expenses"
-            control={<Radio />}
+            control={
+              <Radio
+                name="type"
+                value="expenses"
+                checked={formData?.type === "expenses"}
+                onChange={handleFormChange}
+              />
+            }
           />
         </RadioGroup>
       </Grid>
@@ -79,6 +110,8 @@ function Form(props: Props) {
           multiline
           minRows={4}
           label="Note"
+          value={formData?.note}
+          onChange={handleFormChange}
         />
       </Grid>
     </Grid>
