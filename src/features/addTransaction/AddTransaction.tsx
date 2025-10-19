@@ -1,12 +1,16 @@
 import { Button } from "@mui/material";
 import Form from "../../components/ui/form/Form";
 import AppModal from "../../components/ui/modal/Modal";
+import { useState } from "react";
+import { initialData } from "../../constants/form";
 
 interface Props {
   setAddTransactionForm: (arg: boolean) => void;
 }
 
 function AddTransaction({ setAddTransactionForm }: Props) {
+  const [formData, setFormData] = useState(initialData);
+
   const onSubmit = () => {
     setAddTransactionForm(false);
   };
@@ -14,7 +18,7 @@ function AddTransaction({ setAddTransactionForm }: Props) {
   return (
     <AppModal
       title="Add New Transaction"
-      content={<Form mode="add" />}
+      content={<Form formData={formData} setFormData={setFormData} />}
       actionButtons={
         <>
           <Button variant="contained" onClick={onSubmit}>
