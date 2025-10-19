@@ -1,5 +1,5 @@
 export const initialData = {
-    date: "",
+    date: null,
     amount: "",
     type: "",
     note: "",

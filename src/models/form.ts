@@ -1,9 +1,9 @@
+import type { Dayjs } from "dayjs";
+
 export interface FormData {
-    date: string,
+    date: Dayjs | null,
     amount: string,
     type: string,
     note: string,
     category: string
 }
-
-export type Mode = "add" | "edit";
