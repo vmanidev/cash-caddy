@@ -30,7 +30,7 @@ function Form({ formData, setFormData }: Props) {
         if (prev) return { ...prev, date: event };
       });
     } else {
-      const [name, value] = event.target;
+      const { name, value } = event.target;
       setFormData((prev: any) => {
         if (prev) return { ...prev, [name]: value };
       });
