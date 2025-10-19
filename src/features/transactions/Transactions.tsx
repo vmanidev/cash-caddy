@@ -17,7 +17,11 @@ import AddTransaction from "../addTransaction/AddTransaction";
 import { useState } from "react";
 import TransactionRows from "../../components/common/transactions/TransactionRows";
 
-function Transactions() {
+interface Props {
+  transactionCount?: number;
+}
+
+function Transactions({ transactionCount }: Props) {
   const [addTransactionForm, setAddTransactionForm] = useState(false);
 
   return (
@@ -60,7 +64,7 @@ function Transactions() {
             </TableHead>
 
             <TableBody>
-              <TransactionRows count={3} />
+              <TransactionRows count={transactionCount} />
             </TableBody>
           </Table>
         </TableContainer>

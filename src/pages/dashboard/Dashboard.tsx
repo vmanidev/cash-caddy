@@ -9,7 +9,7 @@ function Dashboard() {
         <Overview />
       </Grid>
       <Grid size={12}>
-        <Transactions />
+        <Transactions transactionCount={5} />
       </Grid>
     </Grid>
   );
