@@ -43,7 +43,7 @@ function Form({ formData, setFormData }: Props) {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Transaction date"
-            value={formData.date}
+            value={dayjs(formData.date)}
             onChange={handleFormChange}
             slotProps={{
               textField: { fullWidth: true, value: formData.date },
@@ -59,7 +59,7 @@ function Form({ formData, setFormData }: Props) {
           label="Amount"
           name="amount"
           placeholder="Ex. ₹2,000"
-          value={formData?.amount}
+          value={formData.amount}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -79,7 +79,7 @@ function Form({ formData, setFormData }: Props) {
           <Select
             label="Category"
             name="category"
-            value={formData?.category}
+            value={formData.category}
             onChange={handleFormChange}
           >
             <MenuItem value="test">Test</MenuItem>
@@ -95,7 +95,7 @@ function Form({ formData, setFormData }: Props) {
               <Radio
                 name="type"
                 value="income"
-                checked={formData?.type === "income"}
+                checked={formData.type === "income"}
                 onChange={handleFormChange}
               />
             }
@@ -106,7 +106,7 @@ function Form({ formData, setFormData }: Props) {
               <Radio
                 name="type"
                 value="expenses"
-                checked={formData?.type === "expenses"}
+                checked={formData.type === "expenses"}
                 onChange={handleFormChange}
               />
             }
@@ -121,7 +121,8 @@ function Form({ formData, setFormData }: Props) {
           multiline
           minRows={4}
           label="Note"
-          value={formData?.note}
+          name="note"
+          value={formData.note}
           onChange={handleFormChange}
         />
       </Grid>
