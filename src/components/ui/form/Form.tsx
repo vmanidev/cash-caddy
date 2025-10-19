@@ -4,8 +4,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
   FormControl,
   FormControlLabel,
+  FormHelperText,
+  FormLabel,
   Grid,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Radio,
@@ -13,7 +14,6 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { CurrencyRupee } from "@mui/icons-material";
 import dayjs from "dayjs";
 
 interface Props {
@@ -50,7 +50,7 @@ function Form({ formData, setFormData }: Props) {
             }
             onChange={handleFormChange}
             slotProps={{
-              textField: { fullWidth: true },
+              textField: { fullWidth: true, helperText: "Pick a date" },
             }}
           />
         </LocalizationProvider>
@@ -62,18 +62,9 @@ function Form({ formData, setFormData }: Props) {
           variant="outlined"
           label="Amount"
           name="amount"
-          placeholder="Ex. ₹2,000"
           value={formData.amount}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <CurrencyRupee />
-                </InputAdornment>
-              ),
-            },
-          }}
+          helperText="Enter the amount (numbers only)"
         />
       </Grid>
 
@@ -88,10 +79,12 @@ function Form({ formData, setFormData }: Props) {
           >
             <MenuItem value="test">Test</MenuItem>
           </Select>
+          <FormHelperText>Select a category</FormHelperText>
         </FormControl>
       </Grid>
 
       <Grid size={6} alignContent="center">
+        <FormLabel>Transaction type</FormLabel>
         <RadioGroup row>
           <FormControlLabel
             label="Income"
@@ -128,6 +121,7 @@ function Form({ formData, setFormData }: Props) {
           name="note"
           value={formData.note}
           onChange={handleFormChange}
+          helperText="Add a note for this transaction"
         />
       </Grid>
     </Grid>
