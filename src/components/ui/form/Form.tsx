@@ -27,7 +27,7 @@ function Form({ formData, setFormData }: Props) {
 
     if (dayjs.isDayjs(event)) {
       setFormData((prev: any) => {
-        if (prev) return { ...prev, date: event };
+        if (prev) return { ...prev, date: event.format("YYYY-MM-DD") };
       });
     } else {
       const { name, value } = event.target;
@@ -43,10 +43,14 @@ function Form({ formData, setFormData }: Props) {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Transaction date"
-            value={dayjs(formData.date)}
+            value={
+              formData.date.length > 0
+                ? dayjs(formData.date, "YYYY-MM-DD")
+                : null
+            }
             onChange={handleFormChange}
             slotProps={{
-              textField: { fullWidth: true, value: formData.date },
+              textField: { fullWidth: true },
             }}
           />
         </LocalizationProvider>
