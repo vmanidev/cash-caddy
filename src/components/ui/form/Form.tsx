@@ -26,14 +26,13 @@ function Form({ formData, setFormData }: Props) {
     if (event === null) return;
 
     if (dayjs.isDayjs(event)) {
-      setFormData((prev: any) => {
-        if (prev) return { ...prev, date: event.format("YYYY-MM-DD") };
-      });
+      setFormData((prev: any) => ({
+        ...prev,
+        date: event.format("YYYY-MM-DD"),
+      }));
     } else {
       const { name, value } = event.target;
-      setFormData((prev: any) => {
-        if (prev) return { ...prev, [name]: value };
-      });
+      setFormData((prev: any) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -116,7 +115,7 @@ function Form({ formData, setFormData }: Props) {
           fullWidth
           variant="outlined"
           multiline
-          minRows={4}
+          minRows={2}
           label="Note"
           name="note"
           value={formData.note}

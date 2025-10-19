@@ -13,21 +13,26 @@ import { transactionTableColumn } from "../../constants/table";
 
 import styles from "./Transactions.module.scss";
 import { Add } from "@mui/icons-material";
-import AddTransaction from "../addTransaction/AddTransaction";
+import UpdateTransaction from "../../components/common/transactions/UpdateTransaction";
 import { useState } from "react";
 import TransactionRows from "../../components/common/transactions/TransactionRows";
+import type { UpdateTransactionStateProps } from "../../models/transactions";
 
 interface Props {
   transactionCount?: number;
 }
 
 function Transactions({ transactionCount }: Props) {
-  const [addTransactionForm, setAddTransactionForm] = useState(false);
+  const [addTransaction, setAddTransaction] =
+    useState<UpdateTransactionStateProps>({ showModal: false });
 
   return (
     <>
-      {addTransactionForm && (
-        <AddTransaction setAddTransactionForm={setAddTransactionForm} />
+      {addTransaction.showModal && (
+        <UpdateTransaction
+          updateTransaction={addTransaction}
+          setUpdateTransaction={setAddTransaction}
+        />
       )}
       <Paper elevation={4}>
         <Grid
@@ -40,7 +45,9 @@ function Transactions({ transactionCount }: Props) {
           <span className="section-title">Recent transactions</span>
           <Button
             variant="outlined"
-            onClick={() => setAddTransactionForm(true)}
+            onClick={() =>
+              setAddTransaction((prev) => ({ ...prev, showModal: true }))
+            }
           >
             <Add /> Add new transaction
           </Button>
