@@ -12,7 +12,7 @@ import type { UpdateTransactionStateProps } from "../../../models/transactions";
 
 interface Props {
   updateTransaction: UpdateTransactionStateProps;
-  setUpdateTransaction: (props: any) => void;
+  setUpdateTransaction: (props: UpdateTransactionStateProps) => void;
 }
 
 function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
@@ -27,11 +27,11 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
         ? editTransaction(formData)
         : addTransaction(formData)
     );
-    setUpdateTransaction((prev: any) => ({ ...prev, showModal: false }));
+    setUpdateTransaction({ showModal: false });
   };
 
   const onCancel = () => {
-    setUpdateTransaction((prev: any) => ({ ...prev, showModal: false }));
+    setUpdateTransaction({ showModal: false });
   };
 
   return (

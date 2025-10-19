@@ -45,9 +45,7 @@ function Transactions({ transactionCount }: Props) {
           <span className="section-title">Recent transactions</span>
           <Button
             variant="outlined"
-            onClick={() =>
-              setAddTransaction((prev) => ({ ...prev, showModal: true }))
-            }
+            onClick={() => setAddTransaction({ showModal: true })}
           >
             <Add /> Add new transaction
           </Button>
