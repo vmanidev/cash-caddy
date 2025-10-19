@@ -1,7 +1,12 @@
 import "./App.scss";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
-  return <div>CashCaddy</div>;
+  return (
+    <div>
+      <Dashboard />
+    </div>
+  );
 }
 
 export default App;
