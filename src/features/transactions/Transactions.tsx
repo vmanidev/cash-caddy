@@ -1,6 +1,5 @@
 import {
   Button,
-  ButtonGroup,
   Grid,
   Paper,
   Table,
@@ -13,9 +12,10 @@ import {
 import { transactionTableColumn } from "../../constants/table";
 
 import styles from "./Transactions.module.scss";
-import { Add, Delete, Edit } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import AddTransaction from "../addTransaction/AddTransaction";
 import { useState } from "react";
+import TransactionRows from "../../components/common/transactions/TransactionRows";
 
 function Transactions() {
   const [addTransactionForm, setAddTransactionForm] = useState(false);
@@ -60,23 +60,7 @@ function Transactions() {
             </TableHead>
 
             <TableBody>
-              <TableRow hover>
-                {/* mock data */}
-                <TableCell>Oct 10, 2025</TableCell>
-                <TableCell>Paid to Chaat Shop</TableCell>
-                <TableCell>Food & Beverages</TableCell>
-                <TableCell>Rs. 200</TableCell>
-                <TableCell>
-                  <ButtonGroup variant="text">
-                    <Button>
-                      <Edit />
-                    </Button>
-                    <Button>
-                      <Delete color="error" />
-                    </Button>
-                  </ButtonGroup>
-                </TableCell>
-              </TableRow>
+              <TransactionRows count={3} />
             </TableBody>
           </Table>
         </TableContainer>
