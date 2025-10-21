@@ -1,6 +1,6 @@
 import type { Transaction } from "../store/types";
 
-export function calculateTransactions(inputArr: Transaction[]) {
+export function calculateTransactions(inputArr: Transaction[] = []) {
 
     const totalIncome = () => calculateTotal("income");
 
@@ -9,7 +9,8 @@ export function calculateTransactions(inputArr: Transaction[]) {
     const totalBalance = () => totalIncome() - totalExpenses();
 
     function calculateTotal(transactionType: string) {
-        return inputArr.filter(({ type }) => type === transactionType).reduce((acc, { amount }) => acc + Number(amount), 0)
+        if (inputArr.length < 1) return 0;
+        return inputArr.filter(({ type }) => type === transactionType).reduce((acc, { amount }) => acc + Number(amount), 0);
     }
 
     return { totalIncome, totalExpenses, totalBalance };
