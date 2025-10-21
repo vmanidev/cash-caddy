@@ -47,7 +47,7 @@ function TransactionRows({ count }: Props) {
             <TableCell
               className={type === "income" ? "income-text" : "expenses-text"}
             >
-              {amount}
+              {`${type === "income" ? "+" : "-"} ${amount}`}
             </TableCell>
             <TableCell>
               <ButtonGroup variant="text">
