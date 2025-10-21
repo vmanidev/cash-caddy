@@ -5,7 +5,7 @@ import { transactionSummaryCard } from "../../constants/overview";
 import { CurrencyRupee } from "@mui/icons-material";
 import { calculateTransactions } from "../../utils/calculate";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function Overview() {
   const [total, setTotal] = useState({
@@ -16,12 +16,17 @@ function Overview() {
 
   const transactionData = useSelector((state: any) => state.transactions);
 
+  const getTotal = useMemo(
+    () => calculateTransactions(transactionData),
+    [transactionData]
+  );
+
   useEffect(
     () =>
       setTotal({
-        income: calculateTransactions(transactionData).totalIncome(),
-        expenses: calculateTransactions(transactionData).totalExpenses(),
-        balance: calculateTransactions(transactionData).totalBalance(),
+        income: getTotal.totalIncome(),
+        expenses: getTotal.totalExpenses(),
+        balance: getTotal.totalBalance(),
       }),
     [transactionData]
   );
