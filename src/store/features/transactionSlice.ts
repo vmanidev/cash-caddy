@@ -18,8 +18,7 @@ const transactionSlice = createSlice({
                 if (item.id === action.payload.id) return action.payload;
                 return item;
             });
-        },
-        noop: (state) => state
+        }
     },
 });
 
