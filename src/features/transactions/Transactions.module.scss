@@ -2,3 +2,14 @@
   background: #ebebeb !important;
   font-weight: 700 !important;
 }
+
+.emptyTableViewText {
+  text-align: center;
+  padding: 1rem;
+  color: #808080;
+  line-height: 2rem;
+
+  .emptyTableViewHighlightText {
+    color: #1976d2;
+  }
+}

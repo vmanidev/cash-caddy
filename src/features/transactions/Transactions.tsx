@@ -17,6 +17,7 @@ import UpdateTransaction from "../../components/common/transactions/UpdateTransa
 import { useState } from "react";
 import TransactionRows from "../../components/common/transactions/TransactionRows";
 import type { UpdateTransactionStateProps } from "../../models/transactions";
+import { useSelector } from "react-redux";
 
 interface Props {
   transactionCount?: number;
@@ -25,6 +26,40 @@ interface Props {
 function Transactions({ transactionCount }: Props) {
   const [addTransaction, setAddTransaction] =
     useState<UpdateTransactionStateProps>({ showModal: false });
+
+  const transactionData = useSelector((state: any) => state.transactions);
+
+  const TableView = () => (
+    <TableContainer>
+      <Table stickyHeader aria-label="Transaction table">
+        <TableHead>
+          <TableRow>
+            {transactionTableColumn.map(({ id, label }) => {
+              return (
+                <TableCell className={styles.tableHeaderCell} key={id} id={id}>
+                  {label}
+                </TableCell>
+              );
+            })}
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          <TransactionRows count={transactionCount} />
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+
+  const EmptyTableView = () => (
+    <div className={styles.emptyTableViewText}>
+      Looks like you haven`t added any transactions yet. Tap{" "}
+      <strong className={styles.emptyTableViewHighlightText}>
+        Add New Transaction
+      </strong>{" "}
+      to get started!
+    </div>
+  );
 
   return (
     <>
@@ -50,29 +85,7 @@ function Transactions({ transactionCount }: Props) {
             <Add /> Add new transaction
           </Button>
         </Grid>
-        <TableContainer>
-          <Table stickyHeader aria-label="Transaction table">
-            <TableHead>
-              <TableRow>
-                {transactionTableColumn.map(({ id, label }) => {
-                  return (
-                    <TableCell
-                      className={styles.tableHeaderCell}
-                      key={id}
-                      id={id}
-                    >
-                      {label}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              <TransactionRows count={transactionCount} />
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {transactionData.length > 0 ? <TableView /> : <EmptyTableView />}
       </Paper>
     </>
   );
