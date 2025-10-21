@@ -19,6 +19,7 @@ const transactionSlice = createSlice({
                 return item;
             });
         },
+        noop: (state) => state
     },
 });
 
