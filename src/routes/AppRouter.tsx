@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../pages/dashboard/Dashboard";
-import Transactions from "../features/transactionTable/TransactionTable";
+import Transactions from "../pages/transactions/Transactions";
 
 function AppRouter() {
   return (
