@@ -2,7 +2,7 @@ import { Delete, Edit } from "@mui/icons-material";
 import { Button, ButtonGroup, TableCell, TableRow } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { Transaction } from "../../../store/types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import UpdateTransaction from "./UpdateTransaction";
 import { initialData } from "../../../constants/form";
 import type {
@@ -14,10 +14,11 @@ import AppModal from "../../ui/modal/Modal";
 import { removeTransaction } from "../../../store/features/transactionSlice";
 
 interface Props {
-  count?: number;
+  page: number;
+  rowsPerPage: number;
 }
 
-function TransactionRows({ count }: Props) {
+function TransactionRows({ page, rowsPerPage }: Props) {
   const [editTransaction, setEditTransaction] =
     useState<UpdateTransactionStateProps>({
       formData: initialData,
@@ -35,44 +36,51 @@ function TransactionRows({ count }: Props) {
 
   const dispatch = useDispatch();
 
+  const renderList = useMemo(
+    () =>
+      [...transactionData].slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [page, rowsPerPage]
+  );
+
   const getTransactionRows = () => {
-    return transactionData
-      .slice(0, count)
-      .map(({ id, date, amount, category, type, note }) => {
-        return (
-          <TableRow key={id} hover>
-            <TableCell>{date}</TableCell>
-            <TableCell>{note}</TableCell>
-            <TableCell>{category}</TableCell>
-            <TableCell
-              className={type === "income" ? "income-text" : "expenses-text"}
-            >
-              {`${type === "income" ? "+" : "-"} ${amount}`}
-            </TableCell>
-            <TableCell>
-              <ButtonGroup variant="text">
-                <Button
-                  onClick={() =>
-                    editTransactionRow({
-                      id,
-                      date,
-                      amount,
-                      category,
-                      type,
-                      note,
-                    })
-                  }
-                >
-                  <Edit />
-                </Button>
-                <Button onClick={() => (id ? showDeleteModal(id) : null)}>
-                  <Delete color="error" />
-                </Button>
-              </ButtonGroup>
-            </TableCell>
-          </TableRow>
-        );
-      });
+    return renderList.map(({ id, date, amount, category, type, note }) => {
+      return (
+        <TableRow key={id} hover>
+          <TableCell>{date}</TableCell>
+          <TableCell>{note}</TableCell>
+          <TableCell>{category}</TableCell>
+          <TableCell
+            className={type === "income" ? "income-text" : "expenses-text"}
+          >
+            {`${type === "income" ? "+" : "-"} ${amount}`}
+          </TableCell>
+          <TableCell>
+            <ButtonGroup variant="text">
+              <Button
+                onClick={() =>
+                  editTransactionRow({
+                    id,
+                    date,
+                    amount,
+                    category,
+                    type,
+                    note,
+                  })
+                }
+              >
+                <Edit />
+              </Button>
+              <Button onClick={() => (id ? showDeleteModal(id) : null)}>
+                <Delete color="error" />
+              </Button>
+            </ButtonGroup>
+          </TableCell>
+        </TableRow>
+      );
+    });
   };
 
   const editTransactionRow = (formData: FormData) => {

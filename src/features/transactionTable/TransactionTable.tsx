@@ -7,6 +7,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
 } from "@mui/material";
 import { transactionTableColumn } from "../../constants/table";
@@ -18,20 +19,32 @@ import { useState } from "react";
 import TransactionRows from "../../components/common/transactions/TransactionRows";
 import type { UpdateTransactionStateProps } from "../../models/transactions";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
-  transactionCount?: number;
   tableTitle: string;
 }
 
-function TransactionTable({ transactionCount, tableTitle }: Props) {
+function TransactionTable({ tableTitle }: Props) {
   const [addTransaction, setAddTransaction] =
     useState<UpdateTransactionStateProps>({ showModal: false });
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const transactionData = useSelector((state: any) => state.transactions);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleChangePage = (event: any, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: any) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const TableView = () => (
     <>
@@ -54,15 +67,31 @@ function TransactionTable({ transactionCount, tableTitle }: Props) {
           </TableHead>
 
           <TableBody>
-            <TransactionRows count={transactionCount} />
+            <TransactionRows page={page} rowsPerPage={rowsPerPage} />
           </TableBody>
         </Table>
       </TableContainer>
-      {transactionCount ? (
-        <Button variant="text" onClick={() => navigate("/transactions")}>
-          See more
+
+      {location.state === "app.transactions" ? (
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, 50]}
+          component="div"
+          count={transactionData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      ) : (
+        <Button
+          variant="text"
+          onClick={() =>
+            navigate("/transactions", { state: "app.transactions" })
+          }
+        >
+          View All Transactions
         </Button>
-      ) : null}
+      )}
     </>
   );
 

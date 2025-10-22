@@ -11,7 +11,6 @@ function Dashboard() {
       <Grid size={12}>
         <TransactionTable
           tableTitle="Recent Transactions"
-          transactionCount={5}
         />
       </Grid>
     </Grid>
