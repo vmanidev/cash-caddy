@@ -18,6 +18,7 @@ import { useState } from "react";
 import TransactionRows from "../../components/common/transactions/TransactionRows";
 import type { UpdateTransactionStateProps } from "../../models/transactions";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   transactionCount?: number;
@@ -30,26 +31,39 @@ function TransactionTable({ transactionCount, tableTitle }: Props) {
 
   const transactionData = useSelector((state: any) => state.transactions);
 
-  const TableView = () => (
-    <TableContainer>
-      <Table stickyHeader aria-label="Transaction table">
-        <TableHead>
-          <TableRow>
-            {transactionTableColumn.map(({ id, label }) => {
-              return (
-                <TableCell className={styles.tableHeaderCell} key={id} id={id}>
-                  {label}
-                </TableCell>
-              );
-            })}
-          </TableRow>
-        </TableHead>
+  const navigate = useNavigate();
 
-        <TableBody>
-          <TransactionRows count={transactionCount} />
-        </TableBody>
-      </Table>
-    </TableContainer>
+  const TableView = () => (
+    <>
+      <TableContainer>
+        <Table stickyHeader aria-label="Transaction table">
+          <TableHead>
+            <TableRow>
+              {transactionTableColumn.map(({ id, label }) => {
+                return (
+                  <TableCell
+                    className={styles.tableHeaderCell}
+                    key={id}
+                    id={id}
+                  >
+                    {label}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            <TransactionRows count={transactionCount} />
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {transactionCount ? (
+        <Button variant="text" onClick={() => navigate("/transactions")}>
+          See more
+        </Button>
+      ) : null}
+    </>
   );
 
   const EmptyTableView = () => (
