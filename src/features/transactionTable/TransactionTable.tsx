@@ -21,9 +21,10 @@ import { useSelector } from "react-redux";
 
 interface Props {
   transactionCount?: number;
+  tableTitle: string;
 }
 
-function Transactions({ transactionCount }: Props) {
+function TransactionTable({ transactionCount, tableTitle }: Props) {
   const [addTransaction, setAddTransaction] =
     useState<UpdateTransactionStateProps>({ showModal: false });
 
@@ -77,7 +78,7 @@ function Transactions({ transactionCount }: Props) {
           padding={2}
           alignItems="center"
         >
-          <span className="section-title">Recent transactions</span>
+          <span className="section-title">{tableTitle}</span>
           <Button
             variant="outlined"
             onClick={() => setAddTransaction({ showModal: true })}
@@ -91,4 +92,4 @@ function Transactions({ transactionCount }: Props) {
   );
 }
 
-export default Transactions;
+export default TransactionTable;

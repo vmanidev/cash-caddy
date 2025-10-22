@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import Overview from "../../features/overview/Overview";
-import Transactions from "../../features/transactionTable/TransactionTable";
+import TransactionTable from "../../features/transactionTable/TransactionTable";
 
 function Dashboard() {
   return (
@@ -9,7 +9,10 @@ function Dashboard() {
         <Overview />
       </Grid>
       <Grid size={12}>
-        <Transactions transactionCount={5} />
+        <TransactionTable
+          tableTitle="Recent Transactions"
+          transactionCount={5}
+        />
       </Grid>
     </Grid>
   );
