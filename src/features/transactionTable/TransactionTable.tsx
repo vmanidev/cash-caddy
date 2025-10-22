@@ -29,7 +29,10 @@ function TransactionTable({ tableTitle }: Props) {
   const [addTransaction, setAddTransaction] =
     useState<UpdateTransactionStateProps>({ showModal: false });
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState({
+    event: null,
+    newPage: 0,
+  });
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const transactionData = useSelector((state: any) => state.transactions);
@@ -38,12 +41,12 @@ function TransactionTable({ tableTitle }: Props) {
   const location = useLocation();
 
   const handleChangePage = (event: any, newPage: number) => {
-    setPage(newPage);
+    setPage({ event, newPage });
   };
 
   const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setPage({ event: null, newPage: 0 });
   };
 
   const TableView = () => (
@@ -67,7 +70,7 @@ function TransactionTable({ tableTitle }: Props) {
           </TableHead>
 
           <TableBody>
-            <TransactionRows page={page} rowsPerPage={rowsPerPage} />
+            <TransactionRows page={page.newPage} rowsPerPage={rowsPerPage} />
           </TableBody>
         </Table>
       </TableContainer>
@@ -78,7 +81,7 @@ function TransactionTable({ tableTitle }: Props) {
           component="div"
           count={transactionData.length}
           rowsPerPage={rowsPerPage}
-          page={page}
+          page={page.newPage}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
