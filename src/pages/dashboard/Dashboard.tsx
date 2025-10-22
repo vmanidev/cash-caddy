@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import Overview from "../../features/overview/Overview";
-import Transactions from "../../features/transactions/Transactions";
+import Transactions from "../../features/transactionTable/TransactionTable";
 
 function Dashboard() {
   return (

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { transactionTableColumn } from "../../constants/table";
 
-import styles from "./Transactions.module.scss";
+import styles from "./TransactionTable.module.scss";
 import { Add } from "@mui/icons-material";
 import UpdateTransaction from "../../components/common/transactions/UpdateTransaction";
 import { useState } from "react";
