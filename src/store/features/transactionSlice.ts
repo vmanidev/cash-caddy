@@ -1,11 +1,19 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Transaction } from "../types";
 
-const initialState: Transaction[] = [];
+const getInitialState = (): Transaction[] => {
+    try {
+        const localData = localStorage.getItem("transactions");
+        return localData ? JSON.parse(localData) : []
+    }
+    catch {
+        return [];
+    }
+}
 
 const transactionSlice = createSlice({
     name: "transactions",
-    initialState: initialState,
+    initialState: getInitialState,
     reducers: {
         addTransaction: (state, action: PayloadAction<Transaction>) => {
             state.push({ ...action.payload, id: `transactionId_${state.length}` });
