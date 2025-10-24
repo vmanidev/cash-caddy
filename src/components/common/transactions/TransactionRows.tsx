@@ -12,6 +12,7 @@ import type {
 import type { FormData } from "../../../models/form";
 import AppModal from "../../ui/modal/Modal";
 import { removeTransaction } from "../../../store/features/transactionSlice";
+import formatDate, { sortByDate } from "../../../utils/date";
 
 interface Props {
   page: number;
@@ -36,20 +37,19 @@ function TransactionRows({ page, rowsPerPage }: Props) {
 
   const dispatch = useDispatch();
 
-  const renderList = useMemo(
-    () =>
-      [...transactionData].slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [page, rowsPerPage]
-  );
+  const renderList = useMemo(() => {
+    let sortedTransactionsByDate = sortByDate([...transactionData]);
+    return sortedTransactionsByDate.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
+  }, [page, rowsPerPage]);
 
   const getTransactionRows = () => {
     return renderList.map(({ id, date, amount, category, type, note }) => {
       return (
         <TableRow key={id} hover>
-          <TableCell>{date}</TableCell>
+          <TableCell>{formatDate(date).getLocaleDate()}</TableCell>
           <TableCell>{note}</TableCell>
           <TableCell>{category}</TableCell>
           <TableCell
