@@ -12,7 +12,7 @@ import type { UpdateTransactionStateProps } from "../../../models/transactions";
 
 interface Props {
   updateTransaction: UpdateTransactionStateProps;
-  setUpdateTransaction: (props: UpdateTransactionStateProps) => void;
+  setUpdateTransaction: (prev: UpdateTransactionStateProps) => void;
 }
 
 function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
