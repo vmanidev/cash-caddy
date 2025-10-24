@@ -49,7 +49,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     return renderList.map(({ id, date, amount, category, type, note }) => {
       return (
         <TableRow key={id} hover>
-          <TableCell>{formatDate(date).getLocaleDate()}</TableCell>
+          <TableCell>{formatDate(date).getRelativeDateLabel()}</TableCell>
           <TableCell>{note}</TableCell>
           <TableCell>{category}</TableCell>
           <TableCell
