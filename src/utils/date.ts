@@ -2,7 +2,14 @@ import type { Transaction } from "../store/types";
 
 function formatDate(date: string) {
 
-    const getLocaleDate = () => Intl.DateTimeFormat("en-us", { dateStyle: "medium" }).format(new Date(date));
+    const getLocaleDate = () => {
+        const dateFormat = Intl.DateTimeFormat("en-us", { dateStyle: "medium" });
+        try {
+            return dateFormat.format(new Date(date));
+        } catch {
+            return dateFormat.format(new Date());
+        }
+    }
 
     const isToday = () => {
         const today = new Date();
