@@ -3,7 +3,7 @@ import type { MenuItems } from "../models/sidebar";
 export const menuItems: MenuItems[] = [{
     key: "dashboard",
     label: "Dashboard",
-    path: "/dashboard",
+    path: "/",
     state: "app.dashboard"
 }, {
     key: "transactions",

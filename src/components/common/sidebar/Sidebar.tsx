@@ -9,6 +9,7 @@ import AppDrawer from "../../ui/drawer/Drawer";
 import { menuItems } from "../../../constants/sidebar";
 import type { ReactNode } from "react";
 import { Category, Dashboard, Receipt, Settings } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   openDrawer: boolean;
@@ -16,15 +17,22 @@ interface Props {
 }
 
 function Sidebar({ openDrawer, setOpenDrawer }: Props) {
+  const navigate = useNavigate();
+
+  const goto = (path: string, state: string) => {
+    navigate(path, { state });
+    setOpenDrawer(false);
+  };
+
   const SidebarMenu = () => {
     return (
       <List>
-        {menuItems.map((item) => {
+        {menuItems.map(({ key, label, path, state }) => {
           return (
-            <ListItem key={item.key}>
-              <ListItemButton>
-                <ListItemIcon>{renderIcon(item.key)}</ListItemIcon>
-                <ListItemText primary={item.label} />
+            <ListItem key={key}>
+              <ListItemButton onClick={() => goto(path, state)}>
+                <ListItemIcon>{renderIcon(key)}</ListItemIcon>
+                <ListItemText primary={label} />
               </ListItemButton>
             </ListItem>
           );
