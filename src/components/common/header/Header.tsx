@@ -1,14 +1,23 @@
 import { Menu } from "@mui/icons-material";
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
+import { useState } from "react";
+import Sidebar from "../sidebar/Sidebar";
 
 function AppHeader() {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
   return (
-    <Grid container size={12} spacing={1} alignItems="center">
-      <Menu />
-      <Typography variant="h4" fontWeight="700" className="income-text">
-        CASH CADDY
-      </Typography>
-    </Grid>
+    <>
+      <Sidebar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+      <Grid container size={12} spacing={1} alignItems="center">
+        <Button variant="text" onClick={() => setOpenDrawer(true)}>
+          <Menu />
+        </Button>
+        <Typography variant="h4" fontWeight="700" className="income-text">
+          CASH CADDY
+        </Typography>
+      </Grid>
+    </>
   );
 }
 
