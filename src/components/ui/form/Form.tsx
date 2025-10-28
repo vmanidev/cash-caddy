@@ -37,8 +37,8 @@ function Form({ formData, setFormData }: Props) {
   };
 
   return (
-    <Grid container spacing={4} margin={2} size={12}>
-      <Grid size={6}>
+    <Grid container spacing={{ xs: 2, sm: 4, md: 4, lg: 4, xl: 4 }} size={12}>
+      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Transaction date"
@@ -55,7 +55,7 @@ function Form({ formData, setFormData }: Props) {
         </LocalizationProvider>
       </Grid>
 
-      <Grid size={6}>
+      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
         <TextField
           fullWidth
           variant="outlined"
@@ -67,7 +67,7 @@ function Form({ formData, setFormData }: Props) {
         />
       </Grid>
 
-      <Grid size={6}>
+      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
         <FormControl fullWidth>
           <InputLabel>Category</InputLabel>
           <Select
@@ -82,7 +82,7 @@ function Form({ formData, setFormData }: Props) {
         </FormControl>
       </Grid>
 
-      <Grid size={6} alignContent="center">
+      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }} alignContent="center">
         <FormLabel>Transaction type</FormLabel>
         <RadioGroup row>
           <FormControlLabel
