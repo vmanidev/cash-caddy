@@ -45,6 +45,11 @@ function TransactionTable({ tableTitle }: Props) {
     setPage({ event: null, newPage: 0 });
   };
 
+  const viewAllTransactions = () => {
+    navigate("/transactions", { state: "app.transactions" });
+    scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const TableView = () => (
     <>
       <TableContainer>
@@ -66,12 +71,7 @@ function TransactionTable({ tableTitle }: Props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       ) : transactionData.length > 5 ? (
-        <Button
-          variant="text"
-          onClick={() =>
-            navigate("/transactions", { state: "app.transactions" })
-          }
-        >
+        <Button size="small" variant="text" onClick={viewAllTransactions}>
           View All Transactions
         </Button>
       ) : null}
