@@ -33,7 +33,14 @@ function Overview() {
 
   const TransactionSummary = () =>
     transactionSummaryCard.map(({ type, displayText }) => (
-      <Grid size={4} key={type}>
+      <Grid
+        size={
+          type === "balance"
+            ? { xs: 12, sm: 4, md: 4, lg: 4, xl: 4 }
+            : { xs: 6, sm: 4, md: 4, lg: 4, xl: 4 }
+        }
+        key={type}
+      >
         <Paper className={`${styles.paper} ${styles[type]}`} elevation={4}>
           <Stack
             direction="column"
