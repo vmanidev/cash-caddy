@@ -1,8 +1,16 @@
 import { Delete, Edit } from "@mui/icons-material";
-import { Button, ButtonGroup, TableCell, TableRow } from "@mui/material";
+import {
+  Button,
+  ButtonGroup,
+  Collapse,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { Transaction } from "../../../store/types";
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import UpdateTransaction from "./UpdateTransaction";
 import { initialData } from "../../../constants/form";
 import type {
@@ -48,37 +56,55 @@ function TransactionRows({ page, rowsPerPage }: Props) {
   const getTransactionRows = () => {
     return renderList.map(({ id, date, amount, category, type, note }) => {
       return (
-        <TableRow key={id} hover>
-          <TableCell>{formatDate(date).getRelativeDateLabel()}</TableCell>
-          <TableCell>{note}</TableCell>
-          <TableCell>{category}</TableCell>
-          <TableCell
-            className={type === "income" ? "income-text" : "expenses-text"}
-          >
-            {`${type === "income" ? "+" : "-"} ${amount}`}
-          </TableCell>
-          <TableCell>
-            <ButtonGroup variant="text">
-              <Button
-                onClick={() =>
-                  editTransactionRow({
-                    id,
-                    date,
-                    amount,
-                    category,
-                    type,
-                    note,
-                  })
-                }
-              >
-                <Edit />
-              </Button>
-              <Button onClick={() => (id ? showDeleteModal(id) : null)}>
-                <Delete color="error" />
-              </Button>
-            </ButtonGroup>
-          </TableCell>
-        </TableRow>
+        <Fragment key={id}>
+          <TableRow sx={{ "& td, & th": { borderBottom: "none" } }}>
+            <TableCell>{formatDate(date).getRelativeDateLabel()}</TableCell>
+            <TableCell
+              className={type === "income" ? "income-text" : "expenses-text"}
+            >
+              {`${amount && (type === "income" ? "+" : "-")} ${amount}`}
+            </TableCell>
+            <TableCell>{category}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell colSpan={4} sx={{ padding: 0 }}>
+              <Collapse in={true}>
+                <Table size="small">
+                  <TableBody>
+                    <TableRow sx={{ "& td, & th": { border: "none" } }}>
+                      <TableCell sx={{ fontStyle: "italic", width: "70%" }}>
+                        {note}
+                      </TableCell>
+                      <TableCell sx={{ width: "30%" }}>
+                        <ButtonGroup variant="text" size="small">
+                          <Button
+                            onClick={() =>
+                              editTransactionRow({
+                                id,
+                                date,
+                                amount,
+                                category,
+                                type,
+                                note,
+                              })
+                            }
+                          >
+                            <Edit />
+                          </Button>
+                          <Button
+                            onClick={() => (id ? showDeleteModal(id) : null)}
+                          >
+                            <Delete color="error" />
+                          </Button>
+                        </ButtonGroup>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </Fragment>
       );
     });
   };

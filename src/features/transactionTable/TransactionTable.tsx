@@ -4,13 +4,9 @@ import {
   Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
-  TableHead,
   TablePagination,
-  TableRow,
 } from "@mui/material";
-import { transactionTableColumn } from "../../constants/table";
 
 import styles from "./TransactionTable.module.scss";
 import { Add } from "@mui/icons-material";
@@ -53,22 +49,6 @@ function TransactionTable({ tableTitle }: Props) {
     <>
       <TableContainer>
         <Table stickyHeader aria-label="Transaction table">
-          <TableHead>
-            <TableRow>
-              {transactionTableColumn.map(({ id, label }) => {
-                return (
-                  <TableCell
-                    className={styles.tableHeaderCell}
-                    key={id}
-                    id={id}
-                  >
-                    {label}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-
           <TableBody>
             <TransactionRows page={page.newPage} rowsPerPage={rowsPerPage} />
           </TableBody>
@@ -116,24 +96,27 @@ function TransactionTable({ tableTitle }: Props) {
           setUpdateTransaction={setAddTransaction}
         />
       )}
-      <Paper elevation={4}>
-        <Grid
-          size={12}
-          display="flex"
-          justifyContent="space-between"
-          padding={2}
-          alignItems="center"
-        >
-          <span className="section-title">{tableTitle}</span>
-          <Button
-            variant="outlined"
-            onClick={() => setAddTransaction({ showModal: true })}
+      <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
+        <Paper elevation={4}>
+          <Grid
+            size={12}
+            display="flex"
+            justifyContent="space-between"
+            padding={2}
+            alignItems="center"
           >
-            <Add /> Add new transaction
-          </Button>
-        </Grid>
-        {transactionData.length > 0 ? <TableView /> : <EmptyTableView />}
-      </Paper>
+            <span className="section-title">{tableTitle}</span>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => setAddTransaction({ showModal: true })}
+            >
+              <Add fontSize="small" /> Add new transaction
+            </Button>
+          </Grid>
+          {transactionData.length > 0 ? <TableView /> : <EmptyTableView />}
+        </Paper>
+      </Grid>
     </>
   );
 }
