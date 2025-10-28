@@ -44,7 +44,7 @@ function Overview() {
           >
             <div>{displayText}</div>
             <div className={styles.valueHolder}>
-              <CurrencyRupee /> {total[type]}
+              <CurrencyRupee fontSize="small" /> {total[type]}
             </div>
           </Stack>
         </Paper>
@@ -53,7 +53,7 @@ function Overview() {
 
   return (
     <>
-      <Grid container spacing={6}>
+      <Grid container spacing={{ xs: 2, sm: 2, md: 6, lg: 6, xl: 6 }}>
         <TransactionSummary />
       </Grid>
     </>

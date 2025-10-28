@@ -14,7 +14,13 @@
 }
 
 .valueHolder {
-  font-size: 1.5rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .valueHolder {
+    font-size: 1.5rem;
+  }
 }
