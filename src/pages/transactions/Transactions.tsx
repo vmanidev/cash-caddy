@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import AppHeader from "../../components/common/header/Header";
 import TransactionTable from "../../features/transactionTable/TransactionTable";
+import AppFooter from "../../components/common/footer/Footer";
 
 function Transactions() {
   return (
@@ -10,6 +11,9 @@ function Transactions() {
       </Grid>
       <Grid size={12}>
         <TransactionTable tableTitle="Transactions" />
+      </Grid>
+      <Grid size={12}>
+        <AppFooter />
       </Grid>
     </Grid>
   );
