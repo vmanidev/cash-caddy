@@ -7,7 +7,7 @@ function AppHeader() {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
-    <>
+    <header>
       <Sidebar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       <Grid container size={12} alignItems="center">
         <Button
@@ -21,7 +21,7 @@ function AppHeader() {
           CASH CADDY
         </Typography>
       </Grid>
-    </>
+    </header>
   );
 }
 
