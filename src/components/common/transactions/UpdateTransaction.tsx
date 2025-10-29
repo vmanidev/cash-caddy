@@ -43,7 +43,7 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
       actionButtons={
         <>
           <Button variant="contained" onClick={onSubmit}>
-            Add
+            {updateTransaction.formData ? "Update" : "Add"}
           </Button>
           <Button variant="text" onClick={onCancel}>
             Cancel
