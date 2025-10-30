@@ -17,7 +17,7 @@ import type {
   DeleteTransactionModalProps,
   UpdateTransactionStateProps,
 } from "../../../models/transactions";
-import type { FormData } from "../../../models/form";
+import type { TransactionFormData } from "../../../models/form";
 import AppModal from "../../ui/modal/Modal";
 import { removeTransaction } from "../../../store/features/transactionSlice";
 import formatDate, { sortByDate } from "../../../utils/date";
@@ -109,7 +109,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     });
   };
 
-  const editTransactionRow = (formData: FormData) => {
+  const editTransactionRow = (formData: TransactionFormData) => {
     setEditTransaction({ formData, showModal: true });
   };
 
