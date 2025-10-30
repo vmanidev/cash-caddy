@@ -6,3 +6,8 @@ export interface Transaction {
     note: string,
     category: string
 }
+
+export interface Category {
+    income: string[],
+    expenses: string[]
+}
