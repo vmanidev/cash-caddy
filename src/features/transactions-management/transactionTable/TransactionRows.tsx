@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { Transaction } from "../../../store/types";
 import { Fragment, useMemo, useState } from "react";
 import UpdateTransaction from "../UpdateTransaction";
-import { initialData } from "../../../constants/form";
+import { initialTransactionData } from "../../../constants/form";
 import type {
   DeleteTransactionModalProps,
   UpdateTransactionStateProps,
@@ -30,7 +30,7 @@ interface Props {
 function TransactionRows({ page, rowsPerPage }: Props) {
   const [editTransaction, setEditTransaction] =
     useState<UpdateTransactionStateProps>({
-      formData: initialData,
+      formData: initialTransactionData,
       showModal: false,
     });
 

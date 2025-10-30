@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import TransactionForm from "../../components/ui/form/TransactionForm";
 import AppModal from "../../components/ui/modal/Modal";
 import { useState } from "react";
-import { initialData } from "../../constants/form";
+import { initialTransactionData } from "../../constants/form";
 import { useDispatch } from "react-redux";
 import {
   addTransaction,
@@ -17,7 +17,7 @@ interface Props {
 
 function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
   const [formData, setFormData] = useState(
-    updateTransaction.formData ? updateTransaction.formData : initialData
+    updateTransaction.formData ? updateTransaction.formData : initialTransactionData
   );
   const dispatch = useDispatch();
 
