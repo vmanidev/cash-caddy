@@ -1,7 +1,7 @@
-import type { FormData } from "./form";
+import type { TransactionFormData } from "./form";
 
 export interface UpdateTransactionStateProps {
-  formData?: FormData;
+  formData?: TransactionFormData;
   showModal: boolean;
 }
 
