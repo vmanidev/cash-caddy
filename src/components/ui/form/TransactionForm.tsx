@@ -21,7 +21,7 @@ interface Props {
   setFormData: (prev: any) => void;
 }
 
-function Form({ formData, setFormData }: Props) {
+function TransactionForm({ formData, setFormData }: Props) {
   const handleFormChange = (event: any) => {
     if (event === null) return;
 
@@ -132,4 +132,4 @@ function Form({ formData, setFormData }: Props) {
   );
 }
 
-export default Form;
+export default TransactionForm;

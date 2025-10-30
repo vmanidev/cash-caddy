@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import Form from "../../ui/form/Form";
+import TransactionForm from "../../ui/form/TransactionForm";
 import AppModal from "../../ui/modal/Modal";
 import { useState } from "react";
 import { initialData } from "../../../constants/form";
@@ -39,7 +39,7 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
       title={
         updateTransaction.formData ? "Edit Transaction" : "Add New Transaction"
       }
-      content={<Form formData={formData} setFormData={setFormData} />}
+      content={<TransactionForm formData={formData} setFormData={setFormData} />}
       actionButtons={
         <>
           <Button variant="contained" onClick={onSubmit}>
