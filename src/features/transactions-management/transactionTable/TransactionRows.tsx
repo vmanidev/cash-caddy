@@ -11,14 +11,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import type { Transaction } from "../../../store/types";
 import { Fragment, useMemo, useState } from "react";
-import UpdateTransaction from "./UpdateTransaction";
+import UpdateTransaction from "../UpdateTransaction";
 import { initialData } from "../../../constants/form";
 import type {
   DeleteTransactionModalProps,
   UpdateTransactionStateProps,
 } from "../../../models/transactions";
 import type { TransactionFormData } from "../../../models/form";
-import AppModal from "../../ui/modal/Modal";
+import AppModal from "../../../components/ui/modal/Modal";
 import { removeTransaction } from "../../../store/features/transactionSlice";
 import formatDate, { sortByDate } from "../../../utils/date";
 

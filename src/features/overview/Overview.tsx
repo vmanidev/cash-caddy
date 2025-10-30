@@ -31,7 +31,7 @@ function Overview() {
     [transactionData]
   );
 
-  const TransactionSummary = () =>
+  const TransactionOverview = () =>
     transactionSummaryCard.map(({ type, displayText }) => (
       <Grid
         size={
@@ -61,7 +61,7 @@ function Overview() {
   return (
     <>
       <Grid container spacing={{ xs: 2, sm: 2, md: 6, lg: 6, xl: 6 }}>
-        <TransactionSummary />
+        <TransactionOverview />
       </Grid>
     </>
   );

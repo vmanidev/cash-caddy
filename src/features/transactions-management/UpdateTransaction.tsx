@@ -1,14 +1,14 @@
 import { Button } from "@mui/material";
-import TransactionForm from "../../ui/form/TransactionForm";
-import AppModal from "../../ui/modal/Modal";
+import TransactionForm from "../../components/ui/form/TransactionForm";
+import AppModal from "../../components/ui/modal/Modal";
 import { useState } from "react";
-import { initialData } from "../../../constants/form";
+import { initialData } from "../../constants/form";
 import { useDispatch } from "react-redux";
 import {
   addTransaction,
   editTransaction,
-} from "../../../store/features/transactionSlice";
-import type { UpdateTransactionStateProps } from "../../../models/transactions";
+} from "../../store/features/transactionSlice";
+import type { UpdateTransactionStateProps } from "../../models/transactions";
 
 interface Props {
   updateTransaction: UpdateTransactionStateProps;

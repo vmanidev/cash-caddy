@@ -10,10 +10,10 @@ import {
 
 import styles from "./TransactionTable.module.scss";
 import { Add } from "@mui/icons-material";
-import UpdateTransaction from "../../components/common/transactions/UpdateTransaction";
+import UpdateTransaction from "../UpdateTransaction";
 import { useState } from "react";
-import TransactionRows from "../../components/common/transactions/TransactionRows";
-import type { UpdateTransactionStateProps } from "../../models/transactions";
+import TransactionRows from "./TransactionRows";
+import type { UpdateTransactionStateProps } from "../../../models/transactions";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
