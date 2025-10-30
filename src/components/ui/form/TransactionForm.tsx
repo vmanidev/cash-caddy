@@ -1,4 +1,4 @@
-import type { FormData } from "../../../models/form";
+import type { TransactionFormData } from "../../../models/form";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
@@ -17,7 +17,7 @@ import {
 import dayjs from "dayjs";
 
 interface Props {
-  formData: FormData;
+  formData: TransactionFormData;
   setFormData: (prev: any) => void;
 }
 

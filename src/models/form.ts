@@ -1,8 +1,13 @@
-export interface FormData {
+export interface TransactionFormData {
     id?: string
     date: string,
     amount: string,
     type: string,
     note: string,
     category: string
+}
+
+export interface CategoryFormData {
+    name: string,
+    type: string
 }
