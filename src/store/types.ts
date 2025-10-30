@@ -7,7 +7,17 @@ export interface Transaction {
     category: string
 }
 
+interface Item {
+    text: string,
+    value: string
+}
+
 export interface Category {
-    income: string[],
-    expenses: string[]
+    income: Item[],
+    expenses: Item[]
+}
+
+export interface CategoryPayload {
+    type: "income" | "expenses",
+    data: Item
 }
