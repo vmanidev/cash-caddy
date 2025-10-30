@@ -9,7 +9,7 @@ function AppFooter() {
         alignItems="center"
         justifyContent="center"
         divider={<Divider orientation="vertical" flexItem />}
-        spacing={2}
+        spacing={1}
       >
         <Grid display="flex" alignItems="center">
           <Copyright fontSize="small" />
