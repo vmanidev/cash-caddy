@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import AppHeader from "../../components/common/header/Header";
-import AppFooter from "../../components/common/footer/Footer";
+import AppHeader from "../components/common/Header";
+import AppFooter from "../components/common/Footer";
 
 function Categories() {
   return (

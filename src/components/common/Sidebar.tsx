@@ -5,8 +5,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import AppDrawer from "../../ui/drawer/Drawer";
-import { menuItems } from "../../../constants/sidebar";
+import AppDrawer from "../ui/drawer/Drawer";
+import { menuItems } from "../../constants/sidebar";
 import type { ReactNode } from "react";
 import { Category, Dashboard, Receipt, Settings } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";

@@ -1,7 +1,7 @@
 import { Menu } from "@mui/icons-material";
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
-import Sidebar from "../sidebar/Sidebar";
+import Sidebar from "./Sidebar";
 
 function AppHeader() {
   const [openDrawer, setOpenDrawer] = useState(false);

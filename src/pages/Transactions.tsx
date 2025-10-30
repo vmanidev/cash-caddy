@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
-import AppHeader from "../../components/common/header/Header";
-import TransactionTable from "../../features/transactions-management/transactionTable/TransactionTable";
-import AppFooter from "../../components/common/footer/Footer";
+import AppHeader from "../components/common/Header";
+import TransactionTable from "../features/transactions-management/transactionTable/TransactionTable";
+import AppFooter from "../components/common/Footer";
 
 function Transactions() {
   return (
