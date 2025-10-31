@@ -1,14 +1,19 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Category, CategoryPayload } from "../types";
 
-const initialState: Category = {
-    income: [],
-    expenses: []
+const getInitialState = (): Category => {
+    try {
+        const localData = localStorage.getItem("categories");
+        return localData ? JSON.parse(localData) : { income: [], expenses: [] }
+    }
+    catch {
+        return { income: [], expenses: [] };
+    }
 }
 
 const categorySlice = createSlice({
     name: "categories",
-    initialState: initialState,
+    initialState: getInitialState,
     reducers: {
         addCategory: (state, action: PayloadAction<CategoryPayload>) => {
             const payload = {
