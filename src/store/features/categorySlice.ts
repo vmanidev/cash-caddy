@@ -11,7 +11,11 @@ const categorySlice = createSlice({
     initialState: initialState,
     reducers: {
         addCategory: (state, action: PayloadAction<CategoryPayload>) => {
-            state[action.payload.type].push(action.payload.name);
+            const payload = {
+                key: action.payload.name.key.replace(/[^A-Za-z0-9_]/g, "").toLowerCase(),  // create an unique key for each category
+                value: action.payload.name.value
+            };
+            state[action.payload.type].push(payload);
         },
         editCategory: (state, action: PayloadAction<CategoryPayload>) => {
             state[action.payload.type].map((item) => {

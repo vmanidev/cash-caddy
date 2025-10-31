@@ -18,27 +18,14 @@ function CategoryForm({ formData, setFormData }: Props) {
     const { name, value } = event.target;
     setFormData((prev: any) => {
       return name === "name"
-        ? {
-            ...prev,
-            name: {
-              key: formData.name.key
-                ? formData.name.key
-                : value.replace(/[^A-Za-z0-9_]/g, "").toLowerCase(),
-              value: value,
-            },
-          } // key is an unique value
+        ? { ...prev, name: { key: value, value: value } }
         : { ...prev, [name]: value };
     });
   };
 
   return (
-    <Grid
-      container
-      spacing={{ xs: 2, sm: 4, md: 4, lg: 4, xl: 4 }}
-      paddingTop={0.5}
-      size={12}
-    >
-      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
+    <Grid container spacing={4} paddingTop={0.5} size={12}>
+      <Grid size={12}>
         <TextField
           fullWidth
           variant="outlined"
@@ -50,7 +37,7 @@ function CategoryForm({ formData, setFormData }: Props) {
         />
       </Grid>
 
-      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }} alignContent="center">
+      <Grid size={12} alignContent="center">
         <FormLabel>Type</FormLabel>
         <RadioGroup row>
           <FormControlLabel
