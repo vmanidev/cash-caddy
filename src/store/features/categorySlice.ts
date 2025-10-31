@@ -13,7 +13,7 @@ const categorySlice = createSlice({
         addCategory: (state, action: PayloadAction<CategoryPayload>) => {
             const payload = {
                 key: action.payload.name.key.replace(/[^A-Za-z0-9_]/g, "").toLowerCase(),  // create an unique key for each category
-                value: action.payload.name.value
+                value: action.payload.name.value.trim() // remove both leading and trailing whitespaces
             };
             state[action.payload.type].push(payload);
         },
