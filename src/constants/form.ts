@@ -1,7 +1,17 @@
-export const initialTransactionData = {
+import type { CategoryFormData, TransactionFormData } from "../models/form"
+
+export const initialTransactionData: TransactionFormData = {
     date: "",
     amount: "",
-    type: "",
+    type: "expenses",
     note: "",
     category: ""
+}
+
+export const initialCategoryData: CategoryFormData = {
+    type: "expenses",
+    name: {
+        key: "",
+        value: ""
+    }
 }
