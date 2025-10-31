@@ -8,6 +8,9 @@ export interface TransactionFormData {
 }
 
 export interface CategoryFormData {
-    name: string,
-    type: string
+    type: string,
+    name: {
+        key: string,
+        value: string
+    }
 }

@@ -11,17 +11,17 @@ const categorySlice = createSlice({
     initialState: initialState,
     reducers: {
         addCategory: (state, action: PayloadAction<CategoryPayload>) => {
-            state[action.payload.type].push(action.payload.data);
+            state[action.payload.type].push(action.payload.name);
         },
         editCategory: (state, action: PayloadAction<CategoryPayload>) => {
             state[action.payload.type].map((item) => {
-                if (item.value === action.payload.data.value) item = action.payload.data;
+                if (item.key === action.payload.name.key) item = action.payload.name;
                 return item;
             });
             return state;
         },
         deleteCategory: (state, action: PayloadAction<CategoryPayload>) => {
-            state[action.payload.type].filter((item) => item.value !== action.payload.data.value);
+            state[action.payload.type].filter((item) => item.key !== action.payload.name.key);
             return state;
         }
     }

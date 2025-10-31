@@ -8,7 +8,7 @@ export interface Transaction {
 }
 
 export interface IncomeExpensesItem {
-    text: string,
+    key: string,
     value: string
 }
 
@@ -19,5 +19,5 @@ export interface Category {
 
 export interface CategoryPayload {
     type: "income" | "expenses",
-    data: IncomeExpensesItem
+    name: IncomeExpensesItem
 }

@@ -10,15 +10,25 @@ import type { CategoryFormData } from "../../../models/form";
 
 interface Props {
   formData: CategoryFormData;
-  setFormData: (prev: any) => void;
+  setFormData: (props: any) => void;
 }
 
 function CategoryForm({ formData, setFormData }: Props) {
   const handleFormChange = (event: any) => {
-    if (event === null) return;
-
     const { name, value } = event.target;
-    setFormData((prev: any) => ({ ...prev, [name]: value }));
+    setFormData((prev: any) => {
+      return name === "name"
+        ? {
+            ...prev,
+            name: {
+              key: formData.name.key
+                ? formData.name.key
+                : value.replace(/[^A-Za-z0-9_]/g, "").toLowerCase(),
+              value: value,
+            },
+          } // key is an unique value
+        : { ...prev, [name]: value };
+    });
   };
 
   return (
@@ -32,42 +42,40 @@ function CategoryForm({ formData, setFormData }: Props) {
         <TextField
           fullWidth
           variant="outlined"
-          label="Amount"
-          name="amount"
-          value={formData.name}
+          label="Category name"
+          name="name"
+          value={formData.name.value}
           onChange={handleFormChange}
-          helperText="Enter the amount (numbers only)"
+          helperText="e.g. Food, Groceries, etc."
         />
-        <Grid
-          size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
-          alignContent="center"
-        >
-          <FormLabel>Transaction type</FormLabel>
-          <RadioGroup row>
-            <FormControlLabel
-              label="Income"
-              control={
-                <Radio
-                  name="type"
-                  value="income"
-                  checked={formData.type === "income"}
-                  onChange={handleFormChange}
-                />
-              }
-            />
-            <FormControlLabel
-              label="Expenses"
-              control={
-                <Radio
-                  name="type"
-                  value="expenses"
-                  checked={formData.type === "expenses"}
-                  onChange={handleFormChange}
-                />
-              }
-            />
-          </RadioGroup>
-        </Grid>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }} alignContent="center">
+        <FormLabel>Type</FormLabel>
+        <RadioGroup row>
+          <FormControlLabel
+            label="Income"
+            control={
+              <Radio
+                name="type"
+                value="income"
+                checked={formData.type === "income"}
+                onChange={handleFormChange}
+              />
+            }
+          />
+          <FormControlLabel
+            label="Expenses"
+            control={
+              <Radio
+                name="type"
+                value="expenses"
+                checked={formData.type === "expenses"}
+                onChange={handleFormChange}
+              />
+            }
+          />
+        </RadioGroup>
       </Grid>
     </Grid>
   );
