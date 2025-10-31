@@ -81,6 +81,7 @@ function TransactionForm({ formData, setFormData }: Props) {
               slotProps={{
                 textField: { fullWidth: true, helperText: "Pick a date" },
               }}
+              disableFuture
             />
           </LocalizationProvider>
         </Grid>
