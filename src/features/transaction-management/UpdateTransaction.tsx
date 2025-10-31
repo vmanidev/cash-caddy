@@ -17,7 +17,9 @@ interface Props {
 
 function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
   const [formData, setFormData] = useState(
-    updateTransaction.formData ? updateTransaction.formData : initialTransactionData
+    updateTransaction.formData
+      ? updateTransaction.formData
+      : initialTransactionData
   );
   const dispatch = useDispatch();
 
@@ -27,11 +29,14 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
         ? editTransaction(formData)
         : addTransaction(formData)
     );
-    setUpdateTransaction({ showModal: false });
+    setUpdateTransaction({ formData, showModal: false });
   };
 
   const onCancel = () => {
-    setUpdateTransaction({ showModal: false });
+    setUpdateTransaction({
+      formData: initialTransactionData,
+      showModal: false,
+    });
   };
 
   return (
@@ -39,7 +44,9 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
       title={
         updateTransaction.formData ? "Edit Transaction" : "Add New Transaction"
       }
-      content={<TransactionForm formData={formData} setFormData={setFormData} />}
+      content={
+        <TransactionForm formData={formData} setFormData={setFormData} />
+      }
       actionButtons={
         <>
           <Button variant="contained" onClick={onSubmit}>
