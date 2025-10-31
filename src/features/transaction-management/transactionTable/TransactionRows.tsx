@@ -21,6 +21,7 @@ import type { TransactionFormData } from "../../../models/form";
 import AppModal from "../../../components/ui/modal/Modal";
 import { removeTransaction } from "../../../store/features/transactionSlice";
 import formatDate, { sortByDate } from "../../../utils/date";
+import useCategoryMap from "../../../hooks/useCategoryMap";
 
 interface Props {
   page: number;
@@ -45,6 +46,8 @@ function TransactionRows({ page, rowsPerPage }: Props) {
 
   const dispatch = useDispatch();
 
+  const categoryMap = useCategoryMap();
+
   const renderList = useMemo(() => {
     let sortedTransactionsByDate = sortByDate([...transactionData]);
     return sortedTransactionsByDate.slice(
@@ -64,7 +67,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
             >
               {`${amount && (type === "income" ? "+" : "-")} ${amount}`}
             </TableCell>
-            <TableCell>{category}</TableCell>
+            <TableCell>{categoryMap[category]}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={4} sx={{ padding: 0 }}>
