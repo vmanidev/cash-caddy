@@ -36,6 +36,10 @@ function Categories() {
     setUpdateCategory({ formData: { name, type }, showModal: true });
   };
 
+  const addNewCategory = () => {
+    setUpdateCategory({ formData: initialCategoryData, showModal: true });
+  };
+
   const Categories = (type: "income" | "expenses") => {
     return (
       <>
@@ -88,7 +92,9 @@ function Categories() {
           control.
         </Typography>
         <Grid size={12}>
-          <Button variant="outlined">Add New Category</Button>
+          <Button variant="outlined" onClick={addNewCategory}>
+            Add New Category
+          </Button>
           <Grid container size={12} marginTop={2} spacing={4}>
             <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
               {categories.income.length > 0 && Categories("income")}
