@@ -47,6 +47,9 @@ function TransactionForm({ formData, setFormData }: Props) {
       }));
     } else {
       const { name, value } = event.target;
+      if (name === "type") {
+        setFormData((prev: any) => ({ ...prev, category: "" })); // Reset category name field upon type change
+      }
       value === "addNewCategory"
         ? addNewCategory()
         : setFormData((prev: any) => ({ ...prev, [name]: value }));
