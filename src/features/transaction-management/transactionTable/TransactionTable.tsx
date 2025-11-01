@@ -6,9 +6,9 @@ import {
   TableBody,
   TableContainer,
   TablePagination,
+  Typography,
 } from "@mui/material";
 
-import styles from "./TransactionTable.module.scss";
 import { Add } from "@mui/icons-material";
 import UpdateTransaction from "../UpdateTransaction";
 import { useState } from "react";
@@ -79,13 +79,9 @@ function TransactionTable({ tableTitle }: Props) {
   );
 
   const EmptyTableView = () => (
-    <div className={styles.emptyTableViewText}>
-      Looks like you haven`t added any transactions yet. Tap{" "}
-      <strong className={styles.emptyTableViewHighlightText}>
-        Add New Transaction
-      </strong>{" "}
-      to get started!
-    </div>
+    <Typography variant="body2" padding={2} lineHeight={2}>
+      No transactions yet — add your first one to start tracking!
+    </Typography>
   );
 
   return (
@@ -96,7 +92,7 @@ function TransactionTable({ tableTitle }: Props) {
           setUpdateTransaction={setAddTransaction}
         />
       )}
-      <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
+      <Grid size={12}>
         <Paper elevation={4}>
           <Grid
             size={12}
