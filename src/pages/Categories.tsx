@@ -36,26 +36,28 @@ function Categories() {
     setUpdateCategory({ formData: { name, type }, showModal: true });
   };
 
-  const IncomeCategories = () => {
+  const Categories = (type: "income" | "expenses") => {
     return (
       <>
-        <Typography variant="h6">Income Categories</Typography>
-        <List>
-          {categories.income.map((item: IncomeExpensesItem) => {
+        <Typography variant="h6">
+          {type === "income" ? "Income" : "Expense"} Categories
+        </Typography>
+        <List sx={{ maxHeight: "300px", overflow: "scroll" }}>
+          {categories[type].map((item: IncomeExpensesItem) => {
             return (
               <ListItem
                 key={item.key}
                 secondaryAction={
                   <ButtonGroup variant="text">
-                    <Button onClick={() => editCategoryItem(item, "income")}>
-                      <Edit />
+                    <Button onClick={() => editCategoryItem(item, type)}>
+                      <Edit fontSize="small" />
                     </Button>
                     <Button
                       onClick={() =>
-                        dispatch(deleteCategory({ name: item, type: "income" }))
+                        dispatch(deleteCategory({ name: item, type }))
                       }
                     >
-                      <Delete color="error" />
+                      <Delete color="error" fontSize="small" />
                     </Button>
                   </ButtonGroup>
                 }
@@ -85,10 +87,15 @@ function Categories() {
           Add, rename, or remove categories to keep your wallet life under
           control.
         </Typography>
-        <Grid size={12} marginTop={2}>
+        <Grid size={12}>
           <Button variant="outlined">Add New Category</Button>
-          <Grid size={12}>
-            {categories.income.length > 0 && <IncomeCategories />}
+          <Grid container size={12} marginTop={2} spacing={4}>
+            <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
+              {categories.income.length > 0 && Categories("income")}
+            </Grid>
+            <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
+              {categories.expenses.length > 0 && Categories("expenses")}
+            </Grid>
           </Grid>
         </Grid>
         <Grid size={12}>
