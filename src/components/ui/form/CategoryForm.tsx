@@ -33,7 +33,11 @@ function CategoryForm({ formData, setFormData }: Props) {
           name="name"
           value={formData.name.value}
           onChange={handleFormChange}
-          helperText="e.g. Food, Groceries, etc."
+          helperText={
+            formData.type === "income"
+              ? "e.g. Salary, Bonus, etc."
+              : "e.g. Food, Groceries, etc."
+          }
         />
       </Grid>
 
