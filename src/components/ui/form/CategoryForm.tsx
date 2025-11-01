@@ -24,7 +24,7 @@ function CategoryForm({ formData, setFormData }: Props) {
   };
 
   return (
-    <Grid container spacing={4} paddingTop={0.5} size={12}>
+    <Grid container spacing={4} paddingTop={1} size={12}>
       <Grid size={12}>
         <TextField
           fullWidth

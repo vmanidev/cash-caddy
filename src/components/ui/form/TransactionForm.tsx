@@ -65,7 +65,7 @@ function TransactionForm({ formData, setFormData }: Props) {
       <Grid
         container
         spacing={{ xs: 2, sm: 4, md: 4, lg: 4, xl: 4 }}
-        paddingTop={0.5}
+        paddingTop={1}
         size={12}
       >
         <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
