@@ -25,7 +25,7 @@ const categorySlice = createSlice({
         },
         editCategory: (state, action: PayloadAction<CategoryPayload>) => {
             state[action.payload.type].map((item) => {
-                if (item.key === action.payload.name.key) item = action.payload.name;
+                if (item.key === action.payload.name.key) item.value = action.payload.name.value;
                 return item;
             });
             return state;

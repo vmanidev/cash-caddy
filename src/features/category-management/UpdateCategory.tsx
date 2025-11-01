@@ -22,7 +22,13 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
   const onSubmit = () => {
     dispatch(
       updateCategory.formData?.name.key !== ""
-        ? editCategory(formData)
+        ? editCategory({
+            ...formData,
+            name: {
+              ...formData.name,
+              key: updateCategory.formData?.name.key ?? formData.name.value,
+            },
+          })
         : addCategory(formData)
     );
     setUpdateCategory({ formData, showModal: false });
