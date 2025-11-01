@@ -31,8 +31,10 @@ const categorySlice = createSlice({
             return state;
         },
         deleteCategory: (state, action: PayloadAction<CategoryPayload>) => {
-            state[action.payload.type].filter((item) => item.key !== action.payload.name.key);
-            return state;
+            return {
+                ...state,
+                [action.payload.type]: state[action.payload.type].filter((item) => item.key !== action.payload.name.key)
+            };
         }
     }
 });
