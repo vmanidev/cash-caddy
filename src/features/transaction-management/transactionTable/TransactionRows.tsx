@@ -2,6 +2,7 @@ import { Delete, Edit } from "@mui/icons-material";
 import {
   Button,
   ButtonGroup,
+  Chip,
   Collapse,
   Table,
   TableBody,
@@ -67,7 +68,9 @@ function TransactionRows({ page, rowsPerPage }: Props) {
             >
               {`${amount && (type === "income" ? "+" : "-")} ${amount}`}
             </TableCell>
-            <TableCell>{categoryMap[category]}</TableCell>
+            <TableCell>
+              <Chip label={categoryMap[category]} variant="filled" />
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={4} sx={{ padding: 0 }}>
