@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Overview from "../features/overview/Overview";
 import TransactionTable from "../features/transaction-management/transactionTable/TransactionTable";
 import AppHeader from "../components/common/Header";
@@ -10,6 +10,12 @@ function Dashboard() {
       <Grid size={12}>
         <AppHeader />
       </Grid>
+      <Typography variant="body1">
+        Track income, expenses, budgets, and trends - all in one{" "}
+        <Typography variant="button" color="primary">
+          Dashboard
+        </Typography>
+      </Typography>
       <Grid size={12}>
         <Overview />
       </Grid>
