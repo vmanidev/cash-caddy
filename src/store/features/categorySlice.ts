@@ -1,13 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Category, CategoryPayload } from "../types";
+import { DEFAULT_CATEGORIES } from "../../constants/form";
 
 const getInitialState = (): Category => {
     try {
         const localData = localStorage.getItem("categories");
-        return localData ? JSON.parse(localData) : { income: [], expenses: [] }
+        return localData ? JSON.parse(localData) : DEFAULT_CATEGORIES;
     }
     catch {
-        return { income: [], expenses: [] };
+        return DEFAULT_CATEGORIES;
     }
 }
 
