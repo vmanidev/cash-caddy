@@ -104,9 +104,9 @@ function Categories() {
         <Grid size={12}>
           <AppHeader />
         </Grid>
-        <Typography variant="body1">
-          Add, rename, or remove categories to keep your wallet life under
-          control.
+        <Typography variant="body1" className="page-description">
+          Easily create, rename, or delete categories to better organize your
+          spending and budgeting habits.
         </Typography>
         <Grid size={12}>
           <Button variant="outlined" onClick={addNewCategory}>

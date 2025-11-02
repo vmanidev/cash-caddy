@@ -8,7 +8,10 @@ function Settings() {
       <Grid size={12}>
         <AppHeader />
       </Grid>
-      <Typography variant="body1">Settings</Typography>
+      <Typography variant="body1" className="page-description">
+        Personalize the app to fit your needs — adjust preferences, manage data
+        options, and explore customization features.
+      </Typography>
       <Grid size={12}>Settings Page</Grid>
       <Grid size={12}>
         <AppFooter />

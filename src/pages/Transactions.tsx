@@ -9,8 +9,9 @@ function Transactions() {
       <Grid size={12}>
         <AppHeader />
       </Grid>
-      <Typography variant="body1">
-        Log new transactions, make quick edits, or clean up old ones.
+      <Typography variant="body1" className="page-description">
+        Add new transactions, quickly edit existing ones, or manage past records
+        to keep your data accurate and organized.
       </Typography>
       <Grid size={12}>
         <TransactionTable tableTitle="Transactions" />

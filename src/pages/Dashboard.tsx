@@ -10,11 +10,10 @@ function Dashboard() {
       <Grid size={12}>
         <AppHeader />
       </Grid>
-      <Typography variant="body1">
-        Track income, expenses, budgets, and trends - all in one{" "}
-        <Typography variant="button" color="primary">
-          Dashboard
-        </Typography>
+      <Typography variant="body1" className="page-description">
+        View all your key financial insights in one place — track income,
+        expenses, budgets, and spending trends through a clean, interactive
+        dashboard.
       </Typography>
       <Grid size={12}>
         <Overview />
