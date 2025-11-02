@@ -26,7 +26,7 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    if (formError.hasError) return;
+    if (!isFormValid()) return;
 
     dispatch(
       updateCategory.editMode
@@ -48,6 +48,15 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
       editMode: false,
       showModal: false,
     });
+  };
+
+  const isFormValid = () => {
+    if (formData.name.value.trim().length < 1) {
+      setFormError({ hasError: true, errorMessage: "Required Field." });
+      return false;
+    }
+    setFormError(initialFormErrorState);
+    return true;
   };
 
   return (
