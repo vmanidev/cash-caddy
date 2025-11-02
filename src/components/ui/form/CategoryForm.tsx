@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import type { CategoryFormData, FormError } from "../../../models/form";
-import { initialFormErrorState } from "../../../constants/form";
+import { validateField } from "../../../utils/formValidation";
 
 interface Props {
   editMode: boolean;
@@ -33,10 +33,8 @@ function CategoryForm({
     });
   };
 
-  const validateForm = (event: any) => {
-    event.target.value.trim().length < 1
-      ? setFormError({ hasError: true, errorMessage: "Required Field." })
-      : setFormError(initialFormErrorState);
+  const validateFormField = (field: string, { value }: any) => {
+    setFormError(validateField({ field, value }));
   };
 
   const getHelperText = () =>
@@ -58,7 +56,7 @@ function CategoryForm({
           onChange={handleFormChange}
           helperText={getHelperText()}
           error={formError.hasError}
-          onInput={validateForm}
+          onInput={({ target }) => validateFormField("Category name", target)}
         />
       </Grid>
 

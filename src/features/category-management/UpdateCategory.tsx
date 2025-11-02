@@ -53,7 +53,10 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
 
   const isFormValid = () => {
     if (formData.name.value.trim().length < 1) {
-      setFormError({ hasError: true, errorMessage: "Required Field." });
+      setFormError({
+        hasError: true,
+        errorMessage: "Category name is required.",
+      });
       return false;
     }
     setFormError(initialFormErrorState);
