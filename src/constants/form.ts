@@ -1,4 +1,4 @@
-import type { CategoryFormData, TransactionFormData } from "../models/form"
+import type { CategoryFormData, FormError, TransactionFormData } from "../models/form"
 import type { Category } from "../store/types"
 
 export const initialTransactionData: TransactionFormData = {
@@ -15,6 +15,11 @@ export const initialCategoryData: CategoryFormData = {
         key: "",
         value: ""
     }
+}
+
+export const initialFormErrorState: FormError = {
+    hasError: false,
+    errorMessage: ""
 }
 
 export const DEFAULT_CATEGORIES: Category = {

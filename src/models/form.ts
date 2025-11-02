@@ -14,3 +14,8 @@ export interface CategoryFormData {
         value: string
     }
 }
+
+export interface FormError {
+    hasError: boolean,
+    errorMessage: string
+}
