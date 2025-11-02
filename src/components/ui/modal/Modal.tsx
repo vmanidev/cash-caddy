@@ -7,7 +7,7 @@ import {
 import type { ReactNode } from "react";
 
 interface Props {
-  title: string;
+  title: ReactNode;
   content: ReactNode;
   actionButtons: ReactNode;
 }

@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import TransactionForm from "../../components/ui/form/TransactionForm";
 import AppModal from "../../components/ui/modal/Modal";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import {
   editTransaction,
 } from "../../store/features/transactionSlice";
 import type { UpdateTransactionStateProps } from "../../models/transactions";
+import { Info } from "@mui/icons-material";
 
 interface Props {
   updateTransaction: UpdateTransactionStateProps;
@@ -43,7 +44,14 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
   return (
     <AppModal
       title={
-        updateTransaction.editMode ? "Edit Transaction" : "Add New Transaction"
+        <Stack direction="row" gap={1} alignItems="center">
+          <Info fontSize="small" color="info" />
+          <span>
+            {updateTransaction.editMode
+              ? "Edit Transaction"
+              : "Add New Transaction"}
+          </span>
+        </Stack>
       }
       content={
         <TransactionForm formData={formData} setFormData={setFormData} />
@@ -53,7 +61,7 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
           <Button variant="contained" onClick={onSubmit}>
             {updateTransaction.editMode ? "Update" : "Add"}
           </Button>
-          <Button variant="text" onClick={onCancel}>
+          <Button variant="outlined" onClick={onCancel}>
             Cancel
           </Button>
         </>

@@ -14,6 +14,7 @@ function AppHeader() {
           variant="text"
           onClick={() => setOpenDrawer(true)}
           sx={{ justifyContent: "flex-start", padding: 0 }}
+          color="inherit"
         >
           <Menu />
         </Button>

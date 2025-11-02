@@ -1,9 +1,10 @@
-import { Delete, Edit } from "@mui/icons-material";
+import { Delete, Edit, Warning } from "@mui/icons-material";
 import {
   Button,
   ButtonGroup,
   Chip,
   Collapse,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -133,15 +134,24 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     <>
       {deleteModal.showModal && (
         <AppModal
-          title="Delete Transaction"
+          title={
+            <Stack direction="row" gap={1} alignItems="center">
+              <Warning fontSize="small" color="warning" />
+              <span>Delete Transaction</span>
+            </Stack>
+          }
           content={<span>Are you sure want to delete the transaction?</span>}
           actionButtons={
             <>
-              <Button variant="text" onClick={() => deleteTransactionRow()}>
-                <Delete color="error" />
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => deleteTransactionRow()}
+              >
+                <Delete /> Delete
               </Button>
               <Button
-                variant="text"
+                variant="outlined"
                 onClick={() => setDeleteModal({ id: "", showModal: false })}
               >
                 Cancel

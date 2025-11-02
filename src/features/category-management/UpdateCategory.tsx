@@ -6,10 +6,11 @@ import {
   initialFormErrorState,
 } from "../../constants/form";
 import CategoryForm from "../../components/ui/form/CategoryForm";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addCategory, editCategory } from "../../store/features/categorySlice";
 import type { FormError } from "../../models/form";
+import { Info } from "@mui/icons-material";
 
 interface Props {
   updateCategory: UpdateCategoryStateProps;
@@ -61,7 +62,14 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
 
   return (
     <AppModal
-      title={updateCategory.editMode ? "Edit Category" : "Add New Category"}
+      title={
+        <Stack direction="row" gap={1} alignItems="center">
+          <Info fontSize="small" color="info" />
+          <span>
+            {updateCategory.editMode ? "Edit Category" : "Add New Category"}
+          </span>
+        </Stack>
+      }
       content={
         <CategoryForm
           editMode={updateCategory.editMode}
@@ -76,7 +84,7 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
           <Button variant="contained" onClick={onSubmit}>
             {updateCategory.editMode ? "Update" : "Add"}
           </Button>
-          <Button variant="text" onClick={onCancel}>
+          <Button variant="outlined" onClick={onCancel}>
             Cancel
           </Button>
         </>

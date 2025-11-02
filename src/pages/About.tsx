@@ -29,7 +29,7 @@ function About() {
         helps you manage income, expenses, budgets, and categories — all from
         one place.
       </Typography>
-      <Grid size={12}>
+      <Grid size={12} marginTop={2}>
         <Typography variant="h6">
           <AutoAwesome fontSize="small" color="primary" /> Features
         </Typography>
@@ -84,7 +84,7 @@ function About() {
           </ListItem>
         </List>
 
-        <Stack direction="column">
+        <Stack direction="column" marginTop={3}>
           <Typography variant="h6">
             <Lightbulb fontSize="small" color="warning" /> Learn more
           </Typography>
