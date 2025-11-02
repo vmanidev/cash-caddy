@@ -1,11 +1,15 @@
 import { useState } from "react";
 import AppModal from "../../components/ui/modal/Modal";
 import type { UpdateCategoryStateProps } from "../../models/categories";
-import { initialCategoryData } from "../../constants/form";
+import {
+  initialCategoryData,
+  initialFormErrorState,
+} from "../../constants/form";
 import CategoryForm from "../../components/ui/form/CategoryForm";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addCategory, editCategory } from "../../store/features/categorySlice";
+import type { FormError } from "../../models/form";
 
 interface Props {
   updateCategory: UpdateCategoryStateProps;
@@ -17,9 +21,13 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
     updateCategory.formData ? updateCategory.formData : initialCategoryData
   );
 
+  const [formError, setFormError] = useState<FormError>(initialFormErrorState);
+
   const dispatch = useDispatch();
 
   const onSubmit = () => {
+    if (formError.hasError) return;
+
     dispatch(
       updateCategory.editMode
         ? editCategory({
@@ -50,6 +58,8 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
           editMode={updateCategory.editMode}
           formData={formData}
           setFormData={setFormData}
+          formError={formError}
+          setFormError={setFormError}
         />
       }
       actionButtons={

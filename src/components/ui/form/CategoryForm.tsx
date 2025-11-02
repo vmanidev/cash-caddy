@@ -6,15 +6,24 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import type { CategoryFormData } from "../../../models/form";
+import type { CategoryFormData, FormError } from "../../../models/form";
+import { initialFormErrorState } from "../../../constants/form";
 
 interface Props {
   editMode: boolean;
   formData: CategoryFormData;
   setFormData: (props: any) => void;
+  formError: FormError;
+  setFormError: (props: FormError) => void;
 }
 
-function CategoryForm({ editMode, formData, setFormData }: Props) {
+function CategoryForm({
+  editMode,
+  formData,
+  setFormData,
+  formError,
+  setFormError,
+}: Props) {
   const handleFormChange = (event: any) => {
     const { name, value } = event.target;
     setFormData((prev: any) => {
@@ -23,6 +32,19 @@ function CategoryForm({ editMode, formData, setFormData }: Props) {
         : { ...prev, [name]: value };
     });
   };
+
+  const validateForm = (event: any) => {
+    event.target.value.trim().length < 1
+      ? setFormError({ hasError: true, errorMessage: "Required Field." })
+      : setFormError(initialFormErrorState);
+  };
+
+  const getHelperText = () =>
+    formError.hasError
+      ? formError.errorMessage
+      : formData.type === "income"
+      ? "e.g. Salary, Bonus, etc."
+      : "e.g. Food, Groceries, etc.";
 
   return (
     <Grid container spacing={4} paddingTop={1} size={12}>
@@ -34,11 +56,9 @@ function CategoryForm({ editMode, formData, setFormData }: Props) {
           name="name"
           value={formData.name.value}
           onChange={handleFormChange}
-          helperText={
-            formData.type === "income"
-              ? "e.g. Salary, Bonus, etc."
-              : "e.g. Food, Groceries, etc."
-          }
+          helperText={getHelperText()}
+          error={formError.hasError}
+          onInput={validateForm}
         />
       </Grid>
 
