@@ -14,7 +14,7 @@ import AppFooter from "../components/common/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import type { IncomeExpensesItem } from "../store/types";
 import { Delete, Edit } from "@mui/icons-material";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import UpdateCategory from "../features/category-management/UpdateCategory";
 import type { UpdateCategoryStateProps } from "../models/categories";
 import { initialCategoryData } from "../constants/form";
@@ -61,9 +61,8 @@ function Categories() {
           <List sx={{ maxHeight: "300px", overflow: "scroll" }}>
             {categories[type].map((item: IncomeExpensesItem, index: number) => {
               return (
-                <>
+                <Fragment key={item.key}>
                   <ListItem
-                    key={item.key}
                     secondaryAction={
                       <ButtonGroup variant="text">
                         <Button onClick={() => editCategoryItem(item, type)}>
@@ -84,7 +83,7 @@ function Categories() {
                   {index !== categories[type].length - 1 && (
                     <Divider component="li" />
                   )}
-                </>
+                </Fragment>
               );
             })}
           </List>
