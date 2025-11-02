@@ -38,3 +38,19 @@ export const DEFAULT_CATEGORIES: Category = {
         { key: "education", value: "🎓 Education" }
     ]
 }
+
+export const HELPER_TEXT = {
+    date: "Pick a date.",
+    amount: "Enter the amount (numbers only).",
+    category: "Select a category.",
+    note: "Add a note for this transaction.",
+    categoryName: "e.g. Salary, Bonus, Food, Groceries, etc."
+}
+
+export const FormFieldMap = {
+    date: "Date",
+    amount: "Amount",
+    category: "Category",
+    note: "Note",
+    categoryName: "Category name"
+}
