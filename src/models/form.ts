@@ -19,3 +19,7 @@ export interface FormError {
     hasError: boolean,
     errorMessage: string
 }
+
+export type TransactionType = "income" | "expenses";
+
+export type FieldType = "date" | "amount" | "category" | "note" | "categoryName";
