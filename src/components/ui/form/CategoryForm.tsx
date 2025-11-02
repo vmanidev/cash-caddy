@@ -33,8 +33,8 @@ function CategoryForm({
     });
   };
 
-  const validateFormField = (field: string, { value }: any) => {
-    setFormError(validateField({ field, value }));
+  const validateFormField = ({ value }: any) => {
+    setFormError(validateField({ field: "categoryName", value }));
   };
 
   const getHelperText = () =>
@@ -56,7 +56,7 @@ function CategoryForm({
           onChange={handleFormChange}
           helperText={getHelperText()}
           error={formError.hasError}
-          onInput={({ target }) => validateFormField("Category name", target)}
+          onInput={({ target }) => validateFormField(target)}
         />
       </Grid>
 

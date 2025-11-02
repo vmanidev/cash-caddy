@@ -10,6 +10,8 @@ import {
 } from "../../store/features/transactionSlice";
 import type { UpdateTransactionStateProps } from "../../models/transactions";
 import { Info } from "@mui/icons-material";
+import type { FormError } from "../../models/form";
+import { validateForm } from "../../utils/formValidation";
 
 interface Props {
   updateTransaction: UpdateTransactionStateProps;
@@ -22,9 +24,14 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
       ? updateTransaction.formData
       : initialTransactionData
   );
+
+  const [formError, setFormError] = useState<Record<string, FormError>>({});
+
   const dispatch = useDispatch();
 
   const onSubmit = () => {
+    if (!isFormValid()) return;
+
     dispatch(
       updateTransaction.formData
         ? editTransaction(formData)
@@ -41,6 +48,15 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
     });
   };
 
+  const isFormValid = () => {
+    const errObj = validateForm(formData);
+
+    setFormError(errObj);
+    if (Object.keys(errObj).length > 0) return false;
+
+    return true;
+  };
+
   return (
     <AppModal
       title={
@@ -54,7 +70,12 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
         </Stack>
       }
       content={
-        <TransactionForm formData={formData} setFormData={setFormData} />
+        <TransactionForm
+          formData={formData}
+          setFormData={setFormData}
+          formError={formError}
+          setFormError={setFormError}
+        />
       }
       actionButtons={
         <>

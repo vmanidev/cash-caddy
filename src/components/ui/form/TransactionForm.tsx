@@ -1,4 +1,4 @@
-import type { TransactionFormData } from "../../../models/form";
+import type { FieldType, TransactionFormData } from "../../../models/form";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
@@ -17,18 +17,26 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { initialCategoryData } from "../../../constants/form";
+import { HELPER_TEXT, initialCategoryData } from "../../../constants/form";
 import type { UpdateCategoryStateProps } from "../../../models/categories";
 import UpdateCategory from "../../../features/category-management/UpdateCategory";
 import { useSelector } from "react-redux";
 import type { IncomeExpensesItem } from "../../../store/types";
+import { validateField } from "../../../utils/formValidation";
 
 interface Props {
   formData: TransactionFormData;
   setFormData: (prev: any) => void;
+  formError: any;
+  setFormError: (prev: any) => void;
 }
 
-function TransactionForm({ formData, setFormData }: Props) {
+function TransactionForm({
+  formData,
+  setFormData,
+  formError,
+  setFormError,
+}: Props) {
   const [updateCategory, setUpdateCategory] =
     useState<UpdateCategoryStateProps>({
       formData: initialCategoryData,
@@ -65,6 +73,19 @@ function TransactionForm({ formData, setFormData }: Props) {
     });
   };
 
+  const validateFormField = (event: any) => {
+    const { name, value } = event.target;
+    setFormError((prev: any) => ({
+      ...prev,
+      [name]: validateField({ field: name, value }),
+    }));
+  };
+
+  const getHelperText = (field: FieldType) =>
+    formError?.[field]?.errorMessage
+      ? formError?.[field]?.errorMessage
+      : HELPER_TEXT[field];
+
   return (
     <>
       <Grid
@@ -84,7 +105,12 @@ function TransactionForm({ formData, setFormData }: Props) {
               }
               onChange={handleFormChange}
               slotProps={{
-                textField: { fullWidth: true, helperText: "Pick a date" },
+                textField: {
+                  fullWidth: true,
+                  helperText: getHelperText("date"),
+                  error: formError?.date?.hasError && !formData.date,
+                  onInput: validateFormField,
+                },
               }}
               disableFuture
             />
@@ -99,7 +125,9 @@ function TransactionForm({ formData, setFormData }: Props) {
             name="amount"
             value={formData.amount}
             onChange={handleFormChange}
-            helperText="Enter the amount (numbers only)"
+            helperText={getHelperText("amount")}
+            error={formError?.amount?.hasError}
+            onInput={validateFormField}
           />
         </Grid>
 
@@ -110,7 +138,11 @@ function TransactionForm({ formData, setFormData }: Props) {
               label="Category"
               name="category"
               value={formData.category}
-              onChange={handleFormChange}
+              onChange={(event) => {
+                handleFormChange(event);
+                validateFormField(event);
+              }}
+              error={formError?.category?.hasError}
             >
               <MenuItem key="addNewCategory" value="addNewCategory">
                 <Button sx={{ padding: 0 }} variant="text">
@@ -123,7 +155,13 @@ function TransactionForm({ formData, setFormData }: Props) {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>Select a category</FormHelperText>
+            <FormHelperText
+              sx={{
+                color: formError?.category?.hasError ? "#d32f2f" : "inherit",
+              }}
+            >
+              {getHelperText("category")}
+            </FormHelperText>
           </FormControl>
         </Grid>
 
@@ -168,7 +206,9 @@ function TransactionForm({ formData, setFormData }: Props) {
             name="note"
             value={formData.note}
             onChange={handleFormChange}
-            helperText="Add a note for this transaction"
+            helperText={getHelperText("note")}
+            error={formError?.note?.hasError}
+            onInput={validateFormField}
           />
         </Grid>
       </Grid>
