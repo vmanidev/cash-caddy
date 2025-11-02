@@ -32,6 +32,7 @@ function TransactionForm({ formData, setFormData }: Props) {
   const [updateCategory, setUpdateCategory] =
     useState<UpdateCategoryStateProps>({
       formData: initialCategoryData,
+      editMode: false,
       showModal: false,
     });
 
@@ -59,6 +60,7 @@ function TransactionForm({ formData, setFormData }: Props) {
   const addNewCategory = () => {
     setUpdateCategory({
       formData: { name: initialCategoryData.name, type: formData.type },
+      editMode: false,
       showModal: true,
     });
   };

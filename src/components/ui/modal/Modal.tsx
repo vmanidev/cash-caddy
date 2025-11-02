@@ -14,7 +14,7 @@ interface Props {
 
 function AppModal({ title, content, actionButtons }: Props) {
   return (
-    <Dialog open>
+    <Dialog open fullWidth>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{content}</DialogContent>
       <DialogActions>{actionButtons}</DialogActions>

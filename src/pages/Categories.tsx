@@ -22,6 +22,7 @@ function Categories() {
   const [updateCategory, setUpdateCategory] =
     useState<UpdateCategoryStateProps>({
       formData: initialCategoryData,
+      editMode: false,
       showModal: false,
     });
 
@@ -33,11 +34,19 @@ function Categories() {
     name: IncomeExpensesItem,
     type: "income" | "expenses"
   ) => {
-    setUpdateCategory({ formData: { name, type }, showModal: true });
+    setUpdateCategory({
+      formData: { name, type },
+      editMode: true,
+      showModal: true,
+    });
   };
 
   const addNewCategory = () => {
-    setUpdateCategory({ formData: initialCategoryData, showModal: true });
+    setUpdateCategory({
+      formData: initialCategoryData,
+      editMode: false,
+      showModal: true,
+    });
   };
 
   const Categories = (type: "income" | "expenses") => {

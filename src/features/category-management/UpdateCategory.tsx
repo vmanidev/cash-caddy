@@ -21,7 +21,7 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
 
   const onSubmit = () => {
     dispatch(
-      updateCategory.formData?.name.key !== ""
+      updateCategory.editMode
         ? editCategory({
             ...formData,
             name: {
@@ -31,25 +31,31 @@ function UpdateCategory({ updateCategory, setUpdateCategory }: Props) {
           })
         : addCategory(formData)
     );
-    setUpdateCategory({ formData, showModal: false });
+    setUpdateCategory({ formData, editMode: false, showModal: false });
   };
 
   const onCancel = () => {
-    setUpdateCategory({ formData: initialCategoryData, showModal: false });
+    setUpdateCategory({
+      formData: initialCategoryData,
+      editMode: false,
+      showModal: false,
+    });
   };
 
   return (
     <AppModal
-      title={
-        updateCategory.formData?.name.key !== ""
-          ? "Edit Category"
-          : "Add New Category"
+      title={updateCategory.editMode ? "Edit Category" : "Add New Category"}
+      content={
+        <CategoryForm
+          editMode={updateCategory.editMode}
+          formData={formData}
+          setFormData={setFormData}
+        />
       }
-      content={<CategoryForm formData={formData} setFormData={setFormData} />}
       actionButtons={
         <>
           <Button variant="contained" onClick={onSubmit}>
-            {updateCategory.formData?.name.key !== "" ? "Update" : "Add"}
+            {updateCategory.editMode ? "Update" : "Add"}
           </Button>
           <Button variant="text" onClick={onCancel}>
             Cancel

@@ -9,11 +9,12 @@ import {
 import type { CategoryFormData } from "../../../models/form";
 
 interface Props {
+  editMode: boolean;
   formData: CategoryFormData;
   setFormData: (props: any) => void;
 }
 
-function CategoryForm({ formData, setFormData }: Props) {
+function CategoryForm({ editMode, formData, setFormData }: Props) {
   const handleFormChange = (event: any) => {
     const { name, value } = event.target;
     setFormData((prev: any) => {
@@ -41,33 +42,35 @@ function CategoryForm({ formData, setFormData }: Props) {
         />
       </Grid>
 
-      <Grid size={12} alignContent="center">
-        <FormLabel>Type</FormLabel>
-        <RadioGroup row>
-          <FormControlLabel
-            label="Income"
-            control={
-              <Radio
-                name="type"
-                value="income"
-                checked={formData.type === "income"}
-                onChange={handleFormChange}
-              />
-            }
-          />
-          <FormControlLabel
-            label="Expenses"
-            control={
-              <Radio
-                name="type"
-                value="expenses"
-                checked={formData.type === "expenses"}
-                onChange={handleFormChange}
-              />
-            }
-          />
-        </RadioGroup>
-      </Grid>
+      {!editMode && (
+        <Grid size={12} alignContent="center">
+          <FormLabel>Type</FormLabel>
+          <RadioGroup row>
+            <FormControlLabel
+              label="Income"
+              control={
+                <Radio
+                  name="type"
+                  value="income"
+                  checked={formData.type === "income"}
+                  onChange={handleFormChange}
+                />
+              }
+            />
+            <FormControlLabel
+              label="Expenses"
+              control={
+                <Radio
+                  name="type"
+                  value="expenses"
+                  checked={formData.type === "expenses"}
+                  onChange={handleFormChange}
+                />
+              }
+            />
+          </RadioGroup>
+        </Grid>
+      )}
     </Grid>
   );
 }
