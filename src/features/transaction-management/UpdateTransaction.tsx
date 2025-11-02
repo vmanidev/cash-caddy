@@ -29,12 +29,13 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
         ? editTransaction(formData)
         : addTransaction(formData)
     );
-    setUpdateTransaction({ formData, showModal: false });
+    setUpdateTransaction({ formData, editMode: false, showModal: false });
   };
 
   const onCancel = () => {
     setUpdateTransaction({
       formData: initialTransactionData,
+      editMode: false,
       showModal: false,
     });
   };
@@ -42,7 +43,7 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
   return (
     <AppModal
       title={
-        updateTransaction.formData ? "Edit Transaction" : "Add New Transaction"
+        updateTransaction.editMode ? "Edit Transaction" : "Add New Transaction"
       }
       content={
         <TransactionForm formData={formData} setFormData={setFormData} />
@@ -50,7 +51,7 @@ function UpdateTransaction({ updateTransaction, setUpdateTransaction }: Props) {
       actionButtons={
         <>
           <Button variant="contained" onClick={onSubmit}>
-            {updateTransaction.formData ? "Update" : "Add"}
+            {updateTransaction.editMode ? "Update" : "Add"}
           </Button>
           <Button variant="text" onClick={onCancel}>
             Cancel

@@ -33,6 +33,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
   const [editTransaction, setEditTransaction] =
     useState<UpdateTransactionStateProps>({
       formData: initialTransactionData,
+      editMode: false,
       showModal: false,
     });
 
@@ -116,7 +117,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
   };
 
   const editTransactionRow = (formData: TransactionFormData) => {
-    setEditTransaction({ formData, showModal: true });
+    setEditTransaction({ formData, editMode: true, showModal: true });
   };
 
   const showDeleteModal = (id: string) => {

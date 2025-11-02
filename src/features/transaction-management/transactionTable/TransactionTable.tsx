@@ -23,7 +23,10 @@ interface Props {
 
 function TransactionTable({ tableTitle }: Props) {
   const [addTransaction, setAddTransaction] =
-    useState<UpdateTransactionStateProps>({ showModal: false });
+    useState<UpdateTransactionStateProps>({
+      editMode: false,
+      showModal: false,
+    });
 
   const [page, setPage] = useState({
     event: null,
@@ -105,7 +108,9 @@ function TransactionTable({ tableTitle }: Props) {
             <Button
               size="small"
               variant="outlined"
-              onClick={() => setAddTransaction({ showModal: true })}
+              onClick={() =>
+                setAddTransaction({ editMode: false, showModal: true })
+              }
             >
               <Add fontSize="small" /> Add new transaction
             </Button>
