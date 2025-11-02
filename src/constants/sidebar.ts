@@ -20,4 +20,9 @@ export const menuItems: MenuItems[] = [{
     label: "Settings",
     path: "/settings",
     state: "app.settings"
+}, {
+    key: "about",
+    label: "About",
+    path: "/about",
+    state: "app.about"
 }]

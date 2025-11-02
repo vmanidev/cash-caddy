@@ -8,7 +8,13 @@ import {
 import AppDrawer from "../ui/drawer/Drawer";
 import { menuItems } from "../../constants/sidebar";
 import type { ReactNode } from "react";
-import { Category, Dashboard, Receipt, Settings } from "@mui/icons-material";
+import {
+  Category,
+  Dashboard,
+  Info,
+  Receipt,
+  Settings,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -55,6 +61,9 @@ function Sidebar({ openDrawer, setOpenDrawer }: Props) {
         break;
       case "settings":
         Icon = <Settings />;
+        break;
+      case "about":
+        Icon = <Info />;
         break;
     }
     return Icon;
