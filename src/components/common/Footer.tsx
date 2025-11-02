@@ -1,5 +1,6 @@
 import { Copyright, GitHub } from "@mui/icons-material";
-import { Divider, Grid, Link, Stack } from "@mui/material";
+import { Divider, Grid, Link, Stack, Typography } from "@mui/material";
+import { GITHUB_REPO_URL } from "../../constants/urls";
 
 function AppFooter() {
   return (
@@ -10,23 +11,19 @@ function AppFooter() {
         justifyContent="center"
         divider={<Divider orientation="vertical" flexItem />}
         spacing={1}
+        marginTop={4}
       >
         <Grid display="flex" alignItems="center">
           <Copyright fontSize="small" />
-          <span>{new Date().getFullYear()}</span>
+          <Typography variant="button">{new Date().getFullYear()}</Typography>
         </Grid>
-        <span>Cash Caddy</span>
+        <Typography variant="button">Cash Caddy</Typography>
         <Link
-          href="https://github.com/vmanidev/cash-caddy/blob/c16ad3aa276ab3f25fd16f6ec058ef723c35be92/LICENSE"
+          href={GITHUB_REPO_URL}
           rel="noopener"
           target="_blank"
-        >
-          MIT License
-        </Link>
-        <Link
-          href="https://github.com/vmanidev/cash-caddy"
-          rel="noopener"
-          target="_blank"
+          color="inherit"
+          sx={{ ":hover": { color: "#1976d2" } }}
         >
           <GitHub />
         </Link>
