@@ -71,7 +71,7 @@ function TransactionTable({ tableTitle }: Props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       ) : transactionData.length > 5 ? (
-        <Button size="small" variant="text" onClick={viewAllTransactions}>
+        <Button size="medium" variant="text" onClick={viewAllTransactions}>
           View All Transactions
         </Button>
       ) : null}

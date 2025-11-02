@@ -1,10 +1,12 @@
 import {
   Button,
   ButtonGroup,
+  Divider,
   Grid,
   List,
   ListItem,
   ListItemText,
+  Paper,
   Typography,
 } from "@mui/material";
 import AppHeader from "../components/common/Header";
@@ -51,36 +53,43 @@ function Categories() {
 
   const Categories = (type: "income" | "expenses") => {
     return (
-      <>
+      <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
         <Typography variant="h6">
           {type === "income" ? "Income" : "Expense"} Categories
         </Typography>
-        <List sx={{ maxHeight: "300px", overflow: "scroll" }}>
-          {categories[type].map((item: IncomeExpensesItem) => {
-            return (
-              <ListItem
-                key={item.key}
-                secondaryAction={
-                  <ButtonGroup variant="text">
-                    <Button onClick={() => editCategoryItem(item, type)}>
-                      <Edit fontSize="small" />
-                    </Button>
-                    <Button
-                      onClick={() =>
-                        dispatch(deleteCategory({ name: item, type }))
-                      }
-                    >
-                      <Delete color="error" fontSize="small" />
-                    </Button>
-                  </ButtonGroup>
-                }
-              >
-                <ListItemText>{item.value}</ListItemText>
-              </ListItem>
-            );
-          })}
-        </List>
-      </>
+        <Paper elevation={4}>
+          <List sx={{ maxHeight: "300px", overflow: "scroll" }}>
+            {categories[type].map((item: IncomeExpensesItem, index: number) => {
+              return (
+                <>
+                  <ListItem
+                    key={item.key}
+                    secondaryAction={
+                      <ButtonGroup variant="text">
+                        <Button onClick={() => editCategoryItem(item, type)}>
+                          <Edit fontSize="small" />
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            dispatch(deleteCategory({ name: item, type }))
+                          }
+                        >
+                          <Delete color="error" fontSize="small" />
+                        </Button>
+                      </ButtonGroup>
+                    }
+                  >
+                    <ListItemText>{item.value}</ListItemText>
+                  </ListItem>
+                  {index !== categories[type].length - 1 && (
+                    <Divider component="li" />
+                  )}
+                </>
+              );
+            })}
+          </List>
+        </Paper>
+      </Grid>
     );
   };
 
@@ -105,12 +114,8 @@ function Categories() {
             Add New Category
           </Button>
           <Grid container size={12} marginTop={2} spacing={4}>
-            <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
-              {categories.income.length > 0 && Categories("income")}
-            </Grid>
-            <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
-              {categories.expenses.length > 0 && Categories("expenses")}
-            </Grid>
+            {categories.income.length > 0 && Categories("income")}
+            {categories.expenses.length > 0 && Categories("expenses")}
           </Grid>
         </Grid>
         <Grid size={12}>
