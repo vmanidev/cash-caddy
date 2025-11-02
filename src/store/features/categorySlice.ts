@@ -21,6 +21,13 @@ const categorySlice = createSlice({
                 key: action.payload.name.key.replace(/[^A-Za-z0-9_]/g, "").toLowerCase(),  // create an unique key for each category
                 value: action.payload.name.value.trim() // remove both leading and trailing whitespaces
             };
+
+            const existingKeys = state[action.payload.type].map(({ key }) => key);
+
+            if (existingKeys.includes(payload.key)) {
+                payload.key = `${payload.key}_${state[action.payload.type].length}`; // To prevent category-key duplication
+            }
+
             state[action.payload.type].push(payload);
         },
         editCategory: (state, action: PayloadAction<CategoryPayload>) => {
