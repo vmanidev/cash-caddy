@@ -1,7 +1,9 @@
 import {
   Button,
+  Divider,
   Grid,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableContainer,
@@ -63,7 +65,7 @@ function TransactionTable({ tableTitle }: Props) {
         </Table>
       </TableContainer>
 
-      {location.state === "app.transactions" ? (
+      {location.state === "app.transactions" && (
         <TablePagination
           rowsPerPageOptions={[5, 10, 25, 50]}
           component="div"
@@ -73,11 +75,7 @@ function TransactionTable({ tableTitle }: Props) {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      ) : transactionData.length > 5 ? (
-        <Button size="medium" variant="text" onClick={viewAllTransactions}>
-          View All Transactions
-        </Button>
-      ) : null}
+      )}
     </>
   );
 
@@ -105,15 +103,30 @@ function TransactionTable({ tableTitle }: Props) {
             alignItems="center"
           >
             <span className="section-title">{tableTitle}</span>
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={() =>
-                setAddTransaction({ editMode: false, showModal: true })
-              }
+            <Stack
+              direction="row"
+              divider={<Divider orientation="vertical" flexItem />}
+              spacing={2}
             >
-              <Add fontSize="small" /> Add new transaction
-            </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                onClick={() =>
+                  setAddTransaction({ editMode: false, showModal: true })
+                }
+              >
+                <Add fontSize="small" /> Add new transaction
+              </Button>
+              {location.state === "app.dashboard" && (
+                <Button
+                  size="small"
+                  variant="text"
+                  onClick={viewAllTransactions}
+                >
+                  View All
+                </Button>
+              )}
+            </Stack>
           </Grid>
           {transactionData.length > 0 ? <TableView /> : <EmptyTableView />}
         </Paper>
