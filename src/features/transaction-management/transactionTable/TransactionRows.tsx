@@ -1,12 +1,17 @@
-import { Delete, Edit, Warning } from "@mui/icons-material";
+import {
+  CalendarMonth,
+  Delete,
+  Edit,
+  NorthEast,
+  SouthWest,
+  Warning,
+} from "@mui/icons-material";
 import {
   Button,
   ButtonGroup,
   Chip,
-  Collapse,
+  Grid,
   Stack,
-  Table,
-  TableBody,
   TableCell,
   TableRow,
 } from "@mui/material";
@@ -14,7 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import type { TransactionPayload } from "../../../store/types";
 import { Fragment, useMemo, useState } from "react";
 import UpdateTransaction from "../UpdateTransaction";
-import { initialTransactionData, PAYMENT_MODE_LABEL } from "../../../constants/form";
+import {
+  initialTransactionData,
+  PAYMENT_MODE_LABEL,
+} from "../../../constants/form";
 import type {
   DeleteTransactionModalProps,
   UpdateTransactionStateProps,
@@ -72,60 +80,56 @@ function TransactionRows({ page, rowsPerPage }: Props) {
       }: TransactionFormData) => {
         return (
           <Fragment key={id}>
-            <TableRow sx={{ "& td, & th": { borderBottom: "none" } }}>
-              <TableCell>{formatDate(date).getRelativeDateLabel()}</TableCell>
+            <TableRow>
+              <TableCell>
+                <Grid display="flex" alignItems="center">
+                  <CalendarMonth fontSize="small" />
+                  {formatDate(date).getRelativeDateLabel()}
+                </Grid>
+              </TableCell>
               <TableCell
                 className={type === "income" ? "income-text" : "expenses-text"}
               >
-                {`${amount && (type === "income" ? "+" : "-")} ${amount}`}
+                <Grid display="flex" alignItems="center">
+                  {type === "income" ? (
+                    <NorthEast fontSize="small" />
+                  ) : (
+                    <SouthWest fontSize="small" />
+                  )}
+                  {amount}
+                </Grid>
               </TableCell>
               <TableCell>
                 <Chip label={categoryMap[category]} variant="filled" />
               </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={4} sx={{ padding: 0 }}>
-                <Collapse in={true}>
-                  <Table size="small">
-                    <TableBody>
-                      <TableRow sx={{ "& td, & th": { border: "none" } }}>
-                        <TableCell sx={{ fontStyle: "italic", width: "70%" }}>
-                          {note}
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={PAYMENT_MODE_LABEL[payment_mode]}
-                            variant="filled"
-                          />
-                        </TableCell>
-                        <TableCell sx={{ width: "30%" }}>
-                          <ButtonGroup variant="text" size="small">
-                            <Button
-                              onClick={() =>
-                                editTransactionRow({
-                                  id,
-                                  date,
-                                  amount,
-                                  category,
-                                  type,
-                                  note,
-                                  payment_mode,
-                                })
-                              }
-                            >
-                              <Edit />
-                            </Button>
-                            <Button
-                              onClick={() => (id ? showDeleteModal(id) : null)}
-                            >
-                              <Delete color="error" />
-                            </Button>
-                          </ButtonGroup>
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </Collapse>
+              <TableCell>
+                <Chip
+                  label={PAYMENT_MODE_LABEL[payment_mode]}
+                  variant="filled"
+                />
+              </TableCell>
+              <TableCell sx={{ fontStyle: "italic" }}>{note}</TableCell>
+              <TableCell sx={{ width: "30%" }}>
+                <ButtonGroup variant="text" size="small">
+                  <Button
+                    onClick={() =>
+                      editTransactionRow({
+                        id,
+                        date,
+                        amount,
+                        category,
+                        type,
+                        note,
+                        payment_mode,
+                      })
+                    }
+                  >
+                    <Edit />
+                  </Button>
+                  <Button onClick={() => (id ? showDeleteModal(id) : null)}>
+                    <Delete color="error" />
+                  </Button>
+                </ButtonGroup>
               </TableCell>
             </TableRow>
           </Fragment>
