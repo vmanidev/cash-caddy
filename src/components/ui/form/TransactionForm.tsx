@@ -23,6 +23,7 @@ import UpdateCategory from "../../../features/category-management/UpdateCategory
 import { useSelector } from "react-redux";
 import type { IncomeExpensesItem } from "../../../store/types";
 import { validateField } from "../../../utils/formValidation";
+import { pink, teal } from "@mui/material/colors";
 
 interface Props {
   formData: TransactionFormData;
@@ -179,17 +180,29 @@ function TransactionForm({
                   value="income"
                   checked={formData.type === "income"}
                   onChange={handleFormChange}
+                  sx={{
+                    color: teal[800],
+                    "&.Mui-checked": {
+                      color: teal[600],
+                    },
+                  }}
                 />
               }
             />
             <FormControlLabel
-              label="Expenses"
+              label="Expense"
               control={
                 <Radio
                   name="type"
                   value="expenses"
                   checked={formData.type === "expenses"}
                   onChange={handleFormChange}
+                  sx={{
+                    color: pink[800],
+                    "&.Mui-checked": {
+                      color: pink[600],
+                    },
+                  }}
                 />
               }
             />
