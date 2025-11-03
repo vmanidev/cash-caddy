@@ -254,6 +254,7 @@ function TransactionForm({
             variant="outlined"
             multiline
             minRows={2}
+            maxRows={3}
             label="Note"
             name="note"
             value={formData.note}
