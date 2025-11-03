@@ -2,10 +2,10 @@ import { Divider, Grid, Paper, Stack } from "@mui/material";
 
 import styles from "./Overview.module.scss";
 import { transactionSummaryCard } from "../../constants/overview";
-import { CurrencyRupee } from "@mui/icons-material";
 import { calculateTransactions } from "../../utils/calculate";
 import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
+import { formatLocaleCurrency } from "../../utils/currency";
 
 function Overview() {
   const [total, setTotal] = useState({
@@ -51,13 +51,9 @@ function Overview() {
           >
             <div>{displayText}</div>
             <div className={styles.valueHolder}>
-              {transactionData.length > 0 ? (
-                <>
-                  <CurrencyRupee fontSize="small" /> {total[type]}
-                </>
-              ) : (
-                "--"
-              )}
+              {transactionData.length > 0
+                ? formatLocaleCurrency(total[type])
+                : "--"}
             </div>
           </Stack>
         </Paper>

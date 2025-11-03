@@ -37,6 +37,7 @@ import { removeTransaction } from "../../../store/features/transactionSlice";
 import formatDate, { sortByDate } from "../../../utils/date";
 import useCategoryMap from "../../../hooks/useCategoryMap";
 import { pink, teal } from "@mui/material/colors";
+import { formatLocaleCurrency } from "../../../utils/currency";
 
 interface Props {
   page: number;
@@ -104,7 +105,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                     <SouthWest fontSize="small" />
                   )}
                   <Typography variant="button" component="td">
-                    {amount}
+                    {formatLocaleCurrency(amount)}
                   </Typography>
                 </Grid>
               </TableCell>
