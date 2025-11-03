@@ -1,8 +1,11 @@
 import {
+  AccountBalance,
   CalendarMonth,
   Delete,
+  Description,
   Edit,
   NorthEast,
+  Payments,
   SouthWest,
   Warning,
 } from "@mui/icons-material";
@@ -14,6 +17,7 @@ import {
   Stack,
   TableCell,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { TransactionPayload } from "../../../store/types";
@@ -32,6 +36,7 @@ import AppModal from "../../../components/ui/modal/Modal";
 import { removeTransaction } from "../../../store/features/transactionSlice";
 import formatDate, { sortByDate } from "../../../utils/date";
 import useCategoryMap from "../../../hooks/useCategoryMap";
+import { pink, teal } from "@mui/material/colors";
 
 interface Props {
   page: number;
@@ -83,12 +88,14 @@ function TransactionRows({ page, rowsPerPage }: Props) {
             <TableRow>
               <TableCell>
                 <Grid display="flex" alignItems="center">
-                  <CalendarMonth fontSize="small" />
-                  {formatDate(date).getRelativeDateLabel()}
+                  <CalendarMonth fontSize="small" color="action" />
+                  <Typography variant="button" component="td">
+                    {formatDate(date).getRelativeDateLabel()}
+                  </Typography>
                 </Grid>
               </TableCell>
               <TableCell
-                className={type === "income" ? "income-text" : "expenses-text"}
+                sx={{ color: type === "income" ? teal[500] : pink[500] }}
               >
                 <Grid display="flex" alignItems="center">
                   {type === "income" ? (
@@ -96,7 +103,9 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                   ) : (
                     <SouthWest fontSize="small" />
                   )}
-                  {amount}
+                  <Typography variant="button" component="td">
+                    {amount}
+                  </Typography>
                 </Grid>
               </TableCell>
               <TableCell>
@@ -106,9 +115,23 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                 <Chip
                   label={PAYMENT_MODE_LABEL[payment_mode]}
                   variant="filled"
+                  icon={
+                    payment_mode === "cash" ? (
+                      <Payments fontSize="small" color="success" />
+                    ) : (
+                      <AccountBalance fontSize="small" color="primary" />
+                    )
+                  }
                 />
               </TableCell>
-              <TableCell sx={{ fontStyle: "italic" }}>{note}</TableCell>
+              <TableCell sx={{ fontStyle: "italic" }}>
+                <Grid display="flex" alignItems="center">
+                  <Description fontSize="small" color="action" />
+                  <Typography variant="subtitle2" component="td">
+                    {note}
+                  </Typography>
+                </Grid>
+              </TableCell>
               <TableCell sx={{ width: "30%" }}>
                 <ButtonGroup variant="text" size="small">
                   <Button
