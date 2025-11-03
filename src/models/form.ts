@@ -4,7 +4,8 @@ export interface TransactionFormData {
     amount: string,
     type: "income" | "expenses",
     note: string,
-    category: string
+    category: string,
+    payment_mode: "cash" | "online"
 }
 
 export interface CategoryFormData {

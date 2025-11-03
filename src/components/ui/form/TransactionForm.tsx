@@ -196,6 +196,34 @@ function TransactionForm({
           </RadioGroup>
         </Grid>
 
+        <Grid size={12} alignContent="center">
+          <FormLabel>Payment mode</FormLabel>
+          <RadioGroup row>
+            <FormControlLabel
+              label="Cash"
+              control={
+                <Radio
+                  name="payment_mode"
+                  value="cash"
+                  checked={formData.payment_mode === "cash"}
+                  onChange={handleFormChange}
+                />
+              }
+            />
+            <FormControlLabel
+              label="Online (UPI/Card/Netbanking)"
+              control={
+                <Radio
+                  name="payment_mode"
+                  value="online"
+                  checked={formData.payment_mode === "online"}
+                  onChange={handleFormChange}
+                />
+              }
+            />
+          </RadioGroup>
+        </Grid>
+
         <Grid size={12}>
           <TextField
             fullWidth

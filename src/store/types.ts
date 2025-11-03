@@ -1,10 +1,11 @@
-export interface Transaction {
+export interface TransactionPayload {
     id?: string
     date: string,
     amount: string,
     type: "income" | "expenses",
     note: string,
-    category: string
+    category: string,
+    payment_mode: "cash" | "online"
 }
 
 export interface IncomeExpensesItem {

@@ -11,10 +11,10 @@ import {
   TableRow,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import type { Transaction } from "../../../store/types";
+import type { TransactionPayload } from "../../../store/types";
 import { Fragment, useMemo, useState } from "react";
 import UpdateTransaction from "../UpdateTransaction";
-import { initialTransactionData } from "../../../constants/form";
+import { initialTransactionData, PAYMENT_MODE_LABEL } from "../../../constants/form";
 import type {
   DeleteTransactionModalProps,
   UpdateTransactionStateProps,
@@ -43,7 +43,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     showModal: false,
   });
 
-  const transactionData: Transaction[] = useSelector(
+  const transactionData: TransactionPayload[] = useSelector(
     (state: any) => state.transactions
   );
 
@@ -60,61 +60,78 @@ function TransactionRows({ page, rowsPerPage }: Props) {
   }, [page, rowsPerPage]);
 
   const getTransactionRows = () => {
-    return renderList.map(({ id, date, amount, category, type, note }) => {
-      return (
-        <Fragment key={id}>
-          <TableRow sx={{ "& td, & th": { borderBottom: "none" } }}>
-            <TableCell>{formatDate(date).getRelativeDateLabel()}</TableCell>
-            <TableCell
-              className={type === "income" ? "income-text" : "expenses-text"}
-            >
-              {`${amount && (type === "income" ? "+" : "-")} ${amount}`}
-            </TableCell>
-            <TableCell>
-              <Chip label={categoryMap[category]} variant="filled" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={4} sx={{ padding: 0 }}>
-              <Collapse in={true}>
-                <Table size="small">
-                  <TableBody>
-                    <TableRow sx={{ "& td, & th": { border: "none" } }}>
-                      <TableCell sx={{ fontStyle: "italic", width: "70%" }}>
-                        {note}
-                      </TableCell>
-                      <TableCell sx={{ width: "30%" }}>
-                        <ButtonGroup variant="text" size="small">
-                          <Button
-                            onClick={() =>
-                              editTransactionRow({
-                                id,
-                                date,
-                                amount,
-                                category,
-                                type,
-                                note,
-                              })
-                            }
-                          >
-                            <Edit />
-                          </Button>
-                          <Button
-                            onClick={() => (id ? showDeleteModal(id) : null)}
-                          >
-                            <Delete color="error" />
-                          </Button>
-                        </ButtonGroup>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </Collapse>
-            </TableCell>
-          </TableRow>
-        </Fragment>
-      );
-    });
+    return renderList.map(
+      ({
+        id,
+        date,
+        amount,
+        category,
+        type,
+        note,
+        payment_mode,
+      }: TransactionFormData) => {
+        return (
+          <Fragment key={id}>
+            <TableRow sx={{ "& td, & th": { borderBottom: "none" } }}>
+              <TableCell>{formatDate(date).getRelativeDateLabel()}</TableCell>
+              <TableCell
+                className={type === "income" ? "income-text" : "expenses-text"}
+              >
+                {`${amount && (type === "income" ? "+" : "-")} ${amount}`}
+              </TableCell>
+              <TableCell>
+                <Chip label={categoryMap[category]} variant="filled" />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell colSpan={4} sx={{ padding: 0 }}>
+                <Collapse in={true}>
+                  <Table size="small">
+                    <TableBody>
+                      <TableRow sx={{ "& td, & th": { border: "none" } }}>
+                        <TableCell sx={{ fontStyle: "italic", width: "70%" }}>
+                          {note}
+                        </TableCell>
+                        <TableCell>
+                          <Chip
+                            label={PAYMENT_MODE_LABEL[payment_mode]}
+                            variant="filled"
+                          />
+                        </TableCell>
+                        <TableCell sx={{ width: "30%" }}>
+                          <ButtonGroup variant="text" size="small">
+                            <Button
+                              onClick={() =>
+                                editTransactionRow({
+                                  id,
+                                  date,
+                                  amount,
+                                  category,
+                                  type,
+                                  note,
+                                  payment_mode,
+                                })
+                              }
+                            >
+                              <Edit />
+                            </Button>
+                            <Button
+                              onClick={() => (id ? showDeleteModal(id) : null)}
+                            >
+                              <Delete color="error" />
+                            </Button>
+                          </ButtonGroup>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+          </Fragment>
+        );
+      }
+    );
   };
 
   const editTransactionRow = (formData: TransactionFormData) => {

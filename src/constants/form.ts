@@ -6,7 +6,8 @@ export const initialTransactionData: TransactionFormData = {
     amount: "",
     type: "expenses",
     note: "",
-    category: ""
+    category: "",
+    payment_mode: "cash"
 }
 
 export const initialCategoryData: CategoryFormData = {
@@ -53,4 +54,9 @@ export const FormFieldMap = {
     category: "Category",
     note: "Note",
     categoryName: "Category name"
+}
+
+export const PAYMENT_MODE_LABEL = {
+    cash: "Cash",
+    online: "Online (UPI/Card/Netbanking)"
 }
