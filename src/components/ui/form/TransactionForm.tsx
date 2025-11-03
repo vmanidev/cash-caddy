@@ -143,40 +143,6 @@ function TransactionForm({
           />
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
-          <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
-            <Select
-              label="Category"
-              name="category"
-              value={formData.category}
-              onChange={(event) => {
-                handleFormChange(event);
-                validateFormField(event);
-              }}
-              error={formError?.category?.hasError}
-            >
-              <MenuItem key="addNewCategory" value="addNewCategory">
-                <Button sx={{ padding: 0 }} variant="text">
-                  Add new Category
-                </Button>
-              </MenuItem>
-              {categories[formData.type].map((item: IncomeExpensesItem) => (
-                <MenuItem key={item.key} value={item.key}>
-                  {item.value}
-                </MenuItem>
-              ))}
-            </Select>
-            <FormHelperText
-              sx={{
-                color: formError?.category?.hasError ? "#d32f2f" : "inherit",
-              }}
-            >
-              {getHelperText("category")}
-            </FormHelperText>
-          </FormControl>
-        </Grid>
-
         <Grid
           size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}
           alignContent="center"
@@ -218,6 +184,40 @@ function TransactionForm({
               }
             />
           </RadioGroup>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
+          <FormControl fullWidth>
+            <InputLabel>Category</InputLabel>
+            <Select
+              label="Category"
+              name="category"
+              value={formData.category}
+              onChange={(event) => {
+                handleFormChange(event);
+                validateFormField(event);
+              }}
+              error={formError?.category?.hasError}
+            >
+              <MenuItem key="addNewCategory" value="addNewCategory">
+                <Button sx={{ padding: 0 }} variant="text">
+                  Add new Category
+                </Button>
+              </MenuItem>
+              {categories[formData.type].map((item: IncomeExpensesItem) => (
+                <MenuItem key={item.key} value={item.key}>
+                  {item.value}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText
+              sx={{
+                color: formError?.category?.hasError ? "#d32f2f" : "inherit",
+              }}
+            >
+              {getHelperText("category")}
+            </FormHelperText>
+          </FormControl>
         </Grid>
 
         <Grid size={12} alignContent="center">
