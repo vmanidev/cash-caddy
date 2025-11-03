@@ -8,6 +8,7 @@ import {
   FormHelperText,
   FormLabel,
   Grid,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Radio,
@@ -24,6 +25,7 @@ import { useSelector } from "react-redux";
 import type { IncomeExpensesItem } from "../../../store/types";
 import { validateField } from "../../../utils/formValidation";
 import { pink, teal } from "@mui/material/colors";
+import { CurrencyRupee } from "@mui/icons-material";
 
 interface Props {
   formData: TransactionFormData;
@@ -129,6 +131,15 @@ function TransactionForm({
             helperText={getHelperText("amount")}
             error={formError?.amount?.hasError}
             onInput={validateFormField}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <CurrencyRupee fontSize="small" />
+                  </InputAdornment>
+                ),
+              },
+            }}
           />
         </Grid>
 
