@@ -90,7 +90,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
               <TableCell>
                 <Grid display="flex" alignItems="center">
                   <CalendarMonth fontSize="small" color="action" />
-                  <Typography variant="button" component="td">
+                  <Typography variant="button">
                     {formatDate(date).getRelativeDateLabel()}
                   </Typography>
                 </Grid>
@@ -104,7 +104,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                   ) : (
                     <SouthWest fontSize="small" />
                   )}
-                  <Typography variant="button" component="td">
+                  <Typography variant="button">
                     {formatLocaleCurrency(amount)}
                   </Typography>
                 </Grid>
@@ -125,12 +125,19 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                   }
                 />
               </TableCell>
-              <TableCell sx={{ fontStyle: "italic" }}>
+              <TableCell
+                sx={{
+                  fontStyle: "italic",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "300px",
+                }}
+                title={note}
+              >
                 <Grid display="flex" alignItems="center">
                   <Description fontSize="small" color="action" />
-                  <Typography variant="subtitle2" component="td">
-                    {note}
-                  </Typography>
+                  <Typography variant="subtitle2">{note}</Typography>
                 </Grid>
               </TableCell>
               <TableCell sx={{ width: "30%" }}>
