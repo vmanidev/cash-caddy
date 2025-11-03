@@ -131,7 +131,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  maxWidth: "300px",
+                  maxWidth: "200px",
                 }}
                 title={note}
               >
