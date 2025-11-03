@@ -51,7 +51,13 @@ function Overview() {
           >
             <div>{displayText}</div>
             <div className={styles.valueHolder}>
-              <CurrencyRupee fontSize="small" /> {total[type]}
+              {transactionData.length > 0 ? (
+                <>
+                  <CurrencyRupee fontSize="small" /> {total[type]}
+                </>
+              ) : (
+                "--"
+              )}
             </div>
           </Stack>
         </Paper>
