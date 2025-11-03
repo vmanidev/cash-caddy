@@ -1,6 +1,6 @@
-import type { Transaction } from "../store/types";
+import type { TransactionPayload } from "../store/types";
 
-export function calculateTransactions(inputArr: Transaction[] = []) {
+export function calculateTransactions(inputArr: TransactionPayload[] = []) {
 
     const totalIncome = () => calculateTotal("income");
 

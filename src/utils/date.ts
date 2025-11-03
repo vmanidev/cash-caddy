@@ -1,4 +1,4 @@
-import type { Transaction } from "../store/types";
+import type { TransactionPayload } from "../store/types";
 
 function formatDate(date: string) {
 
@@ -32,7 +32,7 @@ function formatDate(date: string) {
     return { getLocaleDate, getRelativeDateLabel, isToday, isYesterday };
 }
 
-export const sortByDate = (transactions: Transaction[], order: "ascending" | "descending" = "descending") =>
+export const sortByDate = (transactions: TransactionPayload[], order: "ascending" | "descending" = "descending") =>
     transactions.sort((a, b) =>
         order === "ascending" ?
             (new Date(a.date).getTime() - new Date(b.date).getTime()) :
