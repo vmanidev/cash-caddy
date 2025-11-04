@@ -129,7 +129,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                 sx={{
                   fontStyle: "italic",
                   whiteSpace: "nowrap",
-                  maxWidth: "200px",
+                  maxWidth: "150px",
                 }}
                 title={note}
               >
