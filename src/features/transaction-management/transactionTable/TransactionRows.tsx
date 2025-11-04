@@ -88,7 +88,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
           <Fragment key={id}>
             <TableRow>
               <TableCell>
-                <Grid display="flex" alignItems="center">
+                <Grid display="flex" alignItems="center" whiteSpace="nowrap">
                   <CalendarMonth fontSize="small" color="action" />
                   <Typography variant="button">
                     {formatDate(date).getRelativeDateLabel()}
@@ -98,7 +98,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
               <TableCell
                 sx={{ color: type === "income" ? teal[500] : pink[500] }}
               >
-                <Grid display="flex" alignItems="center">
+                <Grid display="flex" alignItems="center" whiteSpace="nowrap">
                   {type === "income" ? (
                     <NorthEast fontSize="small" />
                   ) : (
@@ -137,7 +137,9 @@ function TransactionRows({ page, rowsPerPage }: Props) {
               >
                 <Grid display="flex" alignItems="center">
                   <Description fontSize="small" color="action" />
-                  <Typography variant="subtitle2">{note}</Typography>
+                  <Typography variant="subtitle2" textOverflow="ellipsis">
+                    {note}
+                  </Typography>
                 </Grid>
               </TableCell>
               <TableCell sx={{ width: "30%" }}>

@@ -18,7 +18,11 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { HELPER_TEXT, initialCategoryData } from "../../../constants/form";
+import {
+  HELPER_TEXT,
+  initialCategoryData,
+  PAYMENT_MODE_LABEL,
+} from "../../../constants/form";
 import type { UpdateCategoryStateProps } from "../../../models/categories";
 import UpdateCategory from "../../../features/category-management/UpdateCategory";
 import { useSelector } from "react-redux";
@@ -224,7 +228,7 @@ function TransactionForm({
           <FormLabel>Payment mode</FormLabel>
           <RadioGroup row>
             <FormControlLabel
-              label="Cash"
+              label={PAYMENT_MODE_LABEL.cash}
               control={
                 <Radio
                   name="payment_mode"
@@ -235,7 +239,7 @@ function TransactionForm({
               }
             />
             <FormControlLabel
-              label="Online (UPI/Card/Netbanking)"
+              label={PAYMENT_MODE_LABEL.online}
               control={
                 <Radio
                   name="payment_mode"

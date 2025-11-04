@@ -58,5 +58,5 @@ export const FormFieldMap = {
 
 export const PAYMENT_MODE_LABEL = {
     cash: "Cash",
-    online: "Online (UPI/Card/Netbanking)"
+    online: "UPI/Card/Netbanking"
 }
