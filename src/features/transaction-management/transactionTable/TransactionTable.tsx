@@ -100,33 +100,37 @@ function TransactionTable({ tableTitle }: Props) {
             display="flex"
             justifyContent="space-between"
             padding={2}
+            spacing={2}
             alignItems="center"
+            container
           >
-            <span className="section-title">{tableTitle}</span>
-            <Stack
-              direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
-              spacing={2}
-            >
-              <Button
-                size="small"
-                variant="outlined"
-                onClick={() =>
-                  setAddTransaction({ editMode: false, showModal: true })
-                }
+            <Typography variant="h6">{tableTitle}</Typography>
+            <Grid>
+              <Stack
+                direction="row"
+                divider={<Divider orientation="vertical" flexItem />}
+                spacing={2}
               >
-                <Add fontSize="small" /> Add new transaction
-              </Button>
-              {location.state !== "app.transactions" && (
                 <Button
                   size="small"
-                  variant="text"
-                  onClick={viewAllTransactions}
+                  variant="outlined"
+                  onClick={() =>
+                    setAddTransaction({ editMode: false, showModal: true })
+                  }
                 >
-                  View All
+                  <Add fontSize="small" /> Add new transaction
                 </Button>
-              )}
-            </Stack>
+                {location.state !== "app.transactions" && (
+                  <Button
+                    size="small"
+                    variant="text"
+                    onClick={viewAllTransactions}
+                  >
+                    View All
+                  </Button>
+                )}
+              </Stack>
+            </Grid>
           </Grid>
           {transactionData.length > 0 ? <TableView /> : <EmptyTableView />}
         </Paper>
