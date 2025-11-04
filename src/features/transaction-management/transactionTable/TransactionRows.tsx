@@ -129,15 +129,17 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                 sx={{
                   fontStyle: "italic",
                   whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
                   maxWidth: "200px",
                 }}
                 title={note}
               >
                 <Grid display="flex" alignItems="center">
                   <Description fontSize="small" color="action" />
-                  <Typography variant="subtitle2" textOverflow="ellipsis">
+                  <Typography
+                    variant="subtitle2"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                  >
                     {note}
                   </Typography>
                 </Grid>
