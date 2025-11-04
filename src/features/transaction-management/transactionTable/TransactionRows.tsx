@@ -126,7 +126,14 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                   </Grid>
                 </TableCell>
                 <TableCell>
-                  <Chip label={categoryMap[category]} variant="filled" />
+                  <Chip
+                    label={
+                      categoryMap[category]?.length > 0
+                        ? categoryMap[category]
+                        : "Unknown"
+                    }
+                    variant="filled"
+                  />
                 </TableCell>
                 <TableCell>
                   <Chip
@@ -258,7 +265,14 @@ function TransactionRows({ page, rowsPerPage }: Props) {
               </Grid>
 
               <Grid size={4}>
-                <Chip label={categoryMap[category]} variant="filled" />
+                <Chip
+                  label={
+                    categoryMap[category]?.length > 0
+                      ? categoryMap[category]
+                      : "Unknown"
+                  }
+                  variant="filled"
+                />
               </Grid>
 
               <Grid size={4}>
@@ -324,7 +338,11 @@ function TransactionRows({ page, rowsPerPage }: Props) {
               <span>Delete Transaction</span>
             </Stack>
           }
-          content={<span>Are you sure want to delete the transaction?</span>}
+          content={
+            <Typography variant="body1">
+              Are you sure want to delete the transaction?
+            </Typography>
+          }
           actionButtons={
             <>
               <Button
