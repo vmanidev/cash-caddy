@@ -15,11 +15,12 @@ function Dashboard() {
         expenses, budgets, and spending trends through a clean, interactive
         dashboard.
       </Typography>
-      <Grid size={12}>
-        <Overview />
-      </Grid>
-      <Grid size={12}>
-        <TransactionTable tableTitle="Recent Transactions" />
+      <Grid container size={12}>
+        <Grid container size={8}>
+          <Overview />
+          <TransactionTable tableTitle="Recent Transactions" />
+        </Grid>
+        <Grid container size={4}></Grid>
       </Grid>
       <Grid size={12}>
         <AppFooter />

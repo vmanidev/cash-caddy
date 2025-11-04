@@ -86,7 +86,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
       }: TransactionFormData) => {
         return (
           <Fragment key={id}>
-            <TableRow>
+            <TableRow hover>
               <TableCell>
                 <Grid display="flex" alignItems="center" whiteSpace="nowrap">
                   <CalendarMonth fontSize="small" color="action" />

@@ -61,11 +61,11 @@ function Overview() {
     ));
 
   return (
-    <>
+    <Grid size={12}>
       <Grid container spacing={{ xs: 2, sm: 2, md: 6, lg: 6, xl: 6 }}>
         <TransactionOverview />
       </Grid>
-    </>
+    </Grid>
   );
 }
 

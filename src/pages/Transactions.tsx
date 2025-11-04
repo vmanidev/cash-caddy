@@ -14,7 +14,10 @@ function Transactions() {
         to keep your data accurate and organized.
       </Typography>
       <Grid size={12}>
-        <TransactionTable tableTitle="Transactions" />
+        <Grid size={8}>
+          <TransactionTable tableTitle="Transactions" />
+        </Grid>
+        <Grid size={4}></Grid>
       </Grid>
       <Grid size={12}>
         <AppFooter />
