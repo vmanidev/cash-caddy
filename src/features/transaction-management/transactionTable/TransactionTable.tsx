@@ -117,7 +117,7 @@ function TransactionTable({ tableTitle }: Props) {
               >
                 <Add fontSize="small" /> Add new transaction
               </Button>
-              {location.state === "app.dashboard" && (
+              {location.state !== "app.transactions" && (
                 <Button
                   size="small"
                   variant="text"
