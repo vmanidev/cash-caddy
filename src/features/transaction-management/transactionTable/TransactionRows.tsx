@@ -1,9 +1,9 @@
 import {
   AccountBalance,
   CalendarMonth,
-  Delete,
+  DeleteOutlineOutlined,
   Description,
-  Edit,
+  EditOutlined,
   NorthEast,
   Payments,
   SouthWest,
@@ -159,10 +159,10 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                       })
                     }
                   >
-                    <Edit />
+                    <EditOutlined />
                   </Button>
                   <Button onClick={() => (id ? showDeleteModal(id) : null)}>
-                    <Delete color="error" />
+                    <DeleteOutlineOutlined color="error" />
                   </Button>
                 </ButtonGroup>
               </TableCell>
@@ -204,7 +204,7 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                 color="error"
                 onClick={() => deleteTransactionRow()}
               >
-                <Delete /> Delete
+                <DeleteOutlineOutlined /> Delete
               </Button>
               <Button
                 variant="outlined"

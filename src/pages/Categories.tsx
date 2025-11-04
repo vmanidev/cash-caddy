@@ -13,7 +13,7 @@ import AppHeader from "../components/common/Header";
 import AppFooter from "../components/common/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import type { IncomeExpensesItem } from "../store/types";
-import { Delete, Edit } from "@mui/icons-material";
+import { DeleteOutlineOutlined, EditOutlined } from "@mui/icons-material";
 import { Fragment, useState } from "react";
 import UpdateCategory from "../features/category-management/UpdateCategory";
 import type { UpdateCategoryStateProps } from "../models/categories";
@@ -66,14 +66,14 @@ function Categories() {
                     secondaryAction={
                       <ButtonGroup variant="text">
                         <Button onClick={() => editCategoryItem(item, type)}>
-                          <Edit fontSize="small" />
+                          <EditOutlined fontSize="small" />
                         </Button>
                         <Button
                           onClick={() =>
                             dispatch(deleteCategory({ name: item, type }))
                           }
                         >
-                          <Delete color="error" fontSize="small" />
+                          <DeleteOutlineOutlined color="error" fontSize="small" />
                         </Button>
                       </ButtonGroup>
                     }
