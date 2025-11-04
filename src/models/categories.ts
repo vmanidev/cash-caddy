@@ -5,3 +5,8 @@ export interface UpdateCategoryStateProps {
     editMode: boolean,
     showModal: boolean
 }
+
+export interface DeleteCategoryModalProps {
+    formData: CategoryFormData;
+    showModal: boolean;
+}
