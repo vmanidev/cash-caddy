@@ -1,10 +1,13 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Overview from "../features/overview/Overview";
 import TransactionTable from "../features/transaction-management/transactionTable/TransactionTable";
 import AppHeader from "../components/common/Header";
 import AppFooter from "../components/common/Footer";
 
 function Dashboard() {
+  const theme = useTheme();
+  const breakpoint = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
     <Grid container spacing={2} margin={2} size={12}>
       <Grid size={12}>
@@ -15,13 +18,21 @@ function Dashboard() {
         expenses, budgets, and spending trends through a clean, interactive
         dashboard.
       </Typography>
-      <Grid container size={12}>
-        <Grid container size={8}>
+      {breakpoint ? (
+        <>
           <Overview />
           <TransactionTable tableTitle="Recent Transactions" />
+        </>
+      ) : (
+        <Grid container size={12}>
+          <Grid container size={8}>
+            <Overview />
+            <TransactionTable tableTitle="Recent Transactions" />
+          </Grid>
+          <Grid container size={4}></Grid>
         </Grid>
-        <Grid container size={4}></Grid>
-      </Grid>
+      )}
+
       <Grid size={12}>
         <AppFooter />
       </Grid>

@@ -18,6 +18,8 @@ import {
   TableCell,
   TableRow,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { TransactionPayload } from "../../../store/types";
@@ -57,6 +59,9 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     showModal: false,
   });
 
+  const theme = useTheme();
+  const breakpoint = useMediaQuery(theme.breakpoints.down("lg"));
+
   const transactionData: TransactionPayload[] = useSelector(
     (state: any) => state.transactions
   );
@@ -86,90 +91,211 @@ function TransactionRows({ page, rowsPerPage }: Props) {
       }: TransactionFormData) => {
         return (
           <Fragment key={id}>
-            <TableRow hover>
-              <TableCell>
-                <Grid display="flex" alignItems="center" whiteSpace="nowrap">
-                  <CalendarMonth fontSize="small" color="action" />
-                  <Typography variant="button">
-                    {formatDate(date).getRelativeDateLabel()}
-                  </Typography>
-                </Grid>
-              </TableCell>
-              <TableCell
-                sx={{ color: type === "income" ? teal[500] : pink[500] }}
-              >
-                <Grid display="flex" alignItems="center" whiteSpace="nowrap">
-                  {type === "income" ? (
-                    <NorthEast fontSize="small" />
-                  ) : (
-                    <SouthWest fontSize="small" />
-                  )}
-                  <Typography variant="button">
-                    {formatLocaleCurrency(amount)}
-                  </Typography>
-                </Grid>
-              </TableCell>
-              <TableCell>
-                <Chip label={categoryMap[category]} variant="filled" />
-              </TableCell>
-              <TableCell>
-                <Chip
-                  label={PAYMENT_MODE_LABEL[payment_mode]}
-                  variant="filled"
-                  icon={
-                    payment_mode === "cash" ? (
-                      <Payments fontSize="small" color="success" />
+            {breakpoint ? (
+              ResponsiveRows({
+                id,
+                date,
+                amount,
+                category,
+                type,
+                note,
+                payment_mode,
+              })
+            ) : (
+              <TableRow hover>
+                <TableCell>
+                  <Grid display="flex" alignItems="center" whiteSpace="nowrap">
+                    <CalendarMonth fontSize="small" color="action" />
+                    <Typography variant="button">
+                      {formatDate(date).getRelativeDateLabel()}
+                    </Typography>
+                  </Grid>
+                </TableCell>
+                <TableCell
+                  sx={{ color: type === "income" ? teal[500] : pink[500] }}
+                >
+                  <Grid display="flex" alignItems="center" whiteSpace="nowrap">
+                    {type === "income" ? (
+                      <NorthEast fontSize="small" />
                     ) : (
-                      <AccountBalance fontSize="small" color="primary" />
-                    )
-                  }
-                />
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontStyle: "italic",
-                  whiteSpace: "nowrap",
-                  maxWidth: "150px",
-                }}
-                title={note}
-              >
-                <Grid display="flex" alignItems="center">
-                  <Description fontSize="small" color="action" />
-                  <Typography
-                    variant="subtitle2"
-                    textOverflow="ellipsis"
-                    overflow="hidden"
-                  >
-                    {note}
-                  </Typography>
-                </Grid>
-              </TableCell>
-              <TableCell sx={{ width: "30%" }}>
-                <ButtonGroup variant="text" size="small">
-                  <Button
-                    onClick={() =>
-                      editTransactionRow({
-                        id,
-                        date,
-                        amount,
-                        category,
-                        type,
-                        note,
-                        payment_mode,
-                      })
+                      <SouthWest fontSize="small" />
+                    )}
+                    <Typography variant="button">
+                      {formatLocaleCurrency(amount)}
+                    </Typography>
+                  </Grid>
+                </TableCell>
+                <TableCell>
+                  <Chip label={categoryMap[category]} variant="filled" />
+                </TableCell>
+                <TableCell>
+                  <Chip
+                    label={PAYMENT_MODE_LABEL[payment_mode]}
+                    variant="filled"
+                    icon={
+                      payment_mode === "cash" ? (
+                        <Payments fontSize="small" color="success" />
+                      ) : (
+                        <AccountBalance fontSize="small" color="primary" />
+                      )
                     }
-                  >
-                    <EditOutlined />
-                  </Button>
-                  <Button onClick={() => (id ? showDeleteModal(id) : null)}>
-                    <DeleteOutlineOutlined color="error" />
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
-            </TableRow>
+                  />
+                </TableCell>
+                <TableCell
+                  sx={{
+                    whiteSpace: "nowrap",
+                    maxWidth: "150px",
+                  }}
+                  title={note}
+                >
+                  <Grid display="flex" alignItems="center">
+                    <Description fontSize="small" color="action" />
+                    <Typography
+                      variant="subtitle2"
+                      textOverflow="ellipsis"
+                      overflow="hidden"
+                    >
+                      {note}
+                    </Typography>
+                  </Grid>
+                </TableCell>
+                <TableCell sx={{ width: "30%" }}>
+                  <ButtonGroup variant="text" size="small">
+                    <Button
+                      onClick={() =>
+                        editTransactionRow({
+                          id,
+                          date,
+                          amount,
+                          category,
+                          type,
+                          note,
+                          payment_mode,
+                        })
+                      }
+                    >
+                      <EditOutlined />
+                    </Button>
+                    <Button onClick={() => (id ? showDeleteModal(id) : null)}>
+                      <DeleteOutlineOutlined color="error" />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              </TableRow>
+            )}
           </Fragment>
         );
       }
+    );
+  };
+
+  const ResponsiveRows = ({
+    id,
+    date,
+    amount,
+    category,
+    type,
+    note,
+    payment_mode,
+  }: TransactionFormData) => {
+    return (
+      <TableRow>
+        <TableCell>
+          <Grid container size={12} spacing={2}>
+            <Grid
+              size={8}
+              display="flex"
+              alignItems="center"
+              whiteSpace="nowrap"
+            >
+              <CalendarMonth fontSize="small" color="action" />
+              <Typography variant="button">
+                {formatDate(date).getRelativeDateLabel()}
+              </Typography>
+            </Grid>
+
+            <Grid size={4}>
+              <ButtonGroup variant="text" size="small">
+                <Button
+                  onClick={() =>
+                    editTransactionRow({
+                      id,
+                      date,
+                      amount,
+                      category,
+                      type,
+                      note,
+                      payment_mode,
+                    })
+                  }
+                >
+                  <EditOutlined />
+                </Button>
+                <Button onClick={() => (id ? showDeleteModal(id) : null)}>
+                  <DeleteOutlineOutlined color="error" />
+                </Button>
+              </ButtonGroup>
+            </Grid>
+
+            <Grid
+              size={12}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                maxWidth: "300px",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <Description fontSize="small" color="action" />
+              <Typography
+                variant="subtitle2"
+                textOverflow="ellipsis"
+                overflow="hidden"
+              >
+                {note}
+              </Typography>
+            </Grid>
+
+            <Grid
+              sx={{
+                color: type === "income" ? teal[500] : pink[500],
+                whiteSpace: "nowrap",
+                display: "flex",
+                alignItems: "center",
+              }}
+              size={4}
+            >
+              {type === "income" ? (
+                <NorthEast fontSize="small" />
+              ) : (
+                <SouthWest fontSize="small" />
+              )}
+              <Typography variant="button">
+                {formatLocaleCurrency(amount)}
+              </Typography>
+            </Grid>
+
+            <Grid size={4}>
+              <Chip label={categoryMap[category]} variant="filled" />
+            </Grid>
+
+            <Grid size={4}>
+              <Chip
+                label={PAYMENT_MODE_LABEL[payment_mode]}
+                variant="filled"
+                icon={
+                  payment_mode === "cash" ? (
+                    <Payments fontSize="small" color="success" />
+                  ) : (
+                    <AccountBalance fontSize="small" color="primary" />
+                  )
+                }
+              />
+            </Grid>
+          </Grid>
+        </TableCell>
+      </TableRow>
     );
   };
 
