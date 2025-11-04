@@ -199,54 +199,93 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     payment_mode,
   }: TransactionFormData) => {
     return (
-      <TableRow>
-        <TableCell>
-          <Grid container size={12} spacing={2}>
-            <Grid
-              size={8}
-              display="flex"
-              alignItems="center"
-              whiteSpace="nowrap"
-            >
-              <CalendarMonth fontSize="small" color="action" />
-              <Typography variant="button">
-                {formatDate(date).getRelativeDateLabel()}
-              </Typography>
-            </Grid>
+      <>
+        <TableRow sx={{ border: "none" }}>
+          <TableCell sx={{ border: "none" }}>
+            <Grid container size={12} spacing={3}>
+              <Grid
+                size={8}
+                display="flex"
+                alignItems="center"
+                whiteSpace="nowrap"
+              >
+                <CalendarMonth fontSize="small" color="action" />
+                <Typography variant="button">
+                  {formatDate(date).getRelativeDateLabel()}
+                </Typography>
+              </Grid>
 
-            <Grid size={4}>
-              <ButtonGroup variant="text" size="small">
-                <Button
-                  onClick={() =>
-                    editTransactionRow({
-                      id,
-                      date,
-                      amount,
-                      category,
-                      type,
-                      note,
-                      payment_mode,
-                    })
+              <Grid size={4}>
+                <ButtonGroup variant="text" size="small">
+                  <Button
+                    onClick={() =>
+                      editTransactionRow({
+                        id,
+                        date,
+                        amount,
+                        category,
+                        type,
+                        note,
+                        payment_mode,
+                      })
+                    }
+                  >
+                    <EditOutlined />
+                  </Button>
+                  <Button onClick={() => (id ? showDeleteModal(id) : null)}>
+                    <DeleteOutlineOutlined color="error" />
+                  </Button>
+                </ButtonGroup>
+              </Grid>
+
+              <Grid
+                sx={{
+                  color: type === "income" ? teal[500] : pink[500],
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                size={4}
+              >
+                {type === "income" ? (
+                  <NorthEast fontSize="small" />
+                ) : (
+                  <SouthWest fontSize="small" />
+                )}
+                <Typography variant="button">
+                  {formatLocaleCurrency(amount)}
+                </Typography>
+              </Grid>
+
+              <Grid size={4}>
+                <Chip label={categoryMap[category]} variant="filled" />
+              </Grid>
+
+              <Grid size={4}>
+                <Chip
+                  label={PAYMENT_MODE_LABEL[payment_mode]}
+                  variant="filled"
+                  icon={
+                    payment_mode === "cash" ? (
+                      <Payments fontSize="small" color="success" />
+                    ) : (
+                      <AccountBalance fontSize="small" color="primary" />
+                    )
                   }
-                >
-                  <EditOutlined />
-                </Button>
-                <Button onClick={() => (id ? showDeleteModal(id) : null)}>
-                  <DeleteOutlineOutlined color="error" />
-                </Button>
-              </ButtonGroup>
+                />
+              </Grid>
             </Grid>
-
-            <Grid
-              size={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                maxWidth: "300px",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell
+            sx={{
+              whiteSpace: "nowrap",
+              maxWidth: "150px",
+            }}
+            title={note}
+          >
+            <Grid display="flex" alignItems="center">
               <Description fontSize="small" color="action" />
               <Typography
                 variant="subtitle2"
@@ -256,46 +295,9 @@ function TransactionRows({ page, rowsPerPage }: Props) {
                 {note}
               </Typography>
             </Grid>
-
-            <Grid
-              sx={{
-                color: type === "income" ? teal[500] : pink[500],
-                whiteSpace: "nowrap",
-                display: "flex",
-                alignItems: "center",
-              }}
-              size={4}
-            >
-              {type === "income" ? (
-                <NorthEast fontSize="small" />
-              ) : (
-                <SouthWest fontSize="small" />
-              )}
-              <Typography variant="button">
-                {formatLocaleCurrency(amount)}
-              </Typography>
-            </Grid>
-
-            <Grid size={4}>
-              <Chip label={categoryMap[category]} variant="filled" />
-            </Grid>
-
-            <Grid size={4}>
-              <Chip
-                label={PAYMENT_MODE_LABEL[payment_mode]}
-                variant="filled"
-                icon={
-                  payment_mode === "cash" ? (
-                    <Payments fontSize="small" color="success" />
-                  ) : (
-                    <AccountBalance fontSize="small" color="primary" />
-                  )
-                }
-              />
-            </Grid>
-          </Grid>
-        </TableCell>
-      </TableRow>
+          </TableCell>
+        </TableRow>
+      </>
     );
   };
 
