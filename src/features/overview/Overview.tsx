@@ -1,11 +1,10 @@
-import { Divider, Grid, Paper, Stack } from "@mui/material";
-
-import styles from "./Overview.module.scss";
+import { Divider, Grid, Paper, Stack, Typography } from "@mui/material";
 import { transactionSummaryCard } from "../../constants/overview";
 import { calculateTransactions } from "../../utils/calculate";
 import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { formatLocaleCurrency } from "../../utils/currency";
+import { pink, teal } from "@mui/material/colors";
 
 function Overview() {
   const [total, setTotal] = useState({
@@ -41,7 +40,20 @@ function Overview() {
         }
         key={type}
       >
-        <Paper className={`${styles.paper} ${styles[type]}`} elevation={4}>
+        <Paper
+          elevation={4}
+          sx={{
+            height: "100px",
+            alignContent: "center",
+            color: type !== "balance" ? "white" : "inherit",
+            backgroundColor:
+              type === "expenses"
+                ? pink[500]
+                : type === "income"
+                ? teal[500]
+                : "inherit",
+          }}
+        >
           <Stack
             direction="column"
             divider={<Divider orientation="horizontal" flexItem />}
@@ -49,12 +61,12 @@ function Overview() {
             justifyContent="center"
             alignItems="center"
           >
-            <div>{displayText}</div>
-            <div className={styles.valueHolder}>
+            <Typography>{displayText}</Typography>
+            <Typography>
               {transactionData.length > 0
                 ? formatLocaleCurrency(total[type])
                 : "--"}
-            </div>
+            </Typography>
           </Stack>
         </Paper>
       </Grid>

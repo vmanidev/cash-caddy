@@ -25,11 +25,11 @@ function Dashboard() {
         </>
       ) : (
         <Grid container size={12}>
-          <Grid container size={8}>
+          <Grid container size={9}>
             <Overview />
             <TransactionTable tableTitle="Recent Transactions" />
           </Grid>
-          <Grid container size={4}></Grid>
+          <Grid container size={3}></Grid>
         </Grid>
       )}
 
