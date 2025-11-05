@@ -1,12 +1,68 @@
-import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Overview from "../features/overview/Overview";
 import TransactionTable from "../features/transaction-management/transactionTable/TransactionTable";
 import AppHeader from "../components/common/Header";
 import AppFooter from "../components/common/Footer";
+import AppPieChart from "../components/charts/AppPieChart";
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { calculateTransactions } from "../utils/calculate";
+import { overviewPieChartData } from "../constants/charts";
+import type { ChartStateProps } from "../models/charts";
 
 function Dashboard() {
+  const [chart, setChart] = useState<ChartStateProps>({
+    pie: { data: overviewPieChartData, pieCenterText: "Overview" },
+  });
+
+  const transactions = useSelector((state: any) => state.transactions);
+
+  const getTotal = useMemo(
+    () => calculateTransactions(transactions),
+    [transactions]
+  );
+
   const theme = useTheme();
   const breakpoint = useMediaQuery(theme.breakpoints.down("lg"));
+
+  useEffect(() => {
+    setChart((prev: ChartStateProps) => {
+      const data = prev.pie.data.map((item) => {
+        item.value =
+          item.label.toLowerCase() === "income"
+            ? getTotal.totalIncome()
+            : item.label.toLowerCase() === "expenses"
+            ? getTotal.totalExpenses()
+            : getTotal.totalBalance();
+        return item;
+      });
+
+      prev.pie = { ...prev.pie, data: data };
+
+      return prev;
+    });
+  }, [transactions]);
+
+  function Charts() {
+    if (transactions.length < 1) return null;
+
+    return (
+      <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
+        <Grid spacing={2} margin={2}>
+          <AppPieChart
+            data={chart.pie.data}
+            pieCenterText={chart.pie.pieCenterText}
+          />
+        </Grid>
+      </Paper>
+    );
+  }
 
   return (
     <Grid container spacing={2} margin={2} size={12}>
@@ -18,9 +74,11 @@ function Dashboard() {
         expenses, budgets, and spending trends through a clean, interactive
         dashboard.
       </Typography>
+
       {breakpoint ? (
         <>
           <Overview />
+          <Charts />
           <TransactionTable tableTitle="Recent Transactions" />
         </>
       ) : (
@@ -29,7 +87,9 @@ function Dashboard() {
             <Overview />
             <TransactionTable tableTitle="Recent Transactions" />
           </Grid>
-          <Grid container size={3}></Grid>
+          <Grid container size={3}>
+            <Charts />
+          </Grid>
         </Grid>
       )}
 
