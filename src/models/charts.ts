@@ -12,4 +12,5 @@ interface PieChart {
 
 export interface ChartStateProps {
     overviewPie: PieChart
+    expensePie: PieChart
 }

@@ -1,6 +1,8 @@
 import {
+  Divider,
   Grid,
   Paper,
+  Stack,
   Typography,
   useMediaQuery,
   useTheme,
@@ -15,10 +17,13 @@ import { useSelector } from "react-redux";
 import { calculateTransactions } from "../utils/calculate";
 import { overviewPieChartData } from "../constants/charts";
 import type { ChartStateProps } from "../models/charts";
+import useTransactionsByCategory from "../hooks/useTransactionsByCategory";
+import { getExpensePieChartData } from "../utils/charts";
 
 function Dashboard() {
   const [chart, setChart] = useState<ChartStateProps>({
     overviewPie: { data: overviewPieChartData, pieCenterText: "Overview" },
+    expensePie: { data: [], pieCenterText: "Expenses" },
   });
 
   const transactions = useSelector((state: any) => state.transactions);
@@ -30,6 +35,8 @@ function Dashboard() {
 
   const theme = useTheme();
   const breakpoint = useMediaQuery(theme.breakpoints.down("lg"));
+
+  const transactionsByExpenseCategory = useTransactionsByCategory("expenses");
 
   useEffect(() => {
     setChart((prev: ChartStateProps) => {
@@ -43,26 +50,16 @@ function Dashboard() {
         return item;
       });
 
+      const expensePieData = getExpensePieChartData(
+        transactionsByExpenseCategory
+      );
+
       prev.overviewPie = { ...prev.overviewPie, data: overviewPieData };
+      prev.expensePie = { ...prev.expensePie, data: expensePieData };
 
       return prev;
     });
-  }, [transactions]);
-
-  function PieCharts() {
-    if (transactions.length < 1) return null;
-
-    return (
-      <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
-        <Grid spacing={2} margin={2}>
-          <AppPieChart
-            data={chart.overviewPie.data}
-            pieCenterText={chart.overviewPie.pieCenterText}
-          />
-        </Grid>
-      </Paper>
-    );
-  }
+  }, [transactions, transactionsByExpenseCategory]);
 
   return (
     <Grid container spacing={2} margin={2} size={12}>
@@ -78,17 +75,57 @@ function Dashboard() {
       {breakpoint ? (
         <>
           <Overview />
-          <PieCharts />
+          <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
+            <Stack
+              direction="column"
+              divider={<Divider orientation="horizontal" />}
+            >
+              <Grid spacing={2} margin={2}>
+                <AppPieChart
+                  data={chart.overviewPie.data}
+                  pieCenterText={chart.overviewPie.pieCenterText}
+                />
+              </Grid>
+              {chart.expensePie.data.length > 0 && (
+                <Grid spacing={2} margin={2}>
+                  <AppPieChart
+                    data={chart.expensePie.data}
+                    pieCenterText={chart.expensePie.pieCenterText}
+                  />
+                </Grid>
+              )}
+            </Stack>
+          </Paper>
           <TransactionTable tableTitle="Recent Transactions" />
         </>
       ) : (
         <Grid container size={12}>
-          <Grid container size={9}>
+          <Grid container size={8}>
             <Overview />
             <TransactionTable tableTitle="Recent Transactions" />
           </Grid>
-          <Grid container size={3}>
-            <PieCharts />
+          <Grid container size={4}>
+            <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
+              <Stack
+                direction="column"
+                divider={<Divider orientation="horizontal" />}
+              >
+                <Grid spacing={2} margin={2}>
+                  <AppPieChart
+                    data={chart.overviewPie.data}
+                    pieCenterText={chart.overviewPie.pieCenterText}
+                  />
+                </Grid>
+                {chart.expensePie.data.length > 0 && (
+                  <Grid spacing={2} margin={2}>
+                    <AppPieChart
+                      data={chart.expensePie.data}
+                      pieCenterText={chart.expensePie.pieCenterText}
+                    />
+                  </Grid>
+                )}
+              </Stack>
+            </Paper>
           </Grid>
         </Grid>
       )}
