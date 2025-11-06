@@ -5,9 +5,11 @@ export interface ChartProps {
     color: string
 }
 
+interface PieChart {
+    data: ChartProps[],
+    pieCenterText: string
+}
+
 export interface ChartStateProps {
-    pie: {
-        data: ChartProps[],
-        pieCenterText: string
-    }
+    overviewPie: PieChart
 }

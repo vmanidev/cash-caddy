@@ -18,7 +18,7 @@ import type { ChartStateProps } from "../models/charts";
 
 function Dashboard() {
   const [chart, setChart] = useState<ChartStateProps>({
-    pie: { data: overviewPieChartData, pieCenterText: "Overview" },
+    overviewPie: { data: overviewPieChartData, pieCenterText: "Overview" },
   });
 
   const transactions = useSelector((state: any) => state.transactions);
@@ -33,7 +33,7 @@ function Dashboard() {
 
   useEffect(() => {
     setChart((prev: ChartStateProps) => {
-      const data = prev.pie.data.map((item) => {
+      const overviewPieData = prev.overviewPie.data.map((item) => {
         item.value =
           item.label.toLowerCase() === "income"
             ? getTotal.totalIncome()
@@ -43,21 +43,21 @@ function Dashboard() {
         return item;
       });
 
-      prev.pie = { ...prev.pie, data: data };
+      prev.overviewPie = { ...prev.overviewPie, data: overviewPieData };
 
       return prev;
     });
   }, [transactions]);
 
-  function Charts() {
+  function PieCharts() {
     if (transactions.length < 1) return null;
 
     return (
       <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
         <Grid spacing={2} margin={2}>
           <AppPieChart
-            data={chart.pie.data}
-            pieCenterText={chart.pie.pieCenterText}
+            data={chart.overviewPie.data}
+            pieCenterText={chart.overviewPie.pieCenterText}
           />
         </Grid>
       </Paper>
@@ -78,7 +78,7 @@ function Dashboard() {
       {breakpoint ? (
         <>
           <Overview />
-          <Charts />
+          <PieCharts />
           <TransactionTable tableTitle="Recent Transactions" />
         </>
       ) : (
@@ -88,7 +88,7 @@ function Dashboard() {
             <TransactionTable tableTitle="Recent Transactions" />
           </Grid>
           <Grid container size={3}>
-            <Charts />
+            <PieCharts />
           </Grid>
         </Grid>
       )}
