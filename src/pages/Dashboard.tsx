@@ -75,36 +75,7 @@ function Dashboard() {
       {breakpoint ? (
         <>
           <Overview />
-          <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
-            <Stack
-              direction="column"
-              divider={<Divider orientation="horizontal" />}
-            >
-              <Grid spacing={2} margin={2}>
-                <AppPieChart
-                  data={chart.overviewPie.data}
-                  pieCenterText={chart.overviewPie.pieCenterText}
-                />
-              </Grid>
-              {chart.expensePie.data.length > 0 && (
-                <Grid spacing={2} margin={2}>
-                  <AppPieChart
-                    data={chart.expensePie.data}
-                    pieCenterText={chart.expensePie.pieCenterText}
-                  />
-                </Grid>
-              )}
-            </Stack>
-          </Paper>
-          <TransactionTable tableTitle="Recent Transactions" />
-        </>
-      ) : (
-        <Grid container size={12}>
-          <Grid container size={8}>
-            <Overview />
-            <TransactionTable tableTitle="Recent Transactions" />
-          </Grid>
-          <Grid container size={4}>
+          {transactions.length > 0 && (
             <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
               <Stack
                 direction="column"
@@ -126,7 +97,40 @@ function Dashboard() {
                 )}
               </Stack>
             </Paper>
+          )}
+          <TransactionTable tableTitle="Recent Transactions" />
+        </>
+      ) : (
+        <Grid container size={12}>
+          <Grid container size={8}>
+            <Overview />
+            <TransactionTable tableTitle="Recent Transactions" />
           </Grid>
+          {transactions.length > 0 && (
+            <Grid container size={4}>
+              <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
+                <Stack
+                  direction="column"
+                  divider={<Divider orientation="horizontal" />}
+                >
+                  <Grid spacing={2} margin={2}>
+                    <AppPieChart
+                      data={chart.overviewPie.data}
+                      pieCenterText={chart.overviewPie.pieCenterText}
+                    />
+                  </Grid>
+                  {chart.expensePie.data.length > 0 && (
+                    <Grid spacing={2} margin={2}>
+                      <AppPieChart
+                        data={chart.expensePie.data}
+                        pieCenterText={chart.expensePie.pieCenterText}
+                      />
+                    </Grid>
+                  )}
+                </Stack>
+              </Paper>
+            </Grid>
+          )}
         </Grid>
       )}
 
