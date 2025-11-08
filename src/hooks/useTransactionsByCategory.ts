@@ -32,7 +32,7 @@ function useTransactionsByCategory(transactionType: TransactionType) {
                     transactionsByCategory.categories[category] = {
                         ...transactionsByCategory.categories[category],
                         totalAmount: [amount],
-                        label: categoryMap[category]
+                        label: categoryMap[category] ?? category
                     }
                 }
                 transactionsByCategory.categories[category]["transactionCount"] = transactionsByCategory.categories[category].totalAmount.length;
@@ -43,7 +43,7 @@ function useTransactionsByCategory(transactionType: TransactionType) {
         Object.entries(transactionsByCategory.categories).forEach(([key, value]) => {
             transactionsByCategory.categories[key].totalAmount = value.totalAmount.reduce((acc: number, curr: string) => acc + parseInt(curr), 0);
         });
-        
+
         return transactionsByCategory;
     }, [transactionType, transactions, categoryMap])
 
