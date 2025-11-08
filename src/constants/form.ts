@@ -1,5 +1,4 @@
-import type { CategoryFormData, FormError, TransactionFormData } from "../models/form"
-import type { Category } from "../store/types"
+import type { CategoryFormData, FormError, TransactionFormData } from "../models/form";
 
 export const initialTransactionData: TransactionFormData = {
     date: "",
@@ -21,23 +20,6 @@ export const initialCategoryData: CategoryFormData = {
 export const initialFormErrorState: FormError = {
     hasError: false,
     errorMessage: ""
-}
-
-export const DEFAULT_CATEGORIES: Category = {
-    income: [
-        { key: "salary", value: "💼 Salary" },
-        { key: "bonus", value: "🎁 Bonus" },
-        { key: "cashback", value: "💳 Cashback" },
-        { key: "interest", value: "🏦 Interest" },
-        { key: "others", value: "💰 Others" }
-    ],
-    expenses: [
-        { key: "food", value: "🍔 Food" },
-        { key: "groceries", value: "🛒 Groceries" },
-        { key: "health", value: "🏥 Health" },
-        { key: "transport", value: "🚗 Transport" },
-        { key: "education", value: "🎓 Education" }
-    ]
 }
 
 export const HELPER_TEXT = {

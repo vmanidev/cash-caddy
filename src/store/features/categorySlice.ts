@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Category, CategoryPayload } from "../types";
-import { DEFAULT_CATEGORIES } from "../../constants/form";
+import { DEFAULT_CATEGORIES } from "../../constants/categories";
 
 const getInitialState = (): Category => {
     try {
