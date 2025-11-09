@@ -11,7 +11,7 @@ import Overview from "../features/overview/Overview";
 import TransactionTable from "../features/transaction-management/transactionTable/TransactionTable";
 import AppHeader from "../components/common/Header";
 import AppFooter from "../components/common/Footer";
-import AppPieChart from "../components/charts/AppPieChart";
+import AppPieChart from "../components/ui/charts/AppPieChart";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { calculateTransactions } from "../utils/calculate";
