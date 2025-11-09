@@ -2,7 +2,7 @@ import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import AppHeader from "../components/common/Header";
 import TransactionTable from "../features/transaction-management/transactionTable/TransactionTable";
 import AppFooter from "../components/common/Footer";
-import TransactionsBarCharts from "../components/common/charts/TransactionsBarChart";
+import TransactionBarChart from "../components/common/charts/TransactionBarChart";
 
 function Transactions() {
   const theme = useTheme();
@@ -22,7 +22,7 @@ function Transactions() {
           <>
             <TransactionTable tableTitle="Transactions" />
             <Grid minHeight="300px" maxHeight="450px">
-              <TransactionsBarCharts />
+              <TransactionBarChart />
             </Grid>
           </>
         ) : (
@@ -31,7 +31,7 @@ function Transactions() {
               <TransactionTable tableTitle="Transactions" />
             </Grid>
             <Grid size={3} maxHeight="450px">
-              <TransactionsBarCharts />
+              <TransactionBarChart />
             </Grid>
           </>
         )}

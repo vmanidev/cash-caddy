@@ -4,7 +4,7 @@ import AppBarChart from "../../ui/charts/AppBarChart";
 import type { TransactionFormData } from "../../../models/form";
 import { useMemo } from "react";
 
-function TransactionsBarCharts() {
+function TransactionBarChart() {
   const transactions = useSelector((state: any) => state.transactions);
 
   const NUM_OF_INCOME_TRANSACTIONS: TransactionFormData[] = useMemo(
@@ -39,4 +39,4 @@ function TransactionsBarCharts() {
   );
 }
 
-export default TransactionsBarCharts;
+export default TransactionBarChart;
