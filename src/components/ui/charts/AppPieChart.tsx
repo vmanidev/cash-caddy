@@ -41,11 +41,9 @@ function AppPieChart({ data, pieCenterText }: Props) {
         series={[
           {
             data: [...chartData],
-            innerRadius: 40,
-            outerRadius: 100,
-            paddingAngle: 2,
+            innerRadius: 45,
+            outerRadius: 95,
             cornerRadius: 5,
-            startAngle: -45,
           },
         ]}
         width={200}
