@@ -103,7 +103,7 @@ function Dashboard() {
         </>
       ) : (
         <Grid container size={12}>
-          <Grid container size={8}>
+          <Grid container size={8} alignContent="flex-start">
             <Overview />
             <TransactionTable tableTitle="Recent Transactions" />
           </Grid>
