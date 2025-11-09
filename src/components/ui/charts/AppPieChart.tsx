@@ -1,7 +1,7 @@
 import { Box, styled, type Theme } from "@mui/material";
 import { PieChart, useDrawingArea } from "@mui/x-charts";
 import { useEffect, useState, type ReactElement, type ReactNode } from "react";
-import type { ChartProps } from "../../../models/charts";
+import type { PieChartProps } from "../../../models/charts";
 
 const StyledText = styled("text")(({ theme }: { theme: Theme }) => ({
   fill: theme.palette.text.primary,
@@ -24,12 +24,12 @@ function PieCenterLabel({ children }: PieCenterLabelProps): ReactElement {
 }
 
 interface Props {
-  data: ChartProps[];
+  data: PieChartProps[];
   pieCenterText: string;
 }
 
 function AppPieChart({ data, pieCenterText }: Props) {
-  const [chartData, setChartData] = useState<ChartProps[]>([]);
+  const [chartData, setChartData] = useState<PieChartProps[]>([]);
 
   useEffect(() => {
     setChartData(data);

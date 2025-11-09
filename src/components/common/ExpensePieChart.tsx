@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { type ChartProps } from "../../models/charts";
+import { type PieChartProps } from "../../models/charts";
 import AppPieChart from "../ui/charts/AppPieChart";
 import useTransactionsByCategory from "../../hooks/useTransactionsByCategory";
 import { getExpensePieChartData } from "../../utils/charts";
 
 function ExpensePieChart() {
-  const [chartData, setChartData] = useState<ChartProps[]>([]);
+  const [chartData, setChartData] = useState<PieChartProps[]>([]);
   const transactionsByExpenseCategory = useTransactionsByCategory("expenses");
 
   useEffect(() => {

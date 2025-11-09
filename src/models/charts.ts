@@ -1,4 +1,4 @@
-export interface ChartProps {
+export interface PieChartProps {
     id: number,
     value: number,
     label: string,
@@ -6,7 +6,7 @@ export interface ChartProps {
 }
 
 interface PieChart {
-    data: ChartProps[],
+    data: PieChartProps[],
     pieCenterText: string
 }
 
