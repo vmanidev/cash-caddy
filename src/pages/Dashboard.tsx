@@ -18,7 +18,7 @@ import { calculateTransactions } from "../utils/calculate";
 import { overviewPieChartData } from "../constants/charts";
 import type { ChartStateProps } from "../models/charts";
 import useTransactionsByCategory from "../hooks/useTransactionsByCategory";
-import ExpensePieChart from "../components/common/ExpensePieChart";
+import ExpensePieChart from "../components/common/charts/ExpensePieChart";
 
 function Dashboard() {
   const [chart, setChart] = useState<ChartStateProps>({
