@@ -21,7 +21,7 @@ function Transactions() {
         {breakpoint ? (
           <>
             <TransactionTable tableTitle="Transactions" />
-            <Grid minHeight="300px">
+            <Grid minHeight="300px" maxHeight="450px">
               <TransactionsBarCharts />
             </Grid>
           </>
@@ -30,7 +30,7 @@ function Transactions() {
             <Grid size={9}>
               <TransactionTable tableTitle="Transactions" />
             </Grid>
-            <Grid size={3}>
+            <Grid size={3} maxHeight="450px">
               <TransactionsBarCharts />
             </Grid>
           </>
