@@ -30,6 +30,13 @@ function TransactionBarChart() {
 
   const yAxisData = [{ width: 100 }];
 
+  if (
+    NUM_OF_INCOME_TRANSACTIONS.length < 1 &&
+    NUM_OF_EXPENSE_TRANSACTIONS.length < 1
+  ) {
+    return null;
+  }
+
   return (
     <AppBarChart
       chartData={chartData}
