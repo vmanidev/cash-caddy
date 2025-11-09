@@ -1,10 +1,9 @@
 import { FormGroup, styled, Switch } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { darkMode } from "../../../store/features/themeSlice";
-import { useState } from "react";
 
 function ThemeToggle() {
-  const [darkModeEnabled, setDarkModeEnabled] = useState(false);
+  const darkModeEnabled = useSelector((state: any) => state.theme);
   const dispatch = useDispatch();
 
   const Toggle = styled(Switch)(({ theme }) => ({
@@ -63,17 +62,12 @@ function ThemeToggle() {
     },
   }));
 
-  const darkModeOnOff = () => {
-    setDarkModeEnabled(!darkModeEnabled);
-    dispatch(darkMode(!darkModeEnabled));
-  };
-
   return (
     <FormGroup>
       <Toggle
         sx={{ m: 1 }}
         checked={darkModeEnabled}
-        onChange={darkModeOnOff}
+        onChange={() => dispatch(darkMode(!darkModeEnabled))}
       />
     </FormGroup>
   );
