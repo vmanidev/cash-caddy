@@ -208,8 +208,8 @@ function TransactionRows({ page, rowsPerPage }: Props) {
     return (
       <>
         <TableRow sx={{ border: "none" }}>
-          <TableCell sx={{ border: "none" }}>
-            <Grid container size={12} spacing={3}>
+          <TableCell sx={{ border: "none", paddingBottom: 0 }}>
+            <Grid container size={12} columnSpacing={3} rowSpacing={2}>
               <Grid
                 size={8}
                 display="flex"
