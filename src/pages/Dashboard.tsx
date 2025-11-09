@@ -18,12 +18,10 @@ import { calculateTransactions } from "../utils/calculate";
 import { overviewPieChartData } from "../constants/charts";
 import type { ChartStateProps } from "../models/charts";
 import useTransactionsByCategory from "../hooks/useTransactionsByCategory";
-import { getExpensePieChartData } from "../utils/charts";
 
 function Dashboard() {
   const [chart, setChart] = useState<ChartStateProps>({
     overviewPie: { data: overviewPieChartData, pieCenterText: "Overview" },
-    expensePie: { data: [], pieCenterText: "Expenses" },
   });
 
   const transactions = useSelector((state: any) => state.transactions);
@@ -49,13 +47,7 @@ function Dashboard() {
             : getTotal.totalBalance();
         return item;
       });
-
-      const expensePieData = getExpensePieChartData(
-        transactionsByExpenseCategory
-      );
-
       prev.overviewPie = { ...prev.overviewPie, data: overviewPieData };
-      prev.expensePie = { ...prev.expensePie, data: expensePieData };
 
       return prev;
     });
@@ -87,14 +79,6 @@ function Dashboard() {
                     pieCenterText={chart.overviewPie.pieCenterText}
                   />
                 </Grid>
-                {chart.expensePie.data.length > 0 && (
-                  <Grid spacing={2} margin={2}>
-                    <AppPieChart
-                      data={chart.expensePie.data}
-                      pieCenterText={chart.expensePie.pieCenterText}
-                    />
-                  </Grid>
-                )}
               </Stack>
             </Paper>
           )}
@@ -119,14 +103,6 @@ function Dashboard() {
                       pieCenterText={chart.overviewPie.pieCenterText}
                     />
                   </Grid>
-                  {chart.expensePie.data.length > 0 && (
-                    <Grid spacing={2} margin={2}>
-                      <AppPieChart
-                        data={chart.expensePie.data}
-                        pieCenterText={chart.expensePie.pieCenterText}
-                      />
-                    </Grid>
-                  )}
                 </Stack>
               </Paper>
             </Grid>
