@@ -88,12 +88,18 @@ function Categories() {
 
   const Categories = (type: "income" | "expenses") => {
     return (
-      <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
+      <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
         <Typography variant="h6">
           {type === "income" ? "Income" : "Expense"} Categories
         </Typography>
         <Paper elevation={4}>
-          <List sx={{ maxHeight: "300px", overflow: "scroll" }}>
+          <List
+            sx={{
+              height: "260px",
+              overflow: "scroll",
+              scrollbarGutter: "stable",
+            }}
+          >
             {categories[type].map((item: IncomeExpensesItem, index: number) => {
               return (
                 <Fragment key={item.key}>
