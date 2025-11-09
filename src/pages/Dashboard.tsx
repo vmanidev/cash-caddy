@@ -18,6 +18,7 @@ import { calculateTransactions } from "../utils/calculate";
 import { overviewPieChartData } from "../constants/charts";
 import type { ChartStateProps } from "../models/charts";
 import useTransactionsByCategory from "../hooks/useTransactionsByCategory";
+import ExpensePieChart from "../components/common/ExpensePieChart";
 
 function Dashboard() {
   const [chart, setChart] = useState<ChartStateProps>({
@@ -68,16 +69,32 @@ function Dashboard() {
         <>
           <Overview />
           {transactions.length > 0 && (
-            <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
+            <Paper
+              elevation={4}
+              sx={{ width: "100%", height: "100%", maxHeight: "513px" }}
+            >
               <Stack
                 direction="column"
                 divider={<Divider orientation="horizontal" />}
               >
-                <Grid spacing={2} margin={2}>
+                <Grid
+                  spacing={2}
+                  margin={2}
+                  maxHeight="200px"
+                  overflow="scroll"
+                >
                   <AppPieChart
                     data={chart.overviewPie.data}
                     pieCenterText={chart.overviewPie.pieCenterText}
                   />
+                </Grid>
+                <Grid
+                  spacing={2}
+                  margin={2}
+                  maxHeight="260px"
+                  overflow="scroll"
+                >
+                  <ExpensePieChart />
                 </Grid>
               </Stack>
             </Paper>
@@ -92,16 +109,32 @@ function Dashboard() {
           </Grid>
           {transactions.length > 0 && (
             <Grid container size={4}>
-              <Paper elevation={4} sx={{ width: "100%", height: "100%" }}>
+              <Paper
+                elevation={4}
+                sx={{ width: "100%", height: "100%", maxHeight: "513px" }}
+              >
                 <Stack
                   direction="column"
                   divider={<Divider orientation="horizontal" />}
                 >
-                  <Grid spacing={2} margin={2}>
+                  <Grid
+                    spacing={2}
+                    margin={2}
+                    maxHeight="200px"
+                    overflow="scroll"
+                  >
                     <AppPieChart
                       data={chart.overviewPie.data}
                       pieCenterText={chart.overviewPie.pieCenterText}
                     />
+                  </Grid>
+                  <Grid
+                    spacing={2}
+                    margin={2}
+                    maxHeight="260px"
+                    overflow="scroll"
+                  >
+                    <ExpensePieChart />
                   </Grid>
                 </Stack>
               </Paper>
