@@ -2,6 +2,7 @@ import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import AppHeader from "../components/common/Header";
 import TransactionTable from "../features/transaction-management/transactionTable/TransactionTable";
 import AppFooter from "../components/common/Footer";
+import TransactionsBarCharts from "../components/common/charts/TransactionsBarChart";
 
 function Transactions() {
   const theme = useTheme();
@@ -16,17 +17,22 @@ function Transactions() {
         Add new transactions, quickly edit existing ones, or manage past records
         to keep your data accurate and organized.
       </Typography>
-      <Grid size={12}>
+      <Grid container size={12}>
         {breakpoint ? (
           <>
             <TransactionTable tableTitle="Transactions" />
+            <Grid minHeight="300px">
+              <TransactionsBarCharts />
+            </Grid>
           </>
         ) : (
           <>
-            <Grid size={8}>
+            <Grid size={9}>
               <TransactionTable tableTitle="Transactions" />
             </Grid>
-            <Grid size={4}></Grid>
+            <Grid size={3}>
+              <TransactionsBarCharts />
+            </Grid>
           </>
         )}
       </Grid>
