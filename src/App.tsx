@@ -14,8 +14,8 @@ function App() {
   useLocalStorageSync({ categories });
 
   // Theme toggle
-  const darkMode = useSelector((store: any) => store.theme);
-  const theme = darkMode ? darkTheme : lightTheme;
+  const mode = useSelector((store: any) => store.theme);
+  const theme = mode.darkMode ? darkTheme : lightTheme;
 
   return (
     <ThemeProvider theme={theme}>

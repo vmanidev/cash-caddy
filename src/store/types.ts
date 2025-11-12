@@ -22,7 +22,3 @@ export interface CategoryPayload {
     type: "income" | "expenses",
     name: IncomeExpensesItem
 }
-
-export interface Mode {
-    darkMode: boolean
-}
