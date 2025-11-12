@@ -1,8 +1,11 @@
 import {
+  Box,
   Button,
+  Divider,
   FormControl,
   FormHelperText,
   Grid,
+  IconButton,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -13,11 +16,15 @@ import {
 import AppHeader from "../components/common/Header";
 import AppFooter from "../components/common/Footer";
 import type { IncomeExpensesItem } from "../store/types";
-import { useSelector } from "react-redux";
-import { CurrencyRupee } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { CurrencyRupee, DarkMode, LightMode } from "@mui/icons-material";
+import { savePreferredMode } from "../store/features/themeSlice";
 
 function Settings() {
   const categories = useSelector((state: any) => state.categories);
+  const mode = useSelector((state: any) => state.theme);
+
+  const dispatch = useDispatch();
 
   return (
     <Grid container spacing={2} margin={2} size={12}>
@@ -28,7 +35,44 @@ function Settings() {
         Personalize the app to fit your needs — adjust preferences, manage data
         options, and explore customization features.
       </Typography>
-      <Grid size={12} container>
+      <Grid container size={12} alignItems="center">
+        <Typography variant="h6">Set preferred mode</Typography>
+        <Box
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            border: "1px solid",
+            borderColor: "divider",
+            borderRadius: 2,
+            bgcolor: "background.paper",
+            color: "text.secondary",
+            "& svg": {
+              m: 1,
+            },
+          }}
+        >
+          <IconButton
+            onClick={() =>
+              dispatch(savePreferredMode({ enableDarkmode: false }))
+            }
+          >
+            <LightMode
+              color={mode.preferredMode === "light" ? "warning" : "inherit"}
+            />
+          </IconButton>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <IconButton
+            onClick={() =>
+              dispatch(savePreferredMode({ enableDarkmode: true }))
+            }
+          >
+            <DarkMode
+              color={mode.preferredMode === "dark" ? "primary" : "inherit"}
+            />
+          </IconButton>
+        </Box>
+      </Grid>
+      <Grid size={10} container>
         <Typography variant="h6">Budget Settings</Typography>
         <Grid size={12} container>
           <Grid
