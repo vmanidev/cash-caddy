@@ -22,3 +22,8 @@ export interface CategoryPayload {
     type: "income" | "expenses",
     name: IncomeExpensesItem
 }
+
+export interface BudgetPayload {
+    category: string,
+    limit: number
+}
