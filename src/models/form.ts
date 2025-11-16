@@ -16,6 +16,11 @@ export interface CategoryFormData {
     }
 }
 
+export interface BudgetFormData {
+    category: string,
+    limit: string
+}
+
 export interface FormError {
     hasError: boolean,
     errorMessage: string
