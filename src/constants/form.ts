@@ -1,4 +1,4 @@
-import type { CategoryFormData, FormError, TransactionFormData } from "../models/form";
+import type { BudgetFormData, CategoryFormData, FormError, TransactionFormData } from "../models/form";
 
 export const initialTransactionData: TransactionFormData = {
     date: "",
@@ -15,6 +15,11 @@ export const initialCategoryData: CategoryFormData = {
         key: "",
         value: ""
     }
+}
+
+export const initialBudgetData: BudgetFormData = {
+    category: "",
+    limit: ""
 }
 
 export const initialFormErrorState: FormError = {
