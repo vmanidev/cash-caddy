@@ -12,9 +12,20 @@ import {
 import { CurrencyRupee } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import type { IncomeExpensesItem } from "../../../store/types";
+import type { BudgetFormData } from "../../../models/form";
 
-function BudgetForm() {
+interface Props {
+  formData: BudgetFormData;
+  setFormData: (props: any) => void;
+}
+
+function BudgetForm({ formData, setFormData }: Props) {
   const categories = useSelector((state: any) => state.categories);
+
+  const onFormChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormData((prev: any) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <Grid
@@ -26,7 +37,12 @@ function BudgetForm() {
       <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6, xl: 6 }}>
         <FormControl fullWidth>
           <InputLabel>Category</InputLabel>
-          <Select label="Category" name="category">
+          <Select
+            label="Category"
+            name="category"
+            value={formData.category}
+            onChange={onFormChange}
+          >
             <MenuItem key="addNewCategory" value="addNewCategory">
               <Button sx={{ padding: 0 }} variant="text">
                 Add new Category
@@ -46,7 +62,7 @@ function BudgetForm() {
           fullWidth
           variant="outlined"
           label="Budget Limit"
-          name="budgetLimit"
+          name="limit"
           helperText="Set your budget limit."
           slotProps={{
             input: {
@@ -57,6 +73,8 @@ function BudgetForm() {
               ),
             },
           }}
+          value={formData.limit}
+          onChange={onFormChange}
         />
       </Grid>
     </Grid>

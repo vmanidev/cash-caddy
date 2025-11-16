@@ -121,7 +121,9 @@ function Settings() {
       </Typography>
 
       <Grid size={12}>
-        {createBudgetModal && <CreateBudget />}
+        {createBudgetModal && (
+          <CreateBudget setCreateBudgetModal={setCreateBudgetModal} />
+        )}
         <List>
           <ModeSettings />
           <Divider component="li" />
