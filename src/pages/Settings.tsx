@@ -43,7 +43,7 @@ function Settings() {
         <Grid size={12} container>
           <Grid size={{ xs: 12, sm: 10, md: 10, lg: 10, xl: 10 }}>
             <ListItemText
-              primary="Set preferred mode"
+              primary="Theme Settings"
               secondary="Save your theme preferrence"
             />
           </Grid>
