@@ -50,12 +50,8 @@ function BudgetList() {
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ fontWeight: "bold" }}>Category</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>
-                    Budget Limit
-                  </TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>
-                    Modify/Delete
-                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Limit</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
