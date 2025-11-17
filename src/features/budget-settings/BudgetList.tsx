@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { BudgetPayload } from "../../store/types";
 import useCategoryMap from "../../hooks/useCategoryMap";
 import { useEffect, useState } from "react";
@@ -18,11 +18,13 @@ import {
 import { DeleteOutlineOutlined, EditOutlined } from "@mui/icons-material";
 import { formatLocaleCurrency } from "../../utils/currency";
 import BudgetPieChart from "../../components/common/charts/BudgetPieChart";
+import { deleteBudget } from "../../store/features/budgetSlice";
 
 function BudgetList() {
   const [list, setList] = useState<BudgetPayload[]>([]);
   const budgets = useSelector((store: any) => store.budgets);
   const categoryMap = useCategoryMap();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const list: any[] = Object.entries(budgets).map(([key, value]) => ({
@@ -65,7 +67,7 @@ function BudgetList() {
                           <Button>
                             <EditOutlined />
                           </Button>
-                          <Button>
+                          <Button onClick={() => dispatch(deleteBudget(item))}>
                             <DeleteOutlineOutlined color="error" />
                           </Button>
                         </ButtonGroup>
