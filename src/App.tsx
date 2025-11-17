@@ -9,9 +9,11 @@ function App() {
   //Sync transactions in localStorage
   const transactions = useSelector((store: any) => store.transactions);
   const categories = useSelector((store: any) => store.categories);
+  const budgets = useSelector((store: any) => store.budgets);
 
   useLocalStorageSync({ transactions });
   useLocalStorageSync({ categories });
+  useLocalStorageSync({ budgets });
 
   // Theme toggle
   const mode = useSelector((store: any) => store.theme);

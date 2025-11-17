@@ -1,11 +1,19 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { BudgetPayload } from "../types";
 
-const initialState: Record<string, number> = {};
+const getInitialState = (): Record<string, number> => {
+    try {
+        const localData = localStorage.getItem("budgets");
+        return localData ? JSON.parse(localData) : {}
+    }
+    catch {
+        return {};
+    }
+};
 
 const budgetSlice = createSlice({
     name: "budgets",
-    initialState: initialState,
+    initialState: getInitialState,
     reducers: {
         updateBudget: (state, action: PayloadAction<BudgetPayload>) => {
             state[action.payload.category] = action.payload.limit;
