@@ -2,7 +2,7 @@ export interface PieChartProps {
     id: number,
     value: number,
     label: string,
-    color: string
+    color?: string
 }
 
 export interface BarChartProps {
