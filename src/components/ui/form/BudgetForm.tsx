@@ -1,5 +1,4 @@
 import {
-  Button,
   FormControl,
   FormHelperText,
   Grid,
@@ -43,11 +42,6 @@ function BudgetForm({ formData, setFormData }: Props) {
             value={formData.category}
             onChange={onFormChange}
           >
-            <MenuItem key="addNewCategory" value="addNewCategory">
-              <Button sx={{ padding: 0 }} variant="text">
-                Add new Category
-              </Button>
-            </MenuItem>
             {categories.expenses.map((item: IncomeExpensesItem) => (
               <MenuItem key={item.key} value={item.key}>
                 {item.value}
