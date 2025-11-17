@@ -31,7 +31,11 @@ function UpdateBudget({ updateBudget, setUpdateBudget }: Props) {
 
   const onSubmit = () => {
     dispatch(modifyBudget({ ...formData, limit: parseInt(formData.limit) }));
-    setUpdateBudget({ formData, editMode: false, showModal: false });
+    setUpdateBudget({
+      formData: initialBudgetData,
+      editMode: false,
+      showModal: false,
+    });
   };
 
   return (
