@@ -4,12 +4,12 @@ import useCategoryMap from "../../../hooks/useCategoryMap";
 import AppPieChart from "../../ui/charts/AppPieChart";
 
 function BudgetPieChart() {
-  const budget: Record<string, number> = useSelector(
-    (store: any) => store.budget
+  const budgets: Record<string, number> = useSelector(
+    (store: any) => store.budgets
   );
   const categoryMap = useCategoryMap();
 
-  const chartData: PieChartProps[] = Object.entries(budget).map(
+  const chartData: PieChartProps[] = Object.entries(budgets).map(
     ([key, value], index) => ({
       id: index,
       label: categoryMap[key],
@@ -17,7 +17,7 @@ function BudgetPieChart() {
     })
   );
 
-  if (Object.keys(budget).length < 1) return null;
+  if (Object.keys(budgets).length < 1) return null;
 
   return <AppPieChart data={chartData} pieCenterText="Budgets" />;
 }

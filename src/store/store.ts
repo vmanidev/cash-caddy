@@ -9,7 +9,7 @@ const store = configureStore({
         transactions: transactionsReducer,
         categories: categoriesReducer,
         theme: themeReducer,
-        budget: budgetReducer
+        budgets: budgetReducer
     }
 });
 

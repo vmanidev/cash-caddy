@@ -21,16 +21,16 @@ import BudgetPieChart from "../../components/common/charts/BudgetPieChart";
 
 function BudgetList() {
   const [list, setList] = useState<BudgetPayload[]>([]);
-  const budget = useSelector((store: any) => store.budget);
+  const budgets = useSelector((store: any) => store.budgets);
   const categoryMap = useCategoryMap();
 
   useEffect(() => {
-    const list: any[] = Object.entries(budget).map(([key, value]) => ({
+    const list: any[] = Object.entries(budgets).map(([key, value]) => ({
       category: key,
       limit: value,
     }));
     setList(list);
-  }, [budget]);
+  }, [budgets]);
 
   if (list.length < 1) return null;
 

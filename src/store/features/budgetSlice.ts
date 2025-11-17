@@ -4,7 +4,7 @@ import type { BudgetPayload } from "../types";
 const initialState: Record<string, number> = {};
 
 const budgetSlice = createSlice({
-    name: "budget",
+    name: "budgets",
     initialState: initialState,
     reducers: {
         updateBudget: (state, action: PayloadAction<BudgetPayload>) => {
