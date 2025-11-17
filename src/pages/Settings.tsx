@@ -23,6 +23,7 @@ import {
 import { savePreferredMode } from "../store/features/themeSlice";
 import { useState } from "react";
 import CreateBudget from "../features/budget-settings/CreateBudget";
+import BudgetList from "../features/budget-settings/BudgetList";
 
 function Settings() {
   const mode = useSelector((state: any) => state.theme);
@@ -41,13 +42,13 @@ function Settings() {
         </ListItemAvatar>
 
         <Grid size={12} container>
-          <Grid size={{ xs: 12, sm: 10, md: 10, lg: 10, xl: 10 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 8, lg: 10, xl: 10 }}>
             <ListItemText
               primary="Theme Settings"
               secondary="Save your theme preferrence"
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 2, md: 2, lg: 2, xl: 2 }}>
+          <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
             <Stack
               direction="row"
               divider={<Divider orientation="vertical" flexItem />}
@@ -88,21 +89,16 @@ function Settings() {
         </ListItemAvatar>
 
         <Grid size={12} container>
-          <Grid size={{ xs: 12, sm: 10, md: 10, lg: 10, xl: 10 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 8, lg: 10, xl: 10 }}>
             <ListItemText
               primary="Budget Settings"
               secondary="Create new or modify your existing budgets."
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 2, md: 2, lg: 2, xl: 2 }}>
-            <Stack
-              direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
-              spacing={2}
-            >
-              <Button onClick={() => setCreateBudgetModal(true)}>Create</Button>
-              <Button onClick={() => setCreateBudgetModal(true)}>Modify</Button>
-            </Stack>
+          <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
+            <Button variant="text" onClick={() => setCreateBudgetModal(true)}>
+              Create Budget
+            </Button>
           </Grid>
         </Grid>
       </ListItem>
@@ -128,6 +124,8 @@ function Settings() {
           <ModeSettings />
           <Divider component="li" />
           <BudgetSettings />
+          <BudgetList />
+          <Divider component="li" />
         </List>
       </Grid>
 
