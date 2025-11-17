@@ -22,15 +22,21 @@ import {
 } from "@mui/icons-material";
 import { savePreferredMode } from "../store/features/themeSlice";
 import { useState } from "react";
-import CreateBudget from "../features/budget-settings/CreateBudget";
+import UpdateBudget from "../features/budget-settings/UpdateBudget";
 import BudgetList from "../features/budget-settings/BudgetList";
+import { initialBudgetData } from "../constants/form";
+import type { UpdateBudgetStateProps } from "../models/budgets";
 
 function Settings() {
   const mode = useSelector((state: any) => state.theme);
 
   const dispatch = useDispatch();
 
-  const [createBudgetModal, setCreateBudgetModal] = useState(false);
+  const [updateBudget, setUpdateBudget] = useState<UpdateBudgetStateProps>({
+    formData: initialBudgetData,
+    editMode: false,
+    showModal: false,
+  });
 
   const ModeSettings = () => {
     return (
@@ -96,7 +102,12 @@ function Settings() {
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
-            <Button variant="text" onClick={() => setCreateBudgetModal(true)}>
+            <Button
+              variant="text"
+              onClick={() =>
+                setUpdateBudget((prev) => ({ ...prev, showModal: true }))
+              }
+            >
               Create Budget
             </Button>
           </Grid>
@@ -117,8 +128,11 @@ function Settings() {
       </Typography>
 
       <Grid size={12}>
-        {createBudgetModal && (
-          <CreateBudget setCreateBudgetModal={setCreateBudgetModal} />
+        {updateBudget.showModal && (
+          <UpdateBudget
+            updateBudget={updateBudget}
+            setUpdateBudget={setUpdateBudget}
+          />
         )}
         <List>
           <ModeSettings />

@@ -15,7 +15,7 @@ const budgetSlice = createSlice({
     name: "budgets",
     initialState: getInitialState,
     reducers: {
-        updateBudget: (state, action: PayloadAction<BudgetPayload>) => {
+        modifyBudget: (state, action: PayloadAction<BudgetPayload>) => {
             state[action.payload.category] = action.payload.limit;
         },
         deleteBudget: (state, action: PayloadAction<BudgetPayload>) => {
@@ -24,6 +24,6 @@ const budgetSlice = createSlice({
     }
 });
 
-export const { updateBudget, deleteBudget } = budgetSlice.actions;
+export const { modifyBudget, deleteBudget } = budgetSlice.actions;
 
 export default budgetSlice.reducer;
