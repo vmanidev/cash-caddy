@@ -1,8 +1,16 @@
 import { Backdrop, Button, Grid, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { onboardUser } from "../store/features/userSlice";
 
 function Welcome() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const onboardNewUser = () => {
+    dispatch(onboardUser(true));
+    navigate("/dashboard", { state: "app.dashboard" });
+  };
 
   return (
     <Backdrop
@@ -29,7 +37,7 @@ function Welcome() {
           </Typography>
         </Grid>
         <Grid size={12}>
-          <Button variant="outlined" onClick={() => navigate("/dashboard")}>
+          <Button variant="outlined" onClick={onboardNewUser}>
             Let's Begin
           </Button>
         </Grid>
