@@ -77,6 +77,13 @@ function About() {
             <ListItemIcon>
               <CheckCircle color="success" />
             </ListItemIcon>
+            <ListItemText>Light and dark theme support</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <CheckCircle color="success" />
+            </ListItemIcon>
             <ListItemText>
               PWA (Progressive Web App) support for offline access and app-like
               experience
