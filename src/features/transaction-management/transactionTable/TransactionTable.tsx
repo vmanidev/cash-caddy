@@ -120,15 +120,16 @@ function TransactionTable({ tableTitle }: Props) {
                 >
                   <Add fontSize="small" /> Add new transaction
                 </Button>
-                {location.state !== "app.transactions" && (
-                  <Button
-                    size="small"
-                    variant="text"
-                    onClick={viewAllTransactions}
-                  >
-                    View All
-                  </Button>
-                )}
+                {location.state !== "app.transactions" &&
+                  transactionData.length > 5 && (
+                    <Button
+                      size="small"
+                      variant="text"
+                      onClick={viewAllTransactions}
+                    >
+                      View All
+                    </Button>
+                  )}
               </Stack>
             </Grid>
           </Grid>
