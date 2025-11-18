@@ -27,3 +27,7 @@ export interface BudgetPayload {
     category: string,
     limit: number
 }
+
+export interface UserPayload {
+    newUser: boolean
+}
