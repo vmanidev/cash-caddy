@@ -85,13 +85,15 @@ function BudgetList() {
                         <Typography
                           variant="subtitle2"
                           color={
-                            budgetUsage[item.category] < item.limit
-                              ? teal[500]
-                              : pink[500]
+                            budgetUsage[item.category] > item.limit
+                              ? pink[500]
+                              : teal[500]
                           }
                         >
                           Spent:{" "}
-                          {formatLocaleCurrency(budgetUsage[item.category])}
+                          {budgetUsage[item.category]
+                            ? formatLocaleCurrency(budgetUsage[item.category])
+                            : 0}
                         </Typography>
                         <Typography variant="subtitle2">
                           Limit: {formatLocaleCurrency(item.limit)}
