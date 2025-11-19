@@ -12,8 +12,8 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { DeleteOutlineOutlined, EditOutlined } from "@mui/icons-material";
 import { formatLocaleCurrency } from "../../utils/currency";
@@ -22,6 +22,8 @@ import { deleteBudget } from "../../store/features/budgetSlice";
 import type { UpdateBudgetStateProps } from "../../models/budgets";
 import { initialBudgetData } from "../../constants/form";
 import UpdateBudget from "./UpdateBudget";
+import useBudgetUsage from "../../hooks/useBudgetUsage";
+import { pink, teal } from "@mui/material/colors";
 
 function BudgetList() {
   const [list, setList] = useState<BudgetPayload[]>([]);
@@ -33,6 +35,7 @@ function BudgetList() {
 
   const budgets = useSelector((store: any) => store.budgets);
   const categoryMap = useCategoryMap();
+  const budgetUsage = useBudgetUsage();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,21 +73,30 @@ function BudgetList() {
               overflow: "scroll",
               scrollbarGutter: "stable",
             }}
+            elevation={4}
           >
-            <Table stickyHeader>
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: "bold" }}>Category</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Limit</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Actions</TableCell>
-                </TableRow>
-              </TableHead>
+            <Table>
               <TableBody>
                 {list.map((item: BudgetPayload) => {
                   return (
                     <TableRow key={item.category}>
                       <TableCell>{categoryMap[item.category]}</TableCell>
-                      <TableCell>{formatLocaleCurrency(item.limit)}</TableCell>
+                      <TableCell>
+                        <Typography
+                          variant="subtitle2"
+                          color={
+                            budgetUsage[item.category] < item.limit
+                              ? teal[500]
+                              : pink[500]
+                          }
+                        >
+                          Spent:{" "}
+                          {formatLocaleCurrency(budgetUsage[item.category])}
+                        </Typography>
+                        <Typography variant="subtitle2">
+                          Limit: {formatLocaleCurrency(item.limit)}
+                        </Typography>
+                      </TableCell>
                       <TableCell>
                         <ButtonGroup variant="text">
                           <Button onClick={() => editBudget(item)}>
@@ -103,7 +115,9 @@ function BudgetList() {
           </TableContainer>
         </Grid>
         <Grid size={{ xs: 12, sm: 12, md: 12, lg: 6, xl: 6 }}>
-          <BudgetPieChart />
+          <Paper elevation={4} sx={{ height: "100%", alignContent: "center" }}>
+            <BudgetPieChart />
+          </Paper>
         </Grid>
       </Grid>
     </ListItem>
