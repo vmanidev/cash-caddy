@@ -16,9 +16,11 @@ import AppFooter from "../components/common/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AccountBalanceWallet,
+  Backup,
   Contrast,
   DarkMode,
   LightMode,
+  Upload,
 } from "@mui/icons-material";
 import { savePreferredMode } from "../store/features/themeSlice";
 import { useState } from "react";
@@ -38,6 +40,30 @@ function Settings() {
     showModal: false,
   });
 
+  const DataAndBackup = () => {
+    return (
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar>
+            <Backup />
+          </Avatar>
+        </ListItemAvatar>
+
+        <Grid size={12} container>
+          <Grid size={{ xs: 12, sm: 8, md: 8, lg: 10, xl: 10 }}>
+            <ListItemText
+              primary="Data & Backup"
+              secondary="Download your transaction data."
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
+            <Button startIcon={<Upload />}>Export CSV</Button>
+          </Grid>
+        </Grid>
+      </ListItem>
+    );
+  };
+
   const ModeSettings = () => {
     return (
       <ListItem alignItems="flex-start">
@@ -51,7 +77,7 @@ function Settings() {
           <Grid size={{ xs: 12, sm: 8, md: 8, lg: 10, xl: 10 }}>
             <ListItemText
               primary="Theme Settings"
-              secondary="Save your theme preferrence"
+              secondary="Save your theme preferrence."
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
@@ -135,6 +161,8 @@ function Settings() {
           />
         )}
         <List>
+          <DataAndBackup />
+          <Divider component="li" />
           <ModeSettings />
           <Divider component="li" />
           <BudgetSettings />
