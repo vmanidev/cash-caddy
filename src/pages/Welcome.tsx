@@ -22,7 +22,7 @@ function Welcome() {
         </Typography>
       </Grid>
       <Grid size={12}>
-        <Typography variant="body1" lineHeight={2}>
+        <Typography variant="body1" lineHeight={2} padding={2}>
           A personal finance app for tracking expenses, setting budgets, and
           achieving financial goals.
         </Typography>
