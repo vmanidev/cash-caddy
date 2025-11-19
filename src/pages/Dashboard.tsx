@@ -70,7 +70,7 @@ function Dashboard() {
       .map((key) => {
         if (budgets[key] < budgetUsage[key]) return categoryMap[key];
       })
-      .filter((name) => name !== "");
+      .filter((name) => name !== undefined);
 
     if (overSpentBudgets.length < 1) return null;
 
