@@ -28,9 +28,11 @@ import UpdateBudget from "../features/budget-settings/UpdateBudget";
 import BudgetList from "../features/budget-settings/BudgetList";
 import { initialBudgetData } from "../constants/form";
 import type { UpdateBudgetStateProps } from "../models/budgets";
+import { exportAsCSV } from "../utils/exportData";
 
 function Settings() {
-  const mode = useSelector((state: any) => state.theme);
+  const mode = useSelector((store: any) => store.theme);
+  const transactions = useSelector((store: any) => store.transactions);
 
   const dispatch = useDispatch();
 
@@ -39,6 +41,11 @@ function Settings() {
     editMode: false,
     showModal: false,
   });
+
+  const exportTransactionData = () => {
+    const headers = Object.keys(transactions[0]);
+    exportAsCSV(headers, transactions, "transactions.csv");
+  };
 
   const DataAndBackup = () => {
     return (
@@ -57,7 +64,9 @@ function Settings() {
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
-            <Button startIcon={<Upload />}>Export CSV</Button>
+            <Button startIcon={<Upload />} onClick={exportTransactionData}>
+              Export CSV
+            </Button>
           </Grid>
         </Grid>
       </ListItem>
