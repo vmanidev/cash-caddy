@@ -1,4 +1,6 @@
 import {
+  Alert,
+  Button,
   Divider,
   Grid,
   Paper,
@@ -19,6 +21,9 @@ import { overviewPieChartData } from "../constants/charts";
 import type { ChartStateProps } from "../models/charts";
 import useTransactionsByCategory from "../hooks/useTransactionsByCategory";
 import ExpensePieChart from "../components/common/charts/ExpensePieChart";
+import useBudgetUsage from "../hooks/useBudgetUsage";
+import useCategoryMap from "../hooks/useCategoryMap";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [chart, setChart] = useState<ChartStateProps>({
@@ -26,6 +31,12 @@ function Dashboard() {
   });
 
   const transactions = useSelector((state: any) => state.transactions);
+  const budgets = useSelector((state: any) => state.budgets);
+
+  const budgetUsage = useBudgetUsage();
+  const categoryMap = useCategoryMap();
+
+  const navigate = useNavigate();
 
   const getTotal = useMemo(
     () => calculateTransactions(transactions),
@@ -54,6 +65,32 @@ function Dashboard() {
     });
   }, [transactions, transactionsByExpenseCategory]);
 
+  const BudgetUsageAlert = () => {
+    const overSpentBudgets = Object.keys(budgets)
+      .map((key) => {
+        if (budgets[key] < budgetUsage[key]) return categoryMap[key];
+      })
+      .filter((name) => name !== "");
+
+    if (overSpentBudgets.length < 1) return null;
+
+    return (
+      <Alert
+        severity="warning"
+        action={
+          <Button
+            size="small"
+            onClick={() => navigate("/settings", { state: "app.settings" })}
+          >
+            Budget Settings
+          </Button>
+        }
+      >
+        Budget exceeded for {overSpentBudgets.join(",\t")}.
+      </Alert>
+    );
+  };
+
   return (
     <Grid container spacing={2} margin={2} size={12}>
       <Grid size={12}>
@@ -64,6 +101,10 @@ function Dashboard() {
         expenses, budgets, and spending trends through a clean, interactive
         dashboard.
       </Typography>
+
+      <Grid size={12}>
+        <BudgetUsageAlert />
+      </Grid>
 
       {breakpoint ? (
         <>
