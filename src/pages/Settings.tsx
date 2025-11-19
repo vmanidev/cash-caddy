@@ -64,7 +64,11 @@ function Settings() {
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 4, md: 4, lg: 2, xl: 2 }}>
-            <Button startIcon={<Upload />} onClick={exportTransactionData}>
+            <Button
+              startIcon={<Upload />}
+              onClick={exportTransactionData}
+              disabled={transactions.length < 1}
+            >
               Export CSV
             </Button>
           </Grid>
