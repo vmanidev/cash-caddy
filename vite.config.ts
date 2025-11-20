@@ -36,14 +36,14 @@ export default defineConfig({
         screenshots: [
           {
             src: "/screenshots/app-desktop.png",
-            sizes: "1280x720",
+            sizes: "1420x654",
             type: "image/png",
             form_factor: "wide",
             label: "Richer PWA dashboard on desktop"
           },
           {
             src: "/screenshots/app-mobile.png",
-            sizes: "414x896",
+            sizes: "428x872",
             type: "image/png",
             form_factor: "narrow",
             label: "Richer PWA dashboard on mobile"
