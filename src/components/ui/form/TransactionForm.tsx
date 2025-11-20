@@ -68,7 +68,10 @@ function TransactionForm({
       }
       value === "addNewCategory"
         ? addNewCategory()
-        : setFormData((prev: any) => ({ ...prev, [name]: value }));
+        : setFormData((prev: any) => ({
+            ...prev,
+            [name]: value.replace(/,/g, ""),
+          }));
     }
   };
 
