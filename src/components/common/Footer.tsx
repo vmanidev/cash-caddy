@@ -17,7 +17,7 @@ function AppFooter() {
           <Copyright fontSize="small" />
           <Typography variant="button">{new Date().getFullYear()}</Typography>
         </Grid>
-        <Typography variant="button">Cash Caddy</Typography>
+        <Typography variant="button">MIT Licence</Typography>
         <Link
           href={GITHUB_REPO_URL}
           rel="noopener"
